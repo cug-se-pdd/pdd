@@ -1,0 +1,13 @@
+{
+  "pages": [
+    "pages/webview/webview"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "sitemapLocation": "sitemap.json"
+}
+
+ 
+ 

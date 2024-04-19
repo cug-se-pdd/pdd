@@ -1,0 +1,6 @@
+<view class="container">
+      <web-view src="http://172.27.231.112:8080/"></web-view>
+
+      
+
+    </view>
