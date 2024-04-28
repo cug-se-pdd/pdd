@@ -5,3 +5,6 @@ npm install sass --save-dev
 
 adadd
 npm install 
+
+
+npm run serve
