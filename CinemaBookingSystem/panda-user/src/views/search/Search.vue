@@ -37,7 +37,7 @@ export default {
         // ,
         // {
         //   id: '2',
-        //   name: '影院',
+        //   name: '活动地点',
         //   path: '/search/searchCinema'
         // }
       ],

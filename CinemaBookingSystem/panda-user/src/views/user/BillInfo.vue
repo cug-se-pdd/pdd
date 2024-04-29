@@ -1,10 +1,10 @@
 <template>
   <div class="bill-list-container">
-    <div class="profile-title">我的订单</div>
+    <div class="profile-title">我的预约</div>
     <div class="order-box" v-for="item in billList">
       <div class="order-header">
-        <span class="order-date">订单时间：{{item.createTime}}</span>
-        <span class="order-id">订单编号: {{item.billId}}</span>
+        <span class="order-date">预约时间：{{item.createTime}}</span>
+        <span class="order-id">预约编号: {{item.billId}}</span>
         <span class="del-order"  @click="deleteBill(item.billId)">
           <i class="el-icon-delete"></i>
         </span>
@@ -88,7 +88,7 @@ export default {
     },
     async deleteBill(id) {
       const _this = this
-      const resp = await this.$confirm('此操作将永久删除订单信息,是否继续?','提示',{
+      const resp = await this.$confirm('此操作将永久删除预约信息,是否继续?','提示',{
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'

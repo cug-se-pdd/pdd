@@ -17,7 +17,7 @@
           <el-menu-item :index="item.path" v-for="item in menuList" :key="item.id">{{item.name}}</el-menu-item>
         </el-menu>
         <div class="searchContainer">
-          <el-input v-model="kw" class="searchBar" placeholder="搜索电影"></el-input>
+          <el-input v-model="kw" class="searchBar" placeholder="搜索活动"></el-input>
           <el-button id="searchBtn" icon="el-icon-search" type="primary" circle @click="search"></el-button>
         </div>
         <el-dropdown @command="handleCommand">
@@ -41,7 +41,7 @@
       <div class="footer-mini"></div>
       <div class="footer">
         <img style="width: 512px; height: 70px" src="../assets/register-footer.jpg">
-<!--        <p style=" font-size: 40px; background-color: white">看电影，就上-{ {{this.cinemaInfo.cinemaName}} }</p>-->
+<!--        <p style=" font-size: 40px; background-color: white">看活动，就上-{ {{this.cinemaInfo.cinemaName}} }</p>-->
       </div>
       <el-backtop></el-backtop>
     </el-footer>

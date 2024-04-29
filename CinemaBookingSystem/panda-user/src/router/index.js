@@ -61,12 +61,12 @@ const routes = [
         children: [
           { path: 'movieOngoing', name:'正在热映', component: MovieOngoing },
           { path: 'movieUpcoming', name: '即将上映', component: MovieUpcoming },
-          { path: 'movieClassics', name: '经典影片', component: MovieClassics }
+          { path: 'movieClassics', name: '经典活动', component: MovieClassics }
           ]
       },
       {
         path: '/movieInfo/:movieId',
-        name: '电影详细信息',
+        name: '活动详细信息',
         component: MovieInfo
       },
       {
@@ -76,7 +76,7 @@ const routes = [
       },
       {
         path: '/chooseSession/:cinemaId',
-        name: '影院详细信息',
+        name: '活动地点详细信息',
         component: ChooseSession
       },
       {

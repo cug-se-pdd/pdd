@@ -16,7 +16,7 @@
             <br/>
             <div class="phone-number">{{cinemaInfo.cinemaAddress}}</div>
             <div class="phone-number">电话: {{cinemaInfo.cinemaPhone}}</div>
-            <div style="margin: 25px 0;">影院服务 ————————————————————</div>
+            <div style="margin: 25px 0;">活动地点服务 ————————————————————</div>
             <div class="service"><span class="service-tag">免费停车</span>观影前1小时至观影后1小时内免费停车</div>
             <div class="service"><span class="service-tag">领快乐水</span>节假日期间，每张票可领取一瓶快乐水</div>
           </div>
@@ -28,9 +28,9 @@
       <div class="movie-info-detail clearfix">
         <div class="main-content">
           <div class="crumbs-nav-container">
-            <a href="/welcome">panda电影</a> &gt; <a href="/aboutUs"> {{cinemaInfo.cinemaName}}</a>
+            <a href="/welcome">panda活动</a> &gt; <a href="/aboutUs"> {{cinemaInfo.cinemaName}}</a>
           </div>
-          <!-- 影院正在上映的所有电影 -->
+          <!-- 活动地点正在上映的所有活动 -->
           <div class="movie-list-container"
                v-if="cinemaInfo.sysMovieList !== null
                       && cinemaInfo.sysMovieList.length !== 0">
@@ -47,7 +47,7 @@
             </div>
           </div>
 
-          <!-- 当前选中电影信息 -->
+          <!-- 当前选中活动信息 -->
           <div class="show-list"
                v-if="cinemaInfo.sysMovieList !== null
                       && cinemaInfo.sysMovieList.length !== 0">
@@ -55,7 +55,7 @@
               <div>
                 <h2 class="show-movie-name">{{movieDict[activeMovie].movieName}}</h2>
               </div>
-              <!-- 电影描述 -->
+              <!-- 活动描述 -->
               <div class="show-movie-desc">
                 <div>
                   <span class="key">时长 : </span>
@@ -100,7 +100,7 @@
                   </template>
                 </el-table-column>
                 <el-table-column
-                    label="影厅提示">
+                    label="场馆提示">
                   <template slot-scope="scope">
                     {{scope.row.sessionTips === null ? '无' : scope.row.sessionTips}}
                   </template>
@@ -138,7 +138,7 @@ export default {
         cinemaPicture: [],
         sysMovieList: []
       },
-      //用于获取指定id的电影信息
+      //用于获取指定id的活动信息
       movieDict: { 0: {
           movieBoxOffice: 0,
           movieCategoryList: [],

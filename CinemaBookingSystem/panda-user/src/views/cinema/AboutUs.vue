@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="list-header">
-      <h2 class=""><span>影院信息</span></h2>
+      <h2 class=""><span>活动地点信息</span></h2>
     </div>
     <div class="list-content" :model="cinemaInfo">
       <div class="list-left">
