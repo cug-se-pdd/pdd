@@ -20,6 +20,9 @@
     <select id="findCinema" parameterType="Long" resultType="SysCinema">
         select * from sys_cinema
     </select>
+    <select id="findAllCinemas"  resultType="SysCinema">
+        select * from sys_cinema
+    </select>
 
     <update id="updateCinema" parameterType="SysCinema">
         update sys_cinema set

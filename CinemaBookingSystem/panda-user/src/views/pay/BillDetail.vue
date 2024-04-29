@@ -14,7 +14,7 @@
           <img src="../../assets/money.png">
         </div>
         <div class="pay-info">
-          <div class="pay-info-status">待支付</div>
+          <div class="pay-info-status">验证</div>
           <div class="pay-info-desc">请在<span>{{minutes}}分钟{{seconds}}秒</span>内完成支付</div>
         </div>
       </div>

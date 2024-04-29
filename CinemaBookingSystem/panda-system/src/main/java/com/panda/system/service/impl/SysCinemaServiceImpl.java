@@ -5,7 +5,8 @@ import com.panda.system.mapper.SysCinemaMapper;
 import com.panda.system.service.SysCinemaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import java.util.List;
+import java.util.HashSet;
 
 @Service
 public class SysCinemaServiceImpl implements SysCinemaService {
@@ -16,6 +17,12 @@ public class SysCinemaServiceImpl implements SysCinemaService {
     @Override
     public SysCinema findCinema() {
         return sysCinemaMapper.findCinema();
+    }
+
+    @Override
+    public List<SysCinema> findAllCinemas()
+    {
+        return sysCinemaMapper.findAllCinemas();
     }
 
     @Override

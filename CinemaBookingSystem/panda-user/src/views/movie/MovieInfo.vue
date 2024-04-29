@@ -14,18 +14,18 @@
             <ul>
               <li>{{movieInfo.movieCategoryList}}</li>
               <li>{{movieInfo.movieArea}} / {{movieInfo.movieLength}}分钟</li>
-              <li>{{movieInfo.releaseDate}} {{movieInfo.movieArea}} 上映</li>
+              <li>{{movieInfo.releaseDate}} {{movieInfo.movieArea}} 举办</li>
             </ul>
           </div>
           <div class="movie-info-btn">
-            <el-button class="buy-btn" type="primary" @click="toChooseSession">特惠购票</el-button>
+            <el-button class="buy-btn" type="primary" @click="toChooseSession">我要预约</el-button>
           </div>
           <div class="movie-info-score">
             <div class="movie-index box-office-container">
-              <span class="movie-index-title">累计票房</span>
+              <span class="movie-index-title">参与人数</span>
               <div style="display: flex;align-items: flex-end;">
                 <span class="box-office">{{movieInfo.movieBoxOffice}}</span>
-                <span class="unit">元</span>
+                <span class="unit">人</span>
               </div>
             </div>
           </div>
@@ -37,7 +37,7 @@
       <div class="movie-info-detail clearfix">
         <div class="main-content">
           <div class="crumbs-nav-container">
-            <a href="/welcome">panda电影</a> &gt; <a href="/movie">电影</a> &gt; {{movieInfo.movieName}}
+            <a href="/welcome">panda电影</a> &gt; <a href="/movie">活动</a> &gt; {{movieInfo.movieName}}
           </div>
           <el-tabs v-model="activeName">
             <el-tab-pane label="介绍" name="introduction">
@@ -45,7 +45,7 @@
                 <!-- 剧情简介 -->
                 <div class="module">
                   <div class="mod-title">
-                    <h2>剧情简介</h2>
+                    <h2>活动简介</h2>
                   </div>
                   <div class="mod-content">
                     <span class="dra">

@@ -9,33 +9,46 @@
       </el-breadcrumb>
     </div>
 
+    <!--分页控件-->
+    <div class="pagination">
+      <el-pagination
+        @current-change="handleCurrentChange"
+        @size-change="handleSizeChange"
+        :current-page="currentPage"
+        :page-sizes="[5, 10, 20, 30]"
+        :page-size="pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="totalCount">
+      </el-pagination>
+    </div>
+
     <!--卡片视图-->
-    <el-card class="box-card">
+    <el-card class="box-card" v-for="cinema in paginatedCinemas" :key="cinema.cinemaId">
       <!--表格显示活动地点信息-->
-      <el-form :model="cinemaInfo" label-width="150px">
+      <el-form :model="cinema" label-width="150px">
         <el-form-item label="活动地点名称: " prop="cinemaName">
-          <el-input class="el-input-show" v-model="cinemaInfo.cinemaName" disabled></el-input>
+          <el-input class="el-input-show" v-model="cinema.cinemaName" disabled></el-input>
         </el-form-item>
         <el-form-item label="活动地点地址: " prop="cinemaAddress">
-          <el-input class="el-input-show" v-model="cinemaInfo.cinemaAddress" disabled></el-input>
+          <el-input class="el-input-show" v-model="cinema.cinemaAddress" disabled></el-input>
         </el-form-item>
         <el-form-item label="活动地点电话: " prop="cinemaPhone">
-          <el-input class="el-input-show" v-model="cinemaInfo.cinemaPhone" disabled></el-input>
+          <el-input class="el-input-show" v-model="cinema.cinemaPhone" disabled></el-input>
         </el-form-item>
-        <el-form-item label="活动时间: " prop="cinemaPhone">
-          <el-input class="el-input-show-time" v-model="cinemaInfo.workStartTime" disabled></el-input>
+        <el-form-item label="活动时间: ">
+          <el-input class="el-input-show-time" v-model="cinema.workStartTime" disabled></el-input>
           至
-          <el-input class="el-input-show-time" v-model="cinemaInfo.workEndTime" disabled></el-input>
+          <el-input class="el-input-show-time" v-model="cinema.workEndTime" disabled></el-input>
         </el-form-item>
-        <el-form-item label="拥有场馆类型: " prop="hallCategory">
-          <el-tag v-for="hall in halls" >{{hall}}</el-tag>
+        <el-form-item label="拥有场馆类型: ">
+          <el-tag v-for="hall in JSON.parse(cinema.hallCategoryList)" :key="hall">{{hall}}</el-tag>
         </el-form-item>
         <el-form-item label="活动地点图片: ">
-          <span v-for="item in pics">
+          <span v-for="item in JSON.parse(cinema.cinemaPicture)">
             <el-popover placement="left" trigger="click" width="300">
-              <img :src="item.url" width="200%"/>
-              <img slot="reference" :src="item.url" :alt="item"
-                   style="max-height: 300px;max-width: 300px;padding: 10px"/>
+              <img :src="global.base + item" width="200%"/>
+              <img slot="reference" :src="global.base + item" :alt="item"
+                   style="max-height: 300px; max-width: 300px; padding: 10px"/>
             </el-popover>
           </span>
         </el-form-item>
@@ -44,6 +57,8 @@
         </el-form-item>
       </el-form>
     </el-card>
+
+
 
     <!--修改活动地点对话框-->
     <el-dialog title="修改活动地点" :visible.sync="editDialogVisible" width="60%" @close="editDialogClosed">
@@ -129,6 +144,12 @@
   export default {
     data() {
       return {
+        currentPage: 1, // 当前页码
+        pageSize: 2, // 每页显示的条数
+        totalCount: 0, // 数据总数
+        allCinemas: [], // 所有影院数据
+        paginatedCinemas: [], // 当前页显示的影院数据
+
         //控制对话框的显示与隐藏
         editDialogVisible: false,
         editForm: {},
@@ -160,9 +181,37 @@
       }
     },
     created() {
+      this.fetchCinemas(); // 在组件创建时获取影院数据
       this.getCinemaInfo()
     },
     methods: {
+      async fetchCinemas() {
+        try {
+          const response = await axios.get("sysCinema"); // 获取所有影院
+          this.allCinemas = response.data.data;
+          this.totalCount = this.allCinemas.length; // 设置数据总数
+          this.paginateCinemas(); // 根据当前页和每页大小设置数据
+        } catch (error) {
+          console.error("Error fetching cinemas:", error);
+        }
+      },
+      paginateCinemas() {
+        // 根据当前页和每页大小设置分页后的影院数据
+        const start = (this.currentPage - 1) * this.pageSize;
+        const end = start + this.pageSize;
+        this.paginatedCinemas = this.allCinemas.slice(start, end);
+      },
+      handleCurrentChange(newPage) {
+        this.currentPage = newPage; // 设置当前页
+        this.paginateCinemas(); // 更新分页后的数据
+      },
+      handleSizeChange(newPageSize) {
+        this.pageSize = newPageSize; // 设置每页大小
+        this.paginateCinemas(); // 更新分页后的数据
+      },
+
+
+
       async getCinemaInfo() {
         const _this = this
         await axios.get('sysCinema').then(resp => {

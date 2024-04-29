@@ -1,10 +1,15 @@
 package com.panda.system.mapper;
 
 import com.panda.system.domin.SysCinema;
+import com.panda.system.domin.SysMovie;
+import com.panda.system.domin.vo.SysMovieVo;
+
+import java.util.List;
 
 public interface SysCinemaMapper {
 
     SysCinema findCinema();
+    List<SysCinema> findAllCinemas();
 
     int updateCinema(SysCinema sysCinema);
 

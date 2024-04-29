@@ -2,6 +2,7 @@ package com.panda.web.controller.system;
 
 import com.panda.common.response.ResponseResult;
 import com.panda.system.domin.SysCinema;
+import com.panda.system.domin.SysResource;
 import com.panda.system.domin.SysSession;
 import com.panda.system.service.impl.SysCinemaServiceImpl;
 import com.panda.system.service.impl.SysSessionServiceImpl;
@@ -24,8 +25,12 @@ public class SysCinemaController extends BaseController {
     private SysSessionServiceImpl sysSessionService;
 
     @GetMapping("/sysCinema")
-    public ResponseResult findCinema() {
-        return getResult(sysCinemaService.findCinema());
+    public ResponseResult findCinema()
+    {
+       startPage();
+       List<SysCinema> data = sysCinemaService.findAllCinemas();
+//        return getResult(sysCinemaService.findCinema());
+        return getResult(data);
     }
 
     @PutMapping("/sysCinema/update")
