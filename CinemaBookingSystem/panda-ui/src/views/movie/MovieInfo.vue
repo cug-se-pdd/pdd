@@ -69,7 +69,7 @@
           <el-tooltip effect="dark" content="删除活动" placement="top" :enterable="false" :open-delay="500">
             <el-button type="danger" icon="el-icon-delete" size="mini" @click="isAbleDelete(scope.row.movieId)"></el-button>
           </el-tooltip>
-          <el-tooltip effect="dark" content="影片类别管理" placement="top" :enterable="false" :open-delay="500">
+          <el-tooltip effect="dark" content="活动类别管理" placement="top" :enterable="false" :open-delay="500">
             <el-button type="warning" icon="el-icon-setting" size="mini" @click="showEditCategoryDialog(scope.row.movieId)"></el-button>
           </el-tooltip>
         </template>
