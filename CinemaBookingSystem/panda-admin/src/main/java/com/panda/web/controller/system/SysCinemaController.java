@@ -24,13 +24,20 @@ public class SysCinemaController extends BaseController {
     @Autowired
     private SysSessionServiceImpl sysSessionService;
 
-    @GetMapping("/sysCinema")
-    public ResponseResult findCinema()
+    @GetMapping("/sysCinemas")
+    public ResponseResult findCinemas()
     {
        startPage();
        List<SysCinema> data = sysCinemaService.findAllCinemas();
 //        return getResult(sysCinemaService.findCinema());
         return getResult(data);
+    }
+    @GetMapping("/sysCinema")
+    public ResponseResult findCinema()
+    {
+
+        return getResult(sysCinemaService.findCinema());
+
     }
 
     @PutMapping("/sysCinema/update")

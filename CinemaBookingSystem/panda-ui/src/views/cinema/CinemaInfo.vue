@@ -187,7 +187,7 @@
     methods: {
       async fetchCinemas() {
         try {
-          const response = await axios.get("sysCinema"); // 获取所有影院
+          const response = await axios.get("sysCinemas"); // 获取所有影院
           this.allCinemas = response.data.data;
           this.totalCount = this.allCinemas.length; // 设置数据总数
           this.paginateCinemas(); // 根据当前页和每页大小设置数据
@@ -214,7 +214,7 @@
 
       async getCinemaInfo() {
         const _this = this
-        await axios.get('sysCinema').then(resp => {
+        await axios.get('sysCinemas').then(resp => {
           _this.cinemaInfo = resp.data.data
         })
         _this.pics = []

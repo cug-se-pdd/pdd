@@ -17,9 +17,11 @@
         <collection property="sysMovieList" ofType="SysMovie" column="cinema_id" select="com.panda.system.mapper.SysMovieMapper.findMovieByCinemaId"></collection>
     </resultMap>
 
-    <select id="findCinema" parameterType="Long" resultType="SysCinema">
-        select * from sys_cinema
+    <!-- 查询表中第一行数据 -->
+    <select id="findCinema" resultMap="SysCinemaMap">
+        select * from sys_cinema limit 1
     </select>
+
     <select id="findAllCinemas"  resultType="SysCinema">
         select * from sys_cinema
     </select>
