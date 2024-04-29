@@ -28,7 +28,7 @@ export default {
         },
         {
           id:2,
-          name:'我的订单',
+          name:'我的预约',
           path:'/bill'
         }
       ]

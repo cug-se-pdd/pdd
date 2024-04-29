@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="searchContainer">
-      <el-input v-model="keyword" class="searchBar" placeholder="请输入电影名称"></el-input>
+      <el-input v-model="keyword" class="searchBar" placeholder="请输入活动名称"></el-input>
       <el-button id="searchBtn" icon="el-icon-search" type="primary" circle @click="searchInfo"></el-button>
     </div>
     <div>
@@ -31,7 +31,7 @@ export default {
       menuList: [
         {
           id: '1',
-          name: '电影',
+          name: '活动',
           path: '/search/searchMovie'
         }
         // ,

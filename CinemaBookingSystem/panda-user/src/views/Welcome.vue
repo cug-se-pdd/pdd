@@ -65,12 +65,12 @@ export default {
         },
         {
           id: 2,
-          name: '电影',
+          name: '活动',
           path: '/movie'
         },
         {
           id: 3,
-          name: '榜单',
+          name: '热门',
           path: '/rankingList'
         },
         {

@@ -21,17 +21,17 @@ export default {
       menuList: [
         {
           id: 1,
-          name: '总票房榜',
+          name: '活动热度榜',
           path: '/rankingList/totalBoxOfficeList'
         },
         {
           id: 2,
-          name: '国内票房榜',
+          name: '南望山校区热度榜',
           path: '/rankingList/domesticBoxOfficeList'
         },
         {
           id: 3,
-          name: '国外票房榜',
+          name: '未来城校区热度榜',
           path: '/rankingList/foreignBoxOfficeList'
         }
       ],

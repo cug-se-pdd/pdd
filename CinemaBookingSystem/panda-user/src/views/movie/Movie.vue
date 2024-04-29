@@ -43,17 +43,17 @@ export default {
       menuList: [
         {
           id: '1',
-          name: '正在热映',
+          name: '正在举办',
           path: '/movie/movieOngoing'
         },
         {
           id: '2',
-          name: '即将上映',
+          name: '即将举办',
           path: '/movie/movieUpcoming'
         },
         {
           id: '3',
-          name: '经典影片',
+          name: '热门活动',
           path: '/movie/movieClassics'
         }
       ],
