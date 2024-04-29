@@ -53,7 +53,7 @@
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column prop="movieId" label="#" width="40"></el-table-column>
       <el-table-column prop="movieName" label="活动名称"></el-table-column>
-      <el-table-column prop="movieArea" label="活动区域"></el-table-column>
+<!--      <el-table-column prop="movieArea" label="活动区域"></el-table-column>-->
       <el-table-column prop="movieLength" label="活动时长（分钟）"></el-table-column>
       <el-table-column prop="releaseDate" label="上映时间"></el-table-column>
       <el-table-column prop="movieBoxOffice" label="热度"></el-table-column>
@@ -96,16 +96,16 @@
         <el-form-item label="活动名称" prop="movieName">
           <el-input v-model="addForm.movieName"></el-input>
         </el-form-item>
-        <el-form-item label="活动区域" prop="movieArea">
-          <el-select v-model="addForm.movieArea" placeholder="请选择活动区域" clearable >
-            <el-option
-                    v-for="item in movieAreaList"
-                    :key="item"
-                    :label="item"
-                    :value="item">
-            </el-option>
-          </el-select>
-        </el-form-item>
+<!--        <el-form-item label="活动区域" prop="movieArea">-->
+<!--          <el-select v-model="addForm.movieArea" placeholder="请选择活动区域" clearable >-->
+<!--            <el-option-->
+<!--                    v-for="item in movieAreaList"-->
+<!--                    :key="item"-->
+<!--                    :label="item"-->
+<!--                    :value="item">-->
+<!--            </el-option>-->
+<!--          </el-select>-->
+<!--        </el-form-item>-->
         <el-form-item label="活动时长/分钟" prop="movieLength">
           <el-input v-model="addForm.movieLength"></el-input>
         </el-form-item>
@@ -186,20 +186,20 @@
           <el-input v-model="editForm.movieName" disabled></el-input>
         </el-form-item>
 
-        <el-form-item label="活动区域" prop="movieArea">
-          <el-select v-model="editForm.movieArea" placeholder="请选择活动区域" clearable >
-            <el-option
-              v-for="item in movieAreaList"
-              :key="item"
-              :label="item"
-              :value="item">
-            </el-option>
-          </el-select>
-        </el-form-item>
+<!--        <el-form-item label="活动区域" prop="movieArea">-->
+<!--          <el-select v-model="editForm.movieArea" placeholder="请选择活动区域" clearable >-->
+<!--            <el-option-->
+<!--              v-for="item in movieAreaList"-->
+<!--              :key="item"-->
+<!--              :label="item"-->
+<!--              :value="item">-->
+<!--            </el-option>-->
+<!--          </el-select>-->
+<!--        </el-form-item>-->
         <el-form-item label="活动时长/分钟" prop="movieLength">
           <el-input v-model="editForm.movieLength"></el-input>
         </el-form-item>
-        <el-form-item label="上映时间" prop="releaseDate">
+        <el-form-item label="开始时间" prop="releaseDate">
           <el-date-picker
               v-model="editForm.releaseDate"
               value-format="yyyy-MM-dd HH:mm:ss"
@@ -311,7 +311,7 @@ export default {
     return {
       queryInfo: {
         movieId: '',
-        movieArea: '',
+        movieArea: '中国大陆',
         movieName: '',
         startDate: '',
         endDate: '',
@@ -323,7 +323,7 @@ export default {
       //控制对话框的显示与隐藏
       addDialogVisible: false,
       selectedMovieCategory:[],
-      selectedMovieArea: '',
+      selectedMovieArea: '中国大陆',
       selectedDate: [],
       inputMovieName: '',
       categoryList:[],
@@ -355,7 +355,7 @@ export default {
       addForm: {
         movieId: '',
         movieName: '',
-        movieArea: '',
+        movieArea: '中国大陆',
         movieLength: 0,
         releaseDate: '',
         movieBoxOffice: '',

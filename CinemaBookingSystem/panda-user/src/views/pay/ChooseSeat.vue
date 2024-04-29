@@ -53,10 +53,10 @@
               <span>场馆：</span>
               <span>{{session.sysHall.hallName}}</span>
             </div>
-            <div class="info-item">
-              <span>版本：</span>
-              <span>{{session.languageVersion}}</span>
-            </div>
+<!--            <div class="info-item">-->
+<!--              <span>版本：</span>-->
+<!--              <span>{{session.languageVersion}}</span>-->
+<!--            </div>-->
             <div class="info-item">
               <span>场次：</span>
               <span>{{session.sessionDate}} {{session.playTime}}</span>

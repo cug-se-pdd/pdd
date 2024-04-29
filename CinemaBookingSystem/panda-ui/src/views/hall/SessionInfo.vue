@@ -60,7 +60,7 @@
         <el-table-column prop="sessionId" label="#" width="40"></el-table-column>
         <el-table-column prop="sysHall.hallName" label="场馆名称"></el-table-column>
         <el-table-column prop="sysMovie.movieName" label="活动名称"></el-table-column>
-        <el-table-column prop="languageVersion" label="语言"></el-table-column>
+<!--        <el-table-column prop="languageVersion" label="语言"></el-table-column>-->
         <el-table-column prop="sessionDate" label="场次时间" width="100"></el-table-column>
         <el-table-column prop="playTime" label="播放时间" width="110">
           <template slot-scope="scope">
@@ -120,9 +120,9 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="语言版本" prop="languageVersion">
-          <el-input v-model="addForm.languageVersion"></el-input>
-        </el-form-item>
+<!--        <el-form-item label="语言版本" prop="languageVersion">-->
+<!--          <el-input v-model="addForm.languageVersion"></el-input>-->
+<!--        </el-form-item>-->
         <el-form-item label="活动名称" prop="movieId">
           <el-select v-model="addForm.movieId" placeholder="请选择活动名称" clearable >
             <el-option
@@ -175,9 +175,9 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="语言版本" prop="languageVersion">
-          <el-input v-model="editForm.languageVersion"></el-input>
-        </el-form-item>
+<!--        <el-form-item label="语言版本" prop="languageVersion">-->
+<!--          <el-input v-model="editForm.languageVersion"></el-input>-->
+<!--        </el-form-item>-->
         <el-form-item label="活动名称" prop="movieId">
           <el-select v-model="editForm.movieId" placeholder="请选择活动名称" clearable >
             <el-option
@@ -261,7 +261,7 @@ export default {
       //添加场馆的表单数据
       addForm: {
         hallId: '',
-        languageVersion: '',
+        languageVersion: '1',
         movieId: '',
         playTime: '',
         endTime: '',

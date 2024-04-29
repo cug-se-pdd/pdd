@@ -57,7 +57,7 @@
           <thead>
           <tr>
             <th>活动</th>
-            <th>语言版本</th>
+<!--            <th>语言版本</th>-->
             <th>播放时间</th>
             <th>座位</th>
             <th>提示信息</th>
@@ -66,7 +66,7 @@
           <tbody>
           <tr>
             <td class="movie-name">《{{billInfo.sysSession.sysMovie.movieName}}》</td>
-            <td class="movie-name">{{billInfo.sysSession.languageVersion}}</td>
+<!--            <td class="movie-name">{{billInfo.sysSession.languageVersion}}</td>-->
             <td class="showtime">{{billInfo.sysSession.sessionDate}} {{billInfo.sysSession.playTime}} - {{billInfo.sysSession.endTime}}</td>
             <td>
               <span class="hall">{{billInfo.sysSession.sysHall.hallName}}</span>
@@ -136,6 +136,7 @@ export default {
   },
   methods: {
     async getBillInfo() {
+      console.log("this.billId:", this.billId); // 输出 this.billId 的值
       const { data : res } = await axios.get('sysBill/' + this.billId)
       if(res.code !== 200) return this.$message.error('获取信息失败')
       let userId = JSON.parse(window.sessionStorage.getItem('loginUser')).userId

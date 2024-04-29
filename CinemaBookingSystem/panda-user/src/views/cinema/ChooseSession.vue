@@ -89,10 +89,10 @@
                     <span class="end-time">{{scope.row.endTime}}散场</span>
                   </template>
                 </el-table-column>
-                <el-table-column
-                    prop="languageVersion"
-                    label="语言版本">
-                </el-table-column>
+<!--                <el-table-column-->
+<!--                    prop="languageVersion"-->
+<!--                    label="语言版本">-->
+<!--                </el-table-column>-->
                 <el-table-column
                     label="放映厅">
                   <template slot-scope="scope">
