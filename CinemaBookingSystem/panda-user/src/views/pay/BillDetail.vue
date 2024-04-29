@@ -136,7 +136,7 @@ export default {
   },
   methods: {
     async getBillInfo() {
-      console.log("this.billId:", this.billId); // 输出 this.billId 的值
+      // console.log("this.billId:", this.billId); // 输出 this.billId 的值
       const { data : res } = await axios.get('sysBill/' + this.billId)
       if(res.code !== 200) return this.$message.error('获取信息失败')
       let userId = JSON.parse(window.sessionStorage.getItem('loginUser')).userId
