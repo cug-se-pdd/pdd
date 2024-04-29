@@ -20,7 +20,7 @@
               <span class="name-tags">类型: </span>{{movieItem.movieCategoryList}}
             </div>
             <div class="title-hover">
-              <span class="name-tags">上映时间: </span>{{movieItem.releaseDate}}
+              <span class="name-tags">活动时间: </span>{{movieItem.releaseDate}}
             </div>
           </div>
         </a>

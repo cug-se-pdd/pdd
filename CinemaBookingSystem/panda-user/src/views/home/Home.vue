@@ -10,7 +10,7 @@
       <div class="left">
         <div class="panel">
           <div class="panel-header">
-            <h2 style="color: #ef4238">正在热映</h2>
+            <h2 style="color: #ef4238">正在举办</h2>
             <a href="/movie/movieOngoing">全部</a>
           </div>
           <div class="panel-content">
@@ -19,7 +19,7 @@
         </div>
         <div class="panel">
           <div class="panel-header">
-            <h2 style="color: #2d98f3">即将上映</h2>
+            <h2 style="color: #2d98f3">即将举办</h2>
             <a href="/movie/movieUpcoming">全部</a>
           </div>
           <div class="panel-content">
@@ -30,7 +30,7 @@
         </div>
         <div class="panel">
           <div class="panel-header">
-            <h2 style="color: #ef4238">经典影片</h2>
+            <h2 style="color: #ef4238">热门活动</h2>
             <a href="/movie/movieClassics">全部</a>
           </div>
           <div class="panel-content">
@@ -43,7 +43,7 @@
       <div class="right">
         <div class="panel">
           <div class="panel-header">
-            <h2 style="color: #ffb400">票房榜</h2>
+            <h2 style="color: #ffb400">热度榜</h2>
             <a href="/rankingList/totalBoxOfficeList">查看完整榜单</a>
           </div>
           <div class="panel-content">
