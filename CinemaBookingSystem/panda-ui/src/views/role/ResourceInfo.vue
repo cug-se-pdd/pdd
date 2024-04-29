@@ -92,7 +92,7 @@
       </span>
     </el-dialog>
 
-    <!--修改影厅对话框-->
+    <!--修改场馆对话框-->
     <el-dialog title="修改资源" :visible.sync="editDialogVisible" width="50%" @close="editDialogClosed">
       <el-form :model="editForm" :rules="editFormRules" ref="editFormRef" label-width="100px">
         <el-form-item label="资源编号" prop="id">
@@ -227,7 +227,7 @@ export default {
     editDialogClosed(){
       this.$refs.editFormRef.resetFields()
     },
-    // 修改影厅分类信息并提交
+    // 修改场馆分类信息并提交
     editResource(){
       this.$refs.editFormRef.validate(async valid => {
         const _this = this

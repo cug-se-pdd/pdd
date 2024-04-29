@@ -482,7 +482,7 @@ export default {
       this.getUserList()
       this.$message.success('批量删除用户成功！')
     },
-    //根据id删除对应的影厅分类
+    //根据id删除对应的场馆分类
     async deleteUserById(id){
       const _this = this
       //询问用户是否确认删除

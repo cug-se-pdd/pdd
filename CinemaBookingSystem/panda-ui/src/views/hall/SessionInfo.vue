@@ -438,7 +438,7 @@ export default {
         this.$message.success('添加场次信息成功！')
       })
     },
-    // 有订单就不能做任何修改
+    // 有预约就不能做任何修改
     isAbleEdit(id) {
       this.checkAbleId.sessionId = id
       axios.get('sysBill', {params: this.checkAbleId}).then(response => {
@@ -588,7 +588,7 @@ export default {
         }
       }
       if (ableMultipleDelete === false) {
-        // '抱歉！。\\n\'+\'导致异常的订单编号为: \''
+        // '抱歉！。\\n\'+\'导致异常的预约编号为: \''
         this.$alert('抱歉！活动场次有相关预约，不能删除活动场次信息。\n' + '导致异常的场次编号为: ' + ids, '批量删除请求异常通知', {
           confirmButtonText: '我知道了',
           callback: action => {

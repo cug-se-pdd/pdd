@@ -38,7 +38,7 @@
         </el-col>
       </el-row>
 
-      <!--订单列表-->
+      <!--预约列表-->
       <el-table :data="billList" style="width: 100%" border stripe @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column prop="billId" label="#" width="40"></el-table-column>
@@ -86,7 +86,7 @@
 
 
 
-    <!--修改影厅对话框-->
+    <!--修改场馆对话框-->
     <el-dialog title="修改预约" :visible.sync="editDialogVisible" width="60%" @close="editDialogClosed">
       <el-form :model="editForm" ref="editFormRef" label-width="100px">
         <!--prop：在addFormRules中定义校验规则， v-model：双向绑定数据-->
@@ -114,7 +114,7 @@
         <el-form-item label="散场时间" prop="sysSession.sessionDate">
           <el-input v-model="editForm.sysSession.endTime" disabled></el-input>
         </el-form-item>
-        <el-form-item label="订单时间" prop="sysSession.sessionDate">
+        <el-form-item label="预约时间" prop="sysSession.sessionDate">
           <el-input v-model="editForm.createTime" disabled></el-input>
         </el-form-item>
         <el-form-item label="支付状态" prop="payState" v-if="!editForm.cancelState">
@@ -246,7 +246,7 @@ export default {
 
         if (this.editForm.payState === true || this.editForm.cancelState === true) {
           isAbleEdit = false
-          this.$alert('抱歉！订单已完成或已取消，不能修改。', '修改请求异常通知', {
+          this.$alert('抱歉！预约已完成或已取消，不能修改。', '修改请求异常通知', {
             confirmButtonText: '我知道了',
             callback: action => {
               this.$router.push('/bill')
@@ -264,11 +264,11 @@ export default {
     editDialogClosed(){
       this.$refs.editFormRef.resetFields()
     },
-    // 修改影厅分类信息并提交
+    // 修改场馆分类信息并提交
     async editBillInfo() {
       const _this = this
       if (_this.editForm.cancelState && _this.editForm.payState) {
-        this.$alert('抱歉，修改失败！取消状态和支付状态不能同时为真。', '修改订单信息异常', {
+        this.$alert('抱歉，修改失败！取消状态和支付状态不能同时为真。', '修改预约信息异常', {
           confirmButtonText: '我知道了',
           callback: action => {
             this.$router.push('/bill')
@@ -280,7 +280,7 @@ export default {
       if (_this.editForm.payState) {
         const { data: res} = await axios.put('sysBill', JSON.stringify(_this.editForm))
         if(res.code !== 200) return this.$message.error('支付失败')
-        this.$message.success('支付订单成功')
+        this.$message.success('支付预约成功')
         this.editDialogVisible = false
         this.getBillList()
         return
@@ -290,19 +290,19 @@ export default {
         // 获取场次座位信息
         const { data : curSession } = await axios.get('sysSession/find/' + _this.editForm.sessionId)
         let sessionSeats = JSON.parse(curSession.data.sessionSeats)
-        // 解析出订单选择的座位，更新座位信息
+        // 解析出预约选择的座位，更新座位信息
         for(let seat of JSON.parse(_this.editForm.sests)){
           let row = seat.substring(0, seat.indexOf('排'))
           let col = Number.parseInt(seat.substring(seat.indexOf('排') + 1, seat.length - 1))
           sessionSeats[row][col - 1] = 0
         }
-        // 更新订单信息和场次座位信息
+        // 更新预约信息和场次座位信息
         axios.defaults.headers.put['Content-Type'] = 'application/json'
         const { data: resp } = await axios.put('sysBill/cancel',JSON.stringify({sysBill: _this.editForm, sessionSeats: JSON.stringify(sessionSeats)}))
         if(resp.code !== 200) return this.$message.error('取消失败')
         this.getBillList()
         this.editDialogVisible = false
-        this.$message.success('取消订单成功')
+        this.$message.success('取消预约成功')
       }
     },
 
@@ -333,7 +333,7 @@ export default {
       this.getBillList()
       this.$message.success('批量删除成功！')
     },
-    //根据id删除对应的影厅分类
+    //根据id删除对应的场馆分类
     async deleteBillById(id){
       const _this = this
       //询问用户是否确认删除
@@ -352,11 +352,11 @@ export default {
 
       await axios.delete('sysBill/' + id).then(resp => {
         if (resp.data.code !== 200){
-          _this.$message.success('删除订单失败！')
+          _this.$message.success('删除预约失败！')
         }
       })
       this.getBillList()
-      this.$message.success('删除订单成功！')
+      this.$message.success('删除预约成功！')
     }
   }
 }
