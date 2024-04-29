@@ -252,7 +252,7 @@ export default {
       total: 0,
       //控制对话框的显示与隐藏
       addDialogVisible: false,
-      //添加影院的表单数据
+      //添加场馆的表单数据
       addForm: {
         userId: '',
         userName: '',

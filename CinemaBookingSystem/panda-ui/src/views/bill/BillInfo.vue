@@ -4,8 +4,8 @@
     <div class="board">
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>订单管理</el-breadcrumb-item>
-        <el-breadcrumb-item>订单信息管理</el-breadcrumb-item>
+        <el-breadcrumb-item>预约管理</el-breadcrumb-item>
+        <el-breadcrumb-item>预约信息管理</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
 
@@ -16,7 +16,7 @@
           <el-input v-model="inputUserName" placeholder="请输入用户名" clearable></el-input>
         </el-col>
         <el-col :span="4">
-          <el-select v-model="selectedState" placeholder="请选择订单状态" clearable>
+          <el-select v-model="selectedState" placeholder="请选择预约状态" clearable>
             <el-option v-for="item in payStates" :key="item.id" :label="item.name" :value="item.id"></el-option>
           </el-select>
         </el-col>
@@ -43,29 +43,29 @@
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column prop="billId" label="#" width="40"></el-table-column>
         <el-table-column prop="sysUser.userName" label="用户名" width="80px"></el-table-column>
-        <el-table-column prop="sysSession.sysMovie.movieName" label="电影名称"></el-table-column>
-        <el-table-column prop="sysSession.sysHall.hallName" label="影厅名称"></el-table-column>
-        <el-table-column prop="sysSession.sessionDate" label="场次日期"></el-table-column>
-        <el-table-column prop="sysSession.playTime, sysSession.endTime" label="播放时间">
+        <el-table-column prop="sysSession.sysMovie.movieName" label="活动名称"></el-table-column>
+        <el-table-column prop="sysSession.sysHall.hallName" label="活动地点"></el-table-column>
+        <el-table-column prop="sysSession.sessionDate" label="活动日期"></el-table-column>
+        <el-table-column prop="sysSession.playTime, sysSession.endTime" label="活动时间">
           <template slot-scope="scope"> {{scope.row.sysSession.playTime}}-{{scope.row.sysSession.endTime}} </template>
         </el-table-column>
         <el-table-column prop="seats" label="座位"></el-table-column>
-        <el-table-column prop="createTime" label="订票时间"></el-table-column>
-        <el-table-column prop="payState" label="订单状态" width="80">
+        <el-table-column prop="createTime" label="预约时间"></el-table-column>
+        <el-table-column prop="payState" label="预约状态" width="80">
           <template slot-scope="scope">
             <span v-if="scope.row.payState === true" style="color: #13ce66">已完成</span>
-            <span v-if="scope.row.payState !== true && scope.row.cancelState !== true " style="color: #145ddc">未支付</span>
+            <span v-if="scope.row.payState !== true && scope.row.cancelState !== true " style="color: #145ddc">未确认</span>
             <span v-if="scope.row.cancelState === true && scope.row.cancelTime ===null" style="color: #e6a23c">超时取消</span>
             <span v-if="scope.row.cancelState === true && scope.row.cancelTime !==null" style="color: crimson">用户取消</span>
           </template>
         </el-table-column>
         <el-table-column label="操作" width="120">
           <template slot-scope="scope">
-            <el-tooltip effect="dark" content="修改订单信息" placement="top" :enterable="false" :open-delay="500">
+            <el-tooltip effect="dark" content="修改预约信息" placement="top" :enterable="false" :open-delay="500">
               <el-button type="primary" icon="el-icon-edit" size="mini"
                          @click="showEditDialog(scope.row.billId)"></el-button>
             </el-tooltip>
-            <el-tooltip effect="dark" content="删除订单" placement="top" :enterable="false" :open-delay="500">
+            <el-tooltip effect="dark" content="删除预约" placement="top" :enterable="false" :open-delay="500">
               <el-button type="danger" icon="el-icon-delete" size="mini" @click="deleteBillById(scope.row.billId)"></el-button>
             </el-tooltip>
           </template>
@@ -87,19 +87,19 @@
 
 
     <!--修改影厅对话框-->
-    <el-dialog title="修改订单" :visible.sync="editDialogVisible" width="60%" @close="editDialogClosed">
+    <el-dialog title="修改预约" :visible.sync="editDialogVisible" width="60%" @close="editDialogClosed">
       <el-form :model="editForm" ref="editFormRef" label-width="100px">
         <!--prop：在addFormRules中定义校验规则， v-model：双向绑定数据-->
-        <el-form-item label="订单编号" prop="billId">
+        <el-form-item label="预约编号" prop="billId">
           <el-input v-model="editForm.billId" disabled></el-input>
         </el-form-item>
         <el-form-item label="用户名" prop="sysUser.userName">
           <el-input v-model="editForm.sysUser.userName" disabled></el-input>
         </el-form-item>
-        <el-form-item label="电影名称" prop="sysSession.sysMovie.movieName">
+        <el-form-item label="活动名称" prop="sysSession.sysMovie.movieName">
           <el-input v-model="editForm.sysSession.sysMovie.movieName" disabled></el-input>
         </el-form-item>
-        <el-form-item label="影厅名称" prop="sysSession.sysHall.hallName">
+        <el-form-item label="场馆名称" prop="sysSession.sysHall.hallName">
           <el-input v-model="editForm.sysSession.sysHall.hallName" disabled></el-input>
         </el-form-item>
         <el-form-item label="座位" prop="sysSession.sysHall.hallName">

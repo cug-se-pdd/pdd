@@ -4,8 +4,8 @@
     <div class="board">
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>电影管理</el-breadcrumb-item>
-        <el-breadcrumb-item>电影类别</el-breadcrumb-item>
+        <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+        <el-breadcrumb-item>活动类别</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
 
@@ -25,10 +25,10 @@
       <el-table :data="movieCategoryList" style="width: 45%" border stripe @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column prop="movieCategoryId" label="类别编号" width="145"></el-table-column>
-        <el-table-column prop="movieCategoryName" label="电影类别" width="180"></el-table-column>
+        <el-table-column prop="movieCategoryName" label="活动类别" width="180"></el-table-column>
         <el-table-column label="操作" width="150">
           <template slot-scope="scope">
-            <el-tooltip effect="dark" content="修改电影类别" placement="top" :enterable="false" :open-delay="500">
+            <el-tooltip effect="dark" content="修改活动类别" placement="top" :enterable="false" :open-delay="500">
               <el-button type="primary" icon="el-icon-edit" size="mini" @click="showEditDialog(scope.row.movieCategoryId)"></el-button>
             </el-tooltip>
             <el-tooltip effect="dark" content="删除类别" placement="top" :enterable="false" :open-delay="500">
@@ -55,7 +55,7 @@
       <!--内容主题区-->
       <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="100px">
         <!--prop：在addFormRules中定义校验规则， v-model：双向绑定数据-->
-        <el-form-item label="电影类别" prop="movieCategoryName">
+        <el-form-item label="活动类别" prop="movieCategoryName">
           <el-input v-model="addForm.movieCategoryName"></el-input>
         </el-form-item>
       </el-form>
@@ -72,7 +72,7 @@
         <el-form-item label="类别编号">
           <el-input v-model="editForm.movieCategoryId" disabled></el-input>
         </el-form-item>
-        <el-form-item label="电影类别" prop="movieCategoryName">
+        <el-form-item label="活动类别" prop="movieCategoryName">
           <el-input v-model="editForm.movieCategoryName"></el-input>
         </el-form-item>
       </el-form>
@@ -110,14 +110,14 @@ export default {
       //验证表单规则对象
       addFormRules: {
         movieCategoryName: [
-          { required: true, message: '请输入电影类别', trigger: 'blur' }
+          { required: true, message: '请输入活动类别', trigger: 'blur' }
         ]
       },
       editDialogVisible: false,
       editForm: {},
       editFormRules: {
         movieCategoryName: [
-          { required: true, message: '请输入电影类别', trigger: 'blur' }
+          { required: true, message: '请输入活动类别', trigger: 'blur' }
         ]
       },
       multipleSelection: []
@@ -162,14 +162,14 @@ export default {
         await axios.post('sysMovieCategory', JSON.stringify(_this.addForm)).then(resp => {
           console.log(resp)
           if (resp.data.code !== 200){
-            this.$message.error('添加电影类别失败！')
+            this.$message.error('添加活动类别失败！')
           }
         })
         //隐藏添加对话框
         this.addDialogVisible = false
         //重新加载列表
         this.getMovieCategoryList()
-        this.$message.success('添加电影类别成功！')
+        this.$message.success('添加活动类别成功！')
       })
     },
     // 显示修改对话框，回显数据
@@ -193,12 +193,12 @@ export default {
         axios.defaults.headers.put['Content-Type'] = 'application/json'
         await axios.put('sysMovieCategory', JSON.stringify(_this.editForm)).then(resp => {
           if (resp.data.code !== 200){
-            this.$message.error('修改电影类别失败！')
+            this.$message.error('修改活动类别失败！')
           }
         })
         this.editDialogVisible = false
         this.getMovieCategoryList()
-        this.$message.success('修改电影类别成功！')
+        this.$message.success('修改活动类别成功！')
       })
     },
     // 监听多选框变化
@@ -226,11 +226,11 @@ export default {
       })
       await axios.delete('sysMovieCategory/' + ids).then(resp => {
         if (resp.data.code !== 200){
-          this.$message.success('批量删除电影类别失败！')
+          this.$message.success('批量删除活动类别失败！')
         }
       })
       this.getMovieCategoryList()
-      this.$message.success('批量删除电影类别成功！')
+      this.$message.success('批量删除活动类别成功！')
     },
     //根据id删除对应的类别分类
     async deleteMovieCategoryById(id){
@@ -251,11 +251,11 @@ export default {
 
       await axios.delete('sysMovieCategory/' + id).then(resp => {
         if (resp.data.code !== 200){
-          _this.$message.success('删除电影类别失败！')
+          _this.$message.success('删除活动类别失败！')
         }
       })
       this.getMovieCategoryList()
-      this.$message.success('删除电影类别成功！')
+      this.$message.success('删除活动类别成功！')
     }
   }
 }

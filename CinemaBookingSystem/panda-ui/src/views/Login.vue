@@ -2,7 +2,7 @@
   <div class="login_container">
     <div class="login_box">
       <div class="title_box">
-        <p>影院管理登录</p>
+        <p>活动管理登录</p>
       </div>
       <!-- 登录表单区域 -->
       <el-form class="login_form" :model="loginForm" :rules="loginFormRules" ref="loginFormRef">

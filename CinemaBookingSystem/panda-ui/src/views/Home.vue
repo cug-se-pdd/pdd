@@ -4,7 +4,7 @@
       <div class="span-container" style="padding: 5px" @click="toWelcome">
         <span>&nbsp;&nbsp;</span>
         <img src="../assets/logo.png" alt="" height="40px" width="40px">
-        <span>影院管理系统</span>
+        <span>活动管理系统</span>
       </div>
       <el-button type="info" @click="logout">退出</el-button>
     </el-header>

@@ -4,33 +4,33 @@
     <div class="board">
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>影院管理</el-breadcrumb-item>
-        <el-breadcrumb-item>影院信息管理</el-breadcrumb-item>
+        <el-breadcrumb-item>活动地点管理</el-breadcrumb-item>
+        <el-breadcrumb-item>活动地点信息管理</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
 
     <!--卡片视图-->
     <el-card class="box-card">
-      <!--表格显示影院信息-->
+      <!--表格显示活动地点信息-->
       <el-form :model="cinemaInfo" label-width="150px">
-        <el-form-item label="影院名称: " prop="cinemaName">
+        <el-form-item label="活动地点名称: " prop="cinemaName">
           <el-input class="el-input-show" v-model="cinemaInfo.cinemaName" disabled></el-input>
         </el-form-item>
-        <el-form-item label="影院地址: " prop="cinemaAddress">
+        <el-form-item label="活动地点地址: " prop="cinemaAddress">
           <el-input class="el-input-show" v-model="cinemaInfo.cinemaAddress" disabled></el-input>
         </el-form-item>
-        <el-form-item label="影院电话: " prop="cinemaPhone">
+        <el-form-item label="活动地点电话: " prop="cinemaPhone">
           <el-input class="el-input-show" v-model="cinemaInfo.cinemaPhone" disabled></el-input>
         </el-form-item>
-        <el-form-item label="营业时间: " prop="cinemaPhone">
+        <el-form-item label="活动时间: " prop="cinemaPhone">
           <el-input class="el-input-show-time" v-model="cinemaInfo.workStartTime" disabled></el-input>
           至
           <el-input class="el-input-show-time" v-model="cinemaInfo.workEndTime" disabled></el-input>
         </el-form-item>
-        <el-form-item label="拥有影厅类型: " prop="hallCategory">
+        <el-form-item label="拥有场馆类型: " prop="hallCategory">
           <el-tag v-for="hall in halls" >{{hall}}</el-tag>
         </el-form-item>
-        <el-form-item label="影院图片: ">
+        <el-form-item label="活动地点图片: ">
           <span v-for="item in pics">
             <el-popover placement="left" trigger="click" width="300">
               <img :src="item.url" width="200%"/>
@@ -40,21 +40,21 @@
           </span>
         </el-form-item>
         <el-form-item label="" prop="cinemaName">
-          <el-button type="primary" @click="showEditDialog">修改影院信息</el-button>
+          <el-button type="primary" @click="showEditDialog">修改活动地点信息</el-button>
         </el-form-item>
       </el-form>
     </el-card>
 
-    <!--修改影院对话框-->
-    <el-dialog title="修改影院" :visible.sync="editDialogVisible" width="60%" @close="editDialogClosed">
+    <!--修改活动地点对话框-->
+    <el-dialog title="修改活动地点" :visible.sync="editDialogVisible" width="60%" @close="editDialogClosed">
       <el-form :model="editForm" :rules="editFormRules" ref="editFormRef" label-width="150px">
-        <el-form-item label="影院名称" prop="cinemaName">
+        <el-form-item label="活动地点名称" prop="cinemaName">
           <el-input v-model="editForm.cinemaName"></el-input>
         </el-form-item>
-        <el-form-item label="影院地址" prop="cinemaAddress">
+        <el-form-item label="活动地点地址" prop="cinemaAddress">
           <el-input v-model="editForm.cinemaAddress"></el-input>
         </el-form-item>
-        <el-form-item label="影院电话" prop="cinemaPhone">
+        <el-form-item label="活动地点电话" prop="cinemaPhone">
           <el-input v-model="editForm.cinemaPhone"></el-input>
         </el-form-item>
         <el-form-item label="开始营业时间" prop="workStartTime">
@@ -71,8 +71,8 @@
             placeholder="选择结束营业时间">
           </el-time-picker>
         </el-form-item>
-        <el-form-item label="拥有影厅类型" prop="hallCategoryList">
-          <el-input class="el-input-hall" placeholder="请输入添加影厅类别名称" v-model="inputHall" clearable></el-input>
+        <el-form-item label="拥有场馆类型" prop="hallCategoryList">
+          <el-input class="el-input-hall" placeholder="请输入添加场馆类别名称" v-model="inputHall" clearable></el-input>
           <el-button type="primary" @click="addHallCategory()">添加</el-button>
         </el-form-item>
         <el-form-item >
@@ -85,7 +85,7 @@
           </el-tag>
         </el-form-item>
 
-        <el-form-item label="影院图片">
+        <el-form-item label="活动地点图片">
           <el-upload action="" list-type="picture-card"
                      :auto-upload="false"
                      :file-list="pics"
@@ -135,13 +135,13 @@
         cinemaInfo: {},
         editFormRules: {
           cinemaName: [
-            { required: true, message: '请输入影院名称', trigger: 'change' }
+            { required: true, message: '请输入活动地点名称', trigger: 'change' }
           ],
           cinemaAddress: [
-            { required: true, message: '请输入影院地址', trigger: 'change' }
+            { required: true, message: '请输入活动地点地址', trigger: 'change' }
           ],
           cinemaPhone: [
-            { required: true, message: '请输入影院电话', trigger: 'change' }
+            { required: true, message: '请输入活动地点电话', trigger: 'change' }
           ]
         },
         inputHall: '',
@@ -151,7 +151,7 @@
         hideUpload: false,
         //添加删除图片 动态绑定图片列表
         pics: [],
-        //添加删除影厅类别 动态绑定影厅列表
+        //添加删除场馆类别 动态绑定场馆列表
         halls: [],
         // 发送给后端的JSON图片数组
         pictureList: [],
@@ -211,14 +211,14 @@
           axios.defaults.headers.put['Content-Type'] = 'application/json'
           await axios.put('sysCinema/update', JSON.stringify(_this.editForm)).then(resp => {
             if (resp.data.code !== 200){
-              this.$message.error('修改影院信息失败！')
+              this.$message.error('修改活动地点信息失败！')
               success = false
             }
           })
           if (!success) return
           this.editDialogVisible = false
           await this.getCinemaInfo()
-          this.$message.success('修改影院信息成功！')
+          this.$message.success('修改活动地点信息成功！')
           for(let item of this.deletePicList) {
             await axios.get('/upload/delete?filePath=' + item.substring(item.indexOf('/images')))
           }
@@ -226,7 +226,7 @@
       },
       addHallCategory() {
         if (this.inputHall === '' || this.inputHall === null) {
-          this.$alert('影厅类别添加失败！原因：所添加的影厅类别不能为空。', '影厅类别添加异常', {
+          this.$alert('场馆类别添加失败！原因：所添加的场馆类别不能为空。', '场馆类别添加异常', {
             confirmButtonText: '我知道了'
           })
           return
@@ -234,7 +234,7 @@
           this.halls.push(this.inputHall)
         } else {
           console.log('已存在')
-          this.$alert('影厅类别添加失败！原因：所添加的影厅类别已存在。', '影厅类别添加异常', {
+          this.$alert('场馆类别添加失败！原因：所添加的场馆类别已存在。', '场馆类别添加异常', {
             confirmButtonText: '我知道了'
           })
         }

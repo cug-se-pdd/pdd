@@ -4,8 +4,8 @@
     <div class="board">
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>影厅管理</el-breadcrumb-item>
-        <el-breadcrumb-item>影厅信息</el-breadcrumb-item>
+        <el-breadcrumb-item>场馆管理</el-breadcrumb-item>
+        <el-breadcrumb-item>场馆信息</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
 
@@ -13,10 +13,10 @@
     <el-card class="box-card">
       <el-row :gutter="20">
         <el-col :span="4">
-          <el-input v-model="inputHallName" placeholder="请输入影厅名称" clearable></el-input>
+          <el-input v-model="inputHallName" placeholder="请输入场馆名称" clearable></el-input>
         </el-col>
         <el-col :span="4">
-          <el-select v-model="selectedHallCategory" placeholder="请选择影厅类别" clearable>
+          <el-select v-model="selectedHallCategory" placeholder="请选择场馆类别" clearable>
             <el-option
                 v-for="item in hallCategoryList"
                 :key="item"
@@ -29,19 +29,19 @@
           <el-button icon="el-icon-search" @click="getHallList">搜索</el-button>
         </el-col>
         <el-col :span="2">
-          <el-button type="primary" @click="addDialogVisible = true">添加影厅</el-button>
+          <el-button type="primary" @click="addDialogVisible = true">添加场馆</el-button>
         </el-col>
         <el-col :span="2">
           <el-button type="danger" @click="isAbleMultipleDelete">批量删除</el-button>
         </el-col>
       </el-row>
 
-      <!--影厅分类列表-->
+      <!--场馆分类列表-->
       <el-table :data="hallList" style="width: 100%" border stripe @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column prop="hallId" label="#" width="40"></el-table-column>
-        <el-table-column prop="hallName" label="影厅名称"></el-table-column>
-        <el-table-column prop="hallCategory" label="影厅类别"></el-table-column>
+        <el-table-column prop="hallName" label="场馆名称"></el-table-column>
+        <el-table-column prop="hallCategory" label="场馆类别"></el-table-column>
         <el-table-column prop="rowStart" label="起始行"></el-table-column>
         <el-table-column prop="rowNums" label="行数"></el-table-column>
         <el-table-column prop="seatNumsRow" label="行座位数"></el-table-column>
@@ -49,11 +49,11 @@
 
         <el-table-column label="操作" width="180">
           <template slot-scope="scope">
-            <el-tooltip effect="dark" content="修改影厅信息" placement="top" :enterable="false" :open-delay="500">
+            <el-tooltip effect="dark" content="修改场馆信息" placement="top" :enterable="false" :open-delay="500">
               <el-button type="primary" icon="el-icon-edit" size="mini"
                          @click="isAbleEdit(scope.row.hallId)"></el-button>
             </el-tooltip>
-            <el-tooltip effect="dark" content="删除影厅" placement="top" :enterable="false" :open-delay="500">
+            <el-tooltip effect="dark" content="删除场馆" placement="top" :enterable="false" :open-delay="500">
               <el-button type="danger" icon="el-icon-delete" size="mini"
                          @click="isAbleDelete(scope.row.hallId)"></el-button>
             </el-tooltip>
@@ -78,16 +78,16 @@
 
     </el-card>
 
-    <!--添加影厅对话框-->
-    <el-dialog title="添加影厅" :visible.sync="addDialogVisible" width="60%" @close="addDialogClosed">
+    <!--添加场馆对话框-->
+    <el-dialog title="添加场馆" :visible.sync="addDialogVisible" width="60%" @close="addDialogClosed">
       <!--内容主题区-->
       <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="100px">
         <!--prop：在addFormRules中定义校验规则， v-model：双向绑定数据-->
-        <el-form-item label="影厅名称" prop="hallName">
+        <el-form-item label="场馆名称" prop="hallName">
           <el-input v-model="addForm.hallName"></el-input>
         </el-form-item>
-        <el-form-item label="影厅类别" prop="hallCategory">
-          <el-select v-model="addForm.hallCategory" placeholder="请选择影厅类别" clearable >
+        <el-form-item label="场馆类别" prop="hallCategory">
+          <el-select v-model="addForm.hallCategory" placeholder="请选择场馆类别" clearable >
             <el-option
                     v-for="item in hallCategoryList"
                     :key="item"
@@ -113,18 +113,18 @@
       </span>
     </el-dialog>
 
-    <!--修改影厅对话框-->
-    <el-dialog title="修改影厅" :visible.sync="editDialogVisible" width="60%" @close="editDialogClosed">
+    <!--修改场馆对话框-->
+    <el-dialog title="修改场馆" :visible.sync="editDialogVisible" width="60%" @close="editDialogClosed">
       <el-form :model="editForm" :rules="editFormRules" ref="editFormRef" label-width="100px">
         <!--prop：在addFormRules中定义校验规则， v-model：双向绑定数据-->
-        <el-form-item label="影厅编号" prop="hallId">
+        <el-form-item label="场馆编号" prop="hallId">
           <el-input v-model="editForm.hallId" disabled></el-input>
         </el-form-item>
-        <el-form-item label="影厅名称" prop="hallName">
-          <el-input v-model="editForm.hallName" disabled>影厅名称不可更改</el-input>
+        <el-form-item label="场馆名称" prop="hallName">
+          <el-input v-model="editForm.hallName" disabled>场馆名称不可更改</el-input>
         </el-form-item>
-        <el-form-item label="影厅类别" prop="hallCategory">
-          <el-select v-model="editForm.hallCategory" placeholder="请选择影厅类别" clearable >
+        <el-form-item label="场馆类别" prop="hallCategory">
+          <el-select v-model="editForm.hallCategory" placeholder="请选择场馆类别" clearable >
             <el-option
               v-for="item in hallCategoryList"
               :key="item"
@@ -192,7 +192,7 @@ export default {
       url: 'http://localhost:8181/',
       //控制对话框的显示与隐藏
       addDialogVisible: false,
-      //添加影厅的表单数据
+      //添加场馆的表单数据
       addForm: {
         hallId: '',
         cinemaId: '1',
@@ -208,10 +208,10 @@ export default {
       //验证表单规则对象
       addFormRules: {
         hallName: [
-          { required: true, message: '请输入影厅名称', trigger: 'blur' }
+          { required: true, message: '请输入场馆名称', trigger: 'blur' }
         ],
         hallCategory: [
-          { required: true, message: '请选择影厅类别', trigger: 'blur' }
+          { required: true, message: '请选择场馆类别', trigger: 'blur' }
         ]
       },
       editDialogVisible: false,
@@ -219,10 +219,10 @@ export default {
       checkAbleId: {},
       editFormRules: {
         hallName: [
-          { required: true, message: '请输入影厅名称', trigger: 'blur' }
+          { required: true, message: '请输入场馆名称', trigger: 'blur' }
         ],
         hallCategory: [
-          { required: true, message: '请选择影厅类别', trigger: 'blur' }
+          { required: true, message: '请选择场馆类别', trigger: 'blur' }
         ]
       },
       inputHallName: '',
@@ -304,12 +304,12 @@ export default {
         //预校验成功，发网络请求
         axios.defaults.headers.post['Content-Type'] = 'application/json'
         const {data : res } = await axios.post('sysHall', JSON.stringify(_this.addForm))
-        if(res.code !== 200) return this.$message.error("添加影厅信息失败 " + res.msg)
+        if(res.code !== 200) return this.$message.error("添加场馆信息失败 " + res.msg)
         //隐藏添加对话框
         this.addDialogVisible = false
         //重新加载列表
         this.getHallList()
-        this.$message.success('添加影厅信息成功！')
+        this.$message.success('添加场馆信息成功！')
       })
     },
     isAbleEdit(id) {
@@ -325,7 +325,7 @@ export default {
             sessionIds += temp.sessionId+' '
           }
           console.log('sessionIds is : '+sessionIds)
-          this.$alert('抱歉！有未完成电影场次，不能修改影厅信息。\n'+'导致异常的场次编号为: '+sessionIds, '修改请求异常通知', {
+          this.$alert('抱歉！有未完成活动场次，不能修改场馆信息。\n'+'导致异常的场次编号为: '+sessionIds, '修改请求异常通知', {
             confirmButtonText: '我知道了',
             callback: action => {
               this.$router.push('/hall')
@@ -347,7 +347,7 @@ export default {
     editDialogClosed(){
       this.$refs.editFormRef.resetFields()
     },
-    // 修改影厅分类信息并提交
+    // 修改场馆分类信息并提交
     editHallInfo(){
       let row = this.editForm.rowNums
       let col = this.editForm.seatNumsRow
@@ -369,14 +369,14 @@ export default {
         axios.defaults.headers.put['Content-Type'] = 'application/json'
         await axios.put('sysHall', JSON.stringify(_this.editForm)).then(resp => {
           if (resp.data.code !== 200){
-            this.$message.error('修改影厅信息失败！')
+            this.$message.error('修改场馆信息失败！')
             success = false
           }
         })
         if (!success) return
         this.editDialogVisible = false
         this.getHallList()
-        this.$message.success('修改影厅信息成功！')
+        this.$message.success('修改场馆信息成功！')
       })
     },
     // 监听多选框变化
@@ -396,7 +396,7 @@ export default {
         }
       }
       if (ableMultipleDelete === false) {
-        this.$alert('抱歉！有未完成电影场次，不能批量删除影厅信息。\n' + '导致异常的影厅编号为: ' + ids, '批量删除请求异常通知', {
+        this.$alert('抱歉！有未完成活动场次，不能批量删除场馆信息。\n' + '导致异常的场馆编号为: ' + ids, '批量删除请求异常通知', {
           confirmButtonText: '我知道了',
           callback: action => {
             this.$router.push('/hall')
@@ -432,11 +432,11 @@ export default {
       axios.defaults.headers.post['Content-Type'] = 'application/json'
       await axios.post('sysHall/delete', JSON.stringify(ids)).then(resp => {
         if (resp.data.code !== 200){
-          this.$message.success('批量删除影厅分类失败！')
+          this.$message.success('批量删除场馆分类失败！')
         }
       })
       this.getHallList()
-      this.$message.success('批量删除影厅分类成功！')
+      this.$message.success('批量删除场馆分类成功！')
     },
     async isAbleDelete(id) {
       this.checkAbleId.hallId = id
@@ -454,7 +454,7 @@ export default {
             sessionIds += temp.sessionId+' '
           }
           console.log('sessionIds is : '+sessionIds)
-          this.$alert('抱歉！有未完成电影场次，不能删除影厅信息。\n'+'导致异常的场次编号为: '+sessionIds, '删除请求异常通知', {
+          this.$alert('抱歉！有未完成活动场次，不能删除场馆信息。\n'+'导致异常的场次编号为: '+sessionIds, '删除请求异常通知', {
             confirmButtonText: '我知道了',
             callback: action => {
               this.$router.push('/hall')
@@ -463,7 +463,7 @@ export default {
         }
       })
     },
-    //根据id删除对应的影厅分类
+    //根据id删除对应的场馆分类
     async deleteHallById(id){
       let deleteInfo = {
         hallId: id
@@ -487,11 +487,11 @@ export default {
       axios.defaults.headers.post['Content-Type'] = 'application/json'
       await axios.post('sysHall/delete', JSON.stringify(deleteInfo)).then(resp => {
         if (resp.data.code !== 200){
-          _this.$message.success('删除影厅信息失败！')
+          _this.$message.success('删除场馆信息失败！')
         }
       })
       this.getHallList()
-      this.$message.success('删除影厅信息成功！')
+      this.$message.success('删除场馆信息成功！')
     },
     async arrangeSeat(id){
       const _this = this

@@ -13,7 +13,7 @@
     <el-card class="box-card">
       <el-row :gutter="20">
         <el-col :span="4">
-          <el-select v-model="selectedHallId" placeholder="请选择影厅名称" clearable>
+          <el-select v-model="selectedHallId" placeholder="请选择场馆名称" clearable>
             <el-option
                 v-for="item in hallList"
                 :key="item.hallId"
@@ -23,7 +23,7 @@
           </el-select>
         </el-col>
         <el-col :span="4">
-          <el-select v-model="selectedMovieId" placeholder="请选择电影名称" clearable>
+          <el-select v-model="selectedMovieId" placeholder="请选择活动名称" clearable>
             <el-option
                 v-for="item in movieList"
                 :key="item.movieId"
@@ -54,12 +54,12 @@
         </el-col>
       </el-row>
 
-      <!--影厅分类列表-->
+      <!--场馆分类列表-->
       <el-table :data="sessionList" style="width: 100%" border stripe @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column prop="sessionId" label="#" width="40"></el-table-column>
-        <el-table-column prop="sysHall.hallName" label="影厅名称"></el-table-column>
-        <el-table-column prop="sysMovie.movieName" label="电影名称"></el-table-column>
+        <el-table-column prop="sysHall.hallName" label="场馆名称"></el-table-column>
+        <el-table-column prop="sysMovie.movieName" label="活动名称"></el-table-column>
         <el-table-column prop="languageVersion" label="语言"></el-table-column>
         <el-table-column prop="sessionDate" label="场次时间" width="100"></el-table-column>
         <el-table-column prop="playTime" label="播放时间" width="110">
@@ -110,8 +110,8 @@
       <!--内容主题区-->
       <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="150px">
         <!--prop：在addFormRules中定义校验规则， v-model：双向绑定数据-->
-        <el-form-item label="影厅名称" prop="hallId">
-          <el-select v-model="addForm.hallId" placeholder="请选择影厅名称" clearable >
+        <el-form-item label="场馆名称" prop="hallId">
+          <el-select v-model="addForm.hallId" placeholder="请选择场馆名称" clearable >
             <el-option
                 v-for="item in hallList"
                 :key="item.hallId"
@@ -123,8 +123,8 @@
         <el-form-item label="语言版本" prop="languageVersion">
           <el-input v-model="addForm.languageVersion"></el-input>
         </el-form-item>
-        <el-form-item label="电影名称" prop="movieId">
-          <el-select v-model="addForm.movieId" placeholder="请选择电影名称" clearable >
+        <el-form-item label="活动名称" prop="movieId">
+          <el-select v-model="addForm.movieId" placeholder="请选择活动名称" clearable >
             <el-option
                 v-for="item in movieList"
                 :key="item.movieId"
@@ -165,8 +165,8 @@
     <!--修改场次对话框-->
     <el-dialog title="修改场次" :visible.sync="editDialogVisible" width="60%" @close="editDialogClosed">
       <el-form :model="editForm" :rules="editFormRules" ref="editFormRef" label-width="150px">
-        <el-form-item label="影厅名称" prop="hallId">
-          <el-select v-model="editForm.hallId" placeholder="请选择影厅名称" clearable >
+        <el-form-item label="场馆名称" prop="hallId">
+          <el-select v-model="editForm.hallId" placeholder="请选择场馆名称" clearable >
             <el-option
                 v-for="item in hallList"
                 :key="item.hallId"
@@ -178,8 +178,8 @@
         <el-form-item label="语言版本" prop="languageVersion">
           <el-input v-model="editForm.languageVersion"></el-input>
         </el-form-item>
-        <el-form-item label="电影名称" prop="movieId">
-          <el-select v-model="editForm.movieId" placeholder="请选择电影名称" clearable >
+        <el-form-item label="活动名称" prop="movieId">
+          <el-select v-model="editForm.movieId" placeholder="请选择活动名称" clearable >
             <el-option
                 v-for="item in movieList"
                 :key="item.movieId"
@@ -258,7 +258,7 @@ export default {
       total: 0,
       //控制对话框的显示与隐藏
       addDialogVisible: false,
-      //添加影厅的表单数据
+      //添加场馆的表单数据
       addForm: {
         hallId: '',
         languageVersion: '',
@@ -275,13 +275,13 @@ export default {
       //验证表单规则对象
       addFormRules: {
         hallId: [
-          { required: true, message: '请选择影厅名称', trigger: 'change' }
+          { required: true, message: '请选择场馆名称', trigger: 'change' }
         ],
         languageVersion: [
-          { required: true, message: '请输入电影语言', trigger: 'blur' }
+          { required: true, message: '请输入活动语言', trigger: 'blur' }
         ],
         movieId: [
-          { required: true, message: '请选择电影名称', trigger: 'change' }
+          { required: true, message: '请选择活动名称', trigger: 'change' }
         ],
         sessionDate: [
           { required: true, message: '请选择场次日期', trigger: 'blur' }
@@ -298,13 +298,13 @@ export default {
       checkAbleId: {},
       editFormRules: {
         hallId: [
-          { required: true, message: '请选择影厅名称', trigger: 'change' }
+          { required: true, message: '请选择场馆名称', trigger: 'change' }
         ],
         languageVersion: [
-          { required: true, message: '请输入电影语言', trigger: 'blur' }
+          { required: true, message: '请输入活动语言', trigger: 'blur' }
         ],
         movieId: [
-          { required: true, message: '请选择电影名称', trigger: 'change' }
+          { required: true, message: '请选择活动名称', trigger: 'change' }
         ],
         sessionDate: [
           { required: true, message: '请选择场次日期', trigger: 'blur' }
@@ -393,11 +393,11 @@ export default {
       this.$refs.addFormRef.validate(async valid => {
         console.log(valid)
         if (!valid) return this.$message.error('添加场次信息失败')
-        //验证通过，将登录用户的影院id赋值给表单
+        //验证通过，将登录用户的活动地点id赋值给表单
 
         let seats = ''
         let seatNums = 0
-        //查询影厅信息，查出对应排数和排座位数，填充sessionSeats字段
+        //查询场馆信息，查出对应排数和排座位数，填充sessionSeats字段
         await axios.get('sysHall/' + this.addForm.hallId).then(resp => {
           _this.rowNums = resp.data.data.rowNums
           _this.colNums = resp.data.data.seatNumsRow
@@ -417,7 +417,7 @@ export default {
         //   seat[isNaN(parseInt(_this.rowStart)) ? String.fromCharCode(i + _this.rowStart.charCodeAt(0)) : i + parseInt(_this.rowStart)] = arr
         // }
         // this.$set(this.addForm, 'sessionSeats', JSON.stringify(seat))
-        //新建场次时，将影厅的座位信息赋值给场次
+        //新建场次时，将场馆的座位信息赋值给场次
         this.$set(this.addForm, 'seatNums', seatNums)
         this.$set(this.addForm, 'sessionSeats', seats)
         console.log(_this.addForm.sessionSeats)
@@ -459,7 +459,7 @@ export default {
             billIds += temp.billId+' '
           }
           console.log('billIds is : '+billIds)
-          this.$alert('抱歉！电影场次有相关订单，不能修改电影场次信息。\n'+'导致异常的订单编号为: '+billIds, '修改请求异常通知', {
+          this.$alert('抱歉！活动场次有相关预约，不能修改活动场次信息。\n'+'导致异常的预约编号为: '+billIds, '修改请求异常通知', {
             confirmButtonText: '我知道了',
             callback: action => {
               this.$router.push('/session')
@@ -512,14 +512,14 @@ export default {
         this.$message.success('修改场次信息成功！')
       })
     },
-    //处理散场时间和片场截止时间（修改或删除电影、影厅信息截止时间修改或删除电影、影厅信息截止时间）
+    //处理散场时间和片场截止时间（修改或删除电活动、场馆信息截止时间修改或删除活动、场馆信息截止时间）
     handleEndTimeAndDeadline(movieId, sessionDate, playTime){
       this.addForm.deadline = ''
       this.editForm.deadline = ''
       this.addForm.endTime = ''
       this.editForm.endTime = ''
       let resultEndTime = ''
-      //电影时长
+      //活动时长
       let movieLengthTime
       for (let item of this.movieList) {
         if (item.movieId === movieId) {
@@ -589,7 +589,7 @@ export default {
       }
       if (ableMultipleDelete === false) {
         // '抱歉！。\\n\'+\'导致异常的订单编号为: \''
-        this.$alert('抱歉！电影场次有相关订单，不能删除电影场次信息。\n' + '导致异常的场次编号为: ' + ids, '批量删除请求异常通知', {
+        this.$alert('抱歉！活动场次有相关预约，不能删除活动场次信息。\n' + '导致异常的场次编号为: ' + ids, '批量删除请求异常通知', {
           confirmButtonText: '我知道了',
           callback: action => {
             this.$router.push('/session')
@@ -627,7 +627,7 @@ export default {
       this.getSessionList()
       this.$message.success('批量删除场次成功！')
     },
-    // 两层检验，第一层检验场次是否完成，完成则可删；第二层检验未完成，是否有订单，有订单不可删。不论订单支付与否
+    // 两层检验，第一层检验场次是否完成，完成则可删；第二层检验未完成，是否有预约，有预约不可删。不论预约支付与否
     async isAbleDelete(session) {
       if (session.deadline <= moment(new Date()).format('YYYY-MM-DD HH:mm:ss')) {
         await this.deleteSessionById(session.sessionId)
@@ -648,7 +648,7 @@ export default {
             billIds += temp.billId+' '
           }
           console.log('billIds is : '+billIds)
-          this.$alert('抱歉！电影场次有相关订单，不能删除电影场次信息。\n'+'导致异常的订单编号为: '+billIds, '删除请求异常通知', {
+          this.$alert('抱歉！活动场次有相关预约，不能删除活动场次信息。\n'+'导致异常的预约编号为: '+billIds, '删除请求异常通知', {
             confirmButtonText: '我知道了',
             callback: action => {
               this.$router.push('/session')
@@ -657,7 +657,7 @@ export default {
         }
       })
     },
-    //根据id删除对应的影厅分类
+    //根据id删除对应的场馆分类
     async deleteSessionById(id){
       const _this = this
       //询问用户是否确认删除

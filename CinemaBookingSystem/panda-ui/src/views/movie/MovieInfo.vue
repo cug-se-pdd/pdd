@@ -4,18 +4,18 @@
     <div class="board">
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>电影管理</el-breadcrumb-item>
-        <el-breadcrumb-item>电影信息</el-breadcrumb-item>
+        <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+        <el-breadcrumb-item>活动信息</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
 
     <el-card class="box-card">
       <el-row :addDialogVisible="20">
         <el-col :span="5">
-          <el-input v-model="inputMovieName" placeholder="请输入电影名称" clearable></el-input>
+          <el-input v-model="inputMovieName" placeholder="请输入活动名称" clearable></el-input>
         </el-col>
         <el-col :span="5">
-          <el-select class="el-select-search" v-model="selectedMovieArea" placeholder="请选择电影地区" clearable>
+          <el-select class="el-select-search" v-model="selectedMovieArea" placeholder="请选择活动地区" clearable>
             <el-option
                 v-for="item in movieAreaList"
                 :key="item"
@@ -41,32 +41,32 @@
         </el-col>
 
         <el-col :span="4">
-          <el-button type="primary" @click="addDialogVisible = true">添加电影</el-button>
+          <el-button type="primary" @click="addDialogVisible = true">添加活动</el-button>
         </el-col>
         <el-col :span="4">
           <el-button type="danger" @click="isAbleMultipleDelete">批量删除</el-button>
         </el-col>
       </el-row>
 
-<!--    电影信息列表-->
+<!--    活动信息列表-->
     <el-table :data="movieList" style="width: 100%" border stripe @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column prop="movieId" label="#" width="40"></el-table-column>
-      <el-table-column prop="movieName" label="电影名称"></el-table-column>
-      <el-table-column prop="movieArea" label="电影区域"></el-table-column>
-      <el-table-column prop="movieLength" label="电影时长（分钟）"></el-table-column>
+      <el-table-column prop="movieName" label="活动名称"></el-table-column>
+      <el-table-column prop="movieArea" label="活动区域"></el-table-column>
+      <el-table-column prop="movieLength" label="活动时长（分钟）"></el-table-column>
       <el-table-column prop="releaseDate" label="上映时间"></el-table-column>
       <el-table-column prop="movieBoxOffice" label="票房"></el-table-column>
 <!--      操作按钮-->
       <el-table-column label="操作" width="240">
         <template slot-scope="scope">
-          <el-tooltip effect="dark" content="查看电影信息详细" placement="top" :enterable="false" :open-delay="500">
+          <el-tooltip effect="dark" content="查看活动信息详细" placement="top" :enterable="false" :open-delay="500">
             <el-button type="success" icon="el-icon-view" size="mini" @click="toMovieInfo(scope.row.movieId)"></el-button>
           </el-tooltip>
-          <el-tooltip effect="dark" content="修改电影信息" placement="top" :enterable="false" :open-delay="500">
+          <el-tooltip effect="dark" content="修改活动信息" placement="top" :enterable="false" :open-delay="500">
             <el-button type="primary" icon="el-icon-edit" size="mini" @click="isAbleEdit(scope.row.movieId)"></el-button>
           </el-tooltip>
-          <el-tooltip effect="dark" content="删除电影" placement="top" :enterable="false" :open-delay="500">
+          <el-tooltip effect="dark" content="删除活动" placement="top" :enterable="false" :open-delay="500">
             <el-button type="danger" icon="el-icon-delete" size="mini" @click="isAbleDelete(scope.row.movieId)"></el-button>
           </el-tooltip>
           <el-tooltip effect="dark" content="影片类别管理" placement="top" :enterable="false" :open-delay="500">
@@ -88,16 +88,16 @@
     </el-pagination>
     </el-card>
 
-    <!--添加电影对话框-->
-    <el-dialog title="添加电影" :visible.sync="addDialogVisible" width="60%" @close="addDialogClosed">
+    <!--添加活动对话框-->
+    <el-dialog title="添加活动" :visible.sync="addDialogVisible" width="60%" @close="addDialogClosed">
       <!--内容主题区-->
       <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="100px">
         <!--prop：在addFormRules中定义校验规则， v-model：双向绑定数据-->
-        <el-form-item label="电影名称" prop="movieName">
+        <el-form-item label="活动名称" prop="movieName">
           <el-input v-model="addForm.movieName"></el-input>
         </el-form-item>
-        <el-form-item label="电影区域" prop="movieArea">
-          <el-select v-model="addForm.movieArea" placeholder="请选择电影区域" clearable >
+        <el-form-item label="活动区域" prop="movieArea">
+          <el-select v-model="addForm.movieArea" placeholder="请选择活动区域" clearable >
             <el-option
                     v-for="item in movieAreaList"
                     :key="item"
@@ -106,7 +106,7 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="电影时长/分钟" prop="movieLength">
+        <el-form-item label="活动时长/分钟" prop="movieLength">
           <el-input v-model="addForm.movieLength"></el-input>
         </el-form-item>
         <el-form-item label="上映时间" prop="releaseDate">
@@ -117,10 +117,10 @@
               placeholder="选择日期">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="电影简介" prop="movieIntroduction">
+        <el-form-item label="活动简介" prop="movieIntroduction">
           <el-input v-model="addForm.movieIntroduction"></el-input>
         </el-form-item>
-        <el-form-item label="电影封面">
+        <el-form-item label="活动封面">
           <el-upload action="" list-type="picture-card"
                      :auto-upload="false" :limit="1"
                      :file-list="poster" :on-exceed="handleExceed"
@@ -147,7 +147,7 @@
           </el-dialog>
         </el-form-item>
         <!--        修改图集-->
-        <el-form-item label="电影图集">
+        <el-form-item label="活动图集">
           <el-upload action="" list-type="picture-card" :auto-upload="false"
                      :file-list="pics" :on-change="handleChange"
                      :on-success="handleSuccess" :on-error="handleError"
@@ -179,15 +179,15 @@
     </el-dialog>
 
 
-    <!-- 修改电影信息对话框 -->
-    <el-dialog title="修改电影信息" :visible.sync="editDialogVisible" width="60%" @close="editDialogClosed">
+    <!-- 修改活动信息对话框 -->
+    <el-dialog title="修改活动信息" :visible.sync="editDialogVisible" width="60%" @close="editDialogClosed">
       <el-form :model="editForm" :rules="editFormRules" ref="editFormRef" label-width="100px">
-        <el-form-item label="电影名称" prop="movieName">
+        <el-form-item label="活动名称" prop="movieName">
           <el-input v-model="editForm.movieName" disabled></el-input>
         </el-form-item>
 
-        <el-form-item label="电影区域" prop="movieArea">
-          <el-select v-model="editForm.movieArea" placeholder="请选择电影区域" clearable >
+        <el-form-item label="活动区域" prop="movieArea">
+          <el-select v-model="editForm.movieArea" placeholder="请选择活动区域" clearable >
             <el-option
               v-for="item in movieAreaList"
               :key="item"
@@ -196,7 +196,7 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="电影时长/分钟" prop="movieLength">
+        <el-form-item label="活动时长/分钟" prop="movieLength">
           <el-input v-model="editForm.movieLength"></el-input>
         </el-form-item>
         <el-form-item label="上映时间" prop="releaseDate">
@@ -207,11 +207,11 @@
               placeholder="选择日期">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="电影简介" prop="movieIntroduction">
+        <el-form-item label="活动简介" prop="movieIntroduction">
           <el-input v-model="editForm.movieIntroduction"></el-input>
         </el-form-item>
 <!--        修改封面-->
-        <el-form-item label="电影封面">
+        <el-form-item label="活动封面">
           <el-upload action="" list-type="picture-card"
                      :auto-upload="false" :limit="1"
                      :file-list="poster" :on-exceed="handleExceed"
@@ -238,7 +238,7 @@
           </el-dialog>
         </el-form-item>
 <!--        修改图集-->
-        <el-form-item label="电影图集">
+        <el-form-item label="活动图集">
           <el-upload action="" list-type="picture-card" :auto-upload="false"
                      :file-list="pics" :on-change="handleChange"
                      :on-success="handleSuccess"
@@ -269,8 +269,8 @@
       </span>
     </el-dialog>
 
-<!--    电影类型管理界面-->
-    <el-dialog title="电影类型管理" :visible.sync="editCategoryVisible" width="60%" @close="editCategoryDialogClosed">
+<!--    活动类型管理界面-->
+    <el-dialog title="活动类型管理" :visible.sync="editCategoryVisible" width="60%" @close="editCategoryDialogClosed">
 <!--      <template>-->
 <!--        <el-checkbox-group-->
 <!--            v-model="selectedMovieCategory">-->
@@ -278,7 +278,7 @@
 <!--        </el-checkbox-group>-->
 <!--      </template>-->
       <el-form label-width="100px">
-        <el-form-item label="电影类型" prop="movieActor">
+        <el-form-item label="活动类型" prop="movieActor">
           <el-select v-model="selectedMovieCategory" placeholder="请选择类型名称" clearable>
             <el-option
                 v-for="item in categoryList"
@@ -340,7 +340,7 @@ export default {
       dialogVisible: false,
       dialogImageUrl: '',
       disabled:false,
-      //电影封面增删变量
+      //活动封面增删变量
       poster: [],
       //发送给后端的JSON图片
       posterL: [],
@@ -351,7 +351,7 @@ export default {
       pictureList: [],
       picNums:0,
       deletePicList:[],
-      //添加电影表单数据
+      //添加活动表单数据
       addForm: {
         movieId: '',
         movieName: '',
@@ -366,19 +366,19 @@ export default {
       //添加验证表单规则对象
       addFormRules: {
         movieName: [
-          {required: true, message: '请输入电影名称', trigger: 'blur'}
+          {required: true, message: '请输入活动名称', trigger: 'blur'}
         ],
         movieArea: [
-          {required: true, message: '请选择电影区域', trigger: 'blur'}
+          {required: true, message: '请选择活动区域', trigger: 'blur'}
         ]
       },
       //修改验证表单规则对象
       editFormRules: {
         movieName: [
-          {required: true, message: '请输入电影名称', trigger: 'blur'}
+          {required: true, message: '请输入活动名称', trigger: 'blur'}
         ],
         movieArea: [
-          {required: true, message: '请选择电影区域', trigger: 'blur'}
+          {required: true, message: '请选择活动区域', trigger: 'blur'}
         ]
       }
     }
@@ -487,14 +487,14 @@ export default {
         await axios.post('sysMovie', JSON.stringify(_this.addForm)).then(resp => {
           console.log(resp)
           if (resp.data.code !== 200) {
-            this.$message.error('添加电影信息失败！')
+            this.$message.error('添加活动信息失败！')
           }
         })
         //隐藏添加对话框
         this.addDialogVisible = false
         //重新加载列表
         this.getMovieList()
-        this.$message.success('添加电影信息成功！')
+        this.$message.success('添加活动信息成功！')
       })
     },
     // 监听修改对话框的关闭事件
@@ -511,7 +511,7 @@ export default {
     editCategoryDialogClosed(){
       this.selectedMovieCategory = ''
     },
-    // 修改电影信息对话框
+    // 修改活动信息对话框
     async editMovieInfo() {
       await this.submitFile()
       this.editForm.moviePictures = JSON.stringify(this.pictureList)
@@ -524,7 +524,7 @@ export default {
         axios.defaults.headers.put['Content-Type'] = 'application/json'
         await axios.put('sysMovie', JSON.stringify(_this.editForm)).then(resp => {
           if (resp.data.code !== 200) {
-            this.$message.error('修改电影信息失败！')
+            this.$message.error('修改活动信息失败！')
             success = false
           }
         })
@@ -537,7 +537,7 @@ export default {
         }
         this.editDialogVisible = false
         this.getMovieList()
-        this.$message.success('修改电影信息成功！')
+        this.$message.success('修改活动信息成功！')
       })
     },
     handleChange(file, filelist) {
@@ -606,7 +606,7 @@ export default {
             sessionIds += temp.sessionId+' '
           }
           console.log('sessionIds is : '+sessionIds)
-          this.$alert('抱歉！有未完成电影场次，不能修改电影信息。\n'+'导致异常的场次编号为: '+sessionIds, '修改请求异常通知', {
+          this.$alert('抱歉！有未完成活动场次，不能修改活动信息。\n'+'导致异常的场次编号为: '+sessionIds, '修改请求异常通知', {
             confirmButtonText: '我知道了',
             callback: action => {
               this.$router.push('/movie')
@@ -668,7 +668,7 @@ export default {
         }
       }
       if (ableDelete === false) {
-        this.$alert('抱歉！有未完成电影场次，不能批量删除电影信息。\n' + '导致异常的电影编号为: ' + ids, '批量删除请求异常通知', {
+        this.$alert('抱歉！有未完成活动场次，不能批量删除活动信息。\n' + '导致异常的活动编号为: ' + ids, '批量删除请求异常通知', {
           confirmButtonText: '我知道了',
           callback: action => {
             this.$router.push('/movie')
@@ -678,7 +678,7 @@ export default {
       }
       await this.multipleDelete()
     },
-    // 批量删除电影
+    // 批量删除活动
     async multipleDelete() {
       const _this = this
       //询问用户是否确认删除
@@ -704,11 +704,11 @@ export default {
       await axios.delete('sysMovie/' + ids, JSON.stringify(ids)).then(resp => {
         console.log(123)
         if (resp.data.code !== 200) {
-          this.$message.success('批量删除电影失败！')
+          this.$message.success('批量删除活动失败！')
         }
       })
       this.getMovieList()
-      this.$message.success('批量删除电影成功！')
+      this.$message.success('批量删除活动成功！')
     },
     async isAbleDelete(id) {
       this.checkAbleId.movieId = id
@@ -725,7 +725,7 @@ export default {
             sessionIds += temp.sessionId+' '
           }
           console.log('sessionIds is : '+sessionIds)
-          this.$alert('抱歉！有未完成电影场次，不能删除电影信息。\n'+'导致异常的场次编号为: '+sessionIds, '删除请求异常通知', {
+          this.$alert('抱歉！有未完成活动场次，不能删除活动信息。\n'+'导致异常的场次编号为: '+sessionIds, '删除请求异常通知', {
             confirmButtonText: '我知道了',
             callback: action => {
               this.$router.push('/movie')
@@ -734,7 +734,7 @@ export default {
         }
       })
     },
-    // 单个删除电影
+    // 单个删除活动
     async deleteMovieById(id) {
       let deleteInfo = id
       const _this = this
@@ -756,11 +756,11 @@ export default {
       axios.defaults.headers.post['Content-Type'] = 'application/json'
       await axios.delete('sysMovie/' + deleteInfo, JSON.stringify(deleteInfo)).then(resp => {
         if (resp.data.code !== 200) {
-          _this.$message.success('删除电影信息失败！')
+          _this.$message.success('删除活动信息失败！')
         }
       })
       this.getMovieList()
-      this.$message.success('删除电影信息成功！')
+      this.$message.success('删除活动信息成功！')
     },
     async deleteCategory(categoryId){
       console.log('类型id')
@@ -775,16 +775,16 @@ export default {
       })
     },
     handleExceed(){
-      this.$message.error('电影封面不能超过一张!')
+      this.$message.error('活动封面不能超过一张!')
     },
     async addCategory(){
       const _this = this
       await axios.post('sysMovieToCategory/'+this.movieId+'/'+this.selectedMovieCategory).then(resp=>{
         console.log(resp)
-        if (resp.data.code !==200) return this.$alert('添加电影类别失败', '添加电影类别异常通知', {
+        if (resp.data.code !==200) return this.$alert('添加活动类别失败', '添加活动类别异常通知', {
           confirmButtonText: '我知道了'
         })
-        this.$message.success("添加电影类别成功")
+        this.$message.success("添加活动类别成功")
       })
       axios.get('sysMovie/find/'+this.movieId).then(response=>{
         _this.editCategoryForm = response.data.data.movieCategoryList
