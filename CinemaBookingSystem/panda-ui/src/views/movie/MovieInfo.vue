@@ -56,7 +56,7 @@
       <el-table-column prop="movieArea" label="活动区域"></el-table-column>
       <el-table-column prop="movieLength" label="活动时长（分钟）"></el-table-column>
       <el-table-column prop="releaseDate" label="上映时间"></el-table-column>
-      <el-table-column prop="movieBoxOffice" label="票房"></el-table-column>
+      <el-table-column prop="movieBoxOffice" label="热度"></el-table-column>
 <!--      操作按钮-->
       <el-table-column label="操作" width="240">
         <template slot-scope="scope">

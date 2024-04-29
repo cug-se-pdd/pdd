@@ -1,13 +1,13 @@
 <template>
   <div>
     <el-steps :active="3" align-center>
-      <el-step title="选择影片场次"></el-step>
+      <el-step title="选择活动场次"></el-step>
       <el-step title="选择座位"></el-step>
       <el-step title="15分钟内付款"></el-step>
-      <el-step title="影院取票观影" status="wait"></el-step>
+      <el-step title="活动地点取票观影" status="wait"></el-step>
     </el-steps>
     <div class="bill-info-container">
-      <!-- 订单状态 -->
+      <!-- 预约状态 -->
       <!-- 未支付，未取消，15分钟内 -->
       <div class="bill-info-status" v-if="payState === false && cancelState === false && (minutes > 0 || seconds > 0)">
         <div class="pay-icon">
@@ -24,7 +24,7 @@
           <img src="../../assets/bill-invalid.png">
         </div>
         <div class="pay-info">
-          <div class="pay-info-status invalid">由于订单超时未支付，已失效</div>
+          <div class="pay-info-status invalid">由于预约超时未支付，已失效</div>
         </div>
       </div>
       <div class="bill-info-status finish" v-if="payState === true">
@@ -40,23 +40,23 @@
           <img src="../../assets/bill-invalid.png">
         </div>
         <div class="pay-info">
-          <div class="pay-info-status invalid">订单已取消</div>
+          <div class="pay-info-status invalid">预约已取消</div>
         </div>
       </div>
 
-      <!-- 订单信息 -->
+      <!-- 预约信息 -->
       <div class="bill-info-desc">
         <div class="bill-info-header">
-          <span>订单编号: {{billInfo.billId}}</span>
+          <span>预约编号: {{billInfo.billId}}</span>
           <span class="bill-info-helper">
-            (有订单问题可拨打客服电话<div>{{billInfo.sysSession.sysHall.sysCinema.cinemaPhone}}</div>，
+            (有预约问题可拨打客服电话<div>{{billInfo.sysSession.sysHall.sysCinema.cinemaPhone}}</div>，
             工作时间: {{billInfo.sysSession.sysHall.sysCinema.workStartTime}}-{{billInfo.sysSession.sysHall.sysCinema.workEndTime}})</span>
         </div>
 
         <table class="order-table">
           <thead>
           <tr>
-            <th>影片</th>
+            <th>活动</th>
             <th>语言版本</th>
             <th>播放时间</th>
             <th>座位</th>
@@ -81,7 +81,7 @@
           </tbody>
         </table>
       </div>
-      <!-- 影院信息、提交订单 -->
+      <!-- 活动地点信息、提交预约 -->
       <div class="bill-info-area">
         <div class="cinema-info">
           <span class="bill-cinema-name">{{billInfo.sysSession.sysHall.sysCinema.cinemaName}}</span>
@@ -95,7 +95,7 @@
           <div v-if="payState === false && cancelState === false && (minutes > 0 || seconds > 0)">
             <el-button @click="payForBill" type="primary" style="width: 200px; margin-top: 20px;" round>立即支付</el-button></div>
           <div v-if="payState === false && cancelState === false && (minutes > 0 || seconds > 0)">
-            <el-button @click="cancelForBill" type="danger" style="width: 200px; margin-top: 20px;" round>取消订单</el-button></div>
+            <el-button @click="cancelForBill" type="danger" style="width: 200px; margin-top: 20px;" round>取消预约</el-button></div>
         </div>
       </div>
     </div>
@@ -140,7 +140,7 @@ export default {
       if(res.code !== 200) return this.$message.error('获取信息失败')
       let userId = JSON.parse(window.sessionStorage.getItem('loginUser')).userId
       if (userId !== res.data.userId) {
-        this.$alert('非法操作！操作非本人订单。', '非法操作订单警告', {
+        this.$alert('非法操作！操作非本人预约。', '非法操作预约警告', {
           confirmButtonText: '我知道了',
           callback: action => {
             this.$router.push('/bill')
@@ -154,7 +154,7 @@ export default {
       console.log(this.billInfo)
       // 截止时间
       console.log(this.billInfo.deadline)
-      //处理订单座位信息
+      //处理预约座位信息
       this.billSeats = JSON.parse(this.billInfo.seats)
       this.payState = this.billInfo.payState
       this.cancelState = this.billInfo.cancelState
@@ -162,14 +162,14 @@ export default {
       this.computeLeftTime()
     },
     async payForBill() {
-      //更新订单状态
+      //更新预约状态
       this.billInfo.payState = true
-      //更新订单信息和场次座位信息
+      //更新预约信息和场次座位信息
       axios.defaults.headers.put['Content-Type'] = 'application/json'
       const { data: res} = await axios.put('sysBill', JSON.stringify(this.billInfo))
       if(res.code !== 200) return this.$message.error('支付失败')
       this.payState = true
-      this.$alert('支付成功！您可以前往个人中心查看订单信息', '支付通知', {
+      this.$alert('支付成功！您可以前往个人中心查看预约信息', '支付通知', {
         confirmButtonText: '我知道了',
         callback: action => {
           this.$router.push('/bill')
@@ -177,26 +177,26 @@ export default {
       })
     },
     async cancelForBill() {
-      //更新订单状态
+      //更新预约状态
       this.billInfo.cancelState = true
       this.billInfo.cancelTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
       // 获取场次座位信息
       const { data : curSession } = await axios.get('sysSession/find/' + this.billInfo.sessionId)
       let sessionSeats = JSON.parse(curSession.data.sessionSeats)
-      // 解析出订单选择的座位，更新座位信息
+      // 解析出预约选择的座位，更新座位信息
       for(let seat of this.billSeats){
         let row = seat.substring(0, seat.indexOf('排'))
         let col = Number.parseInt(seat.substring(seat.indexOf('排') + 1, seat.length - 1))
         sessionSeats[row][col - 1] = 0
       }
-      // 更新订单信息和场次座位信息
+      // 更新预约信息和场次座位信息
       axios.defaults.headers.put['Content-Type'] = 'application/json'
       const { data: res } = await axios.put('sysBill/cancel',JSON.stringify({sysBill: this.billInfo, sessionSeats: JSON.stringify(sessionSeats)}))
       if(res.code !== 200) return this.$message.error('取消失败')
 
       this.payState = false
       this.cancelState = true
-      this.$alert('取消成功！您可以前往个人中心查看订单信息', '取消通知', {
+      this.$alert('取消成功！您可以前往个人中心查看预约信息', '取消通知', {
         confirmButtonText: '我知道了',
         callback: action => {
           this.$router.push('/billDetail/' + this.billInfo.billId)

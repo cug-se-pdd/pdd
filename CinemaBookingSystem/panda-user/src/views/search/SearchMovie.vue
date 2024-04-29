@@ -1,14 +1,14 @@
 <template>
   <div class="search-container">
-    <!-- 搜索的一部电影 -->
+    <!-- 搜索的一部活动 -->
     <div class="search-result" v-for="item in movieList" :key="item.movieId">
-      <!-- 电影海报 -->
+      <!-- 活动海报 -->
       <div class="img-container">
         <a :href="'/movieInfo/' + item.movieId">
           <img :src="item.moviePoster">
         </a>
       </div>
-      <!-- 电影信息 -->
+      <!-- 活动信息 -->
       <div class="movie-info">
         <div class="movie-name">{{item.movieName}}</div>
         <br/>

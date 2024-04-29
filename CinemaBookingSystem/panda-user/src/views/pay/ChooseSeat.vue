@@ -1,10 +1,10 @@
 <template>
   <div>
     <el-steps :active="2" align-center>
-      <el-step title="选择影片场次"></el-step>
+      <el-step title="选择活动场次"></el-step>
       <el-step title="选择座位"></el-step>
       <el-step title="15分钟内付款"></el-step>
-      <el-step title="影院取票观影"></el-step>
+      <el-step title="活动地点取票观影"></el-step>
     </el-steps>
     <div class="whole">
       <div class="left">
@@ -46,11 +46,11 @@
           </div>
           <div class="right-content">
             <div class="info-item">
-              <span>影院：</span>
+              <span>活动地点：</span>
               <span>{{session.sysHall.sysCinema.cinemaName}}</span>
             </div>
             <div class="info-item">
-              <span>影厅：</span>
+              <span>场馆：</span>
               <span>{{session.sysHall.hallName}}</span>
             </div>
             <div class="info-item">
@@ -74,7 +74,7 @@
               <span style="font-size: 20px;color: #f03d37">￥{{session.sessionPrice * pickedSeats.length}}</span>
             </div>
             <div style="text-align: center;margin-top: 30px">
-              <el-button type="danger" round @click="submitBill">提交订单</el-button>
+              <el-button type="danger" round @click="submitBill">提交预约</el-button>
             </div>
           </div>
         </div>
@@ -156,7 +156,7 @@ export default {
       const token = window.sessionStorage.getItem("token")
       if (!token) {
         window.sessionStorage.setItem('sessionId', this.session.sessionId)
-        this.$alert('抱歉！提交订单前，请先登录', '提交订单异常通知', {
+        this.$alert('抱歉！提交预约前，请先登录', '提交预约异常通知', {
           confirmButtonText: '我知道了',
           callback: action => {
             this.$router.push('/login')
@@ -166,7 +166,7 @@ export default {
       }
       // 校验是否选座，未选座则警告
       if (this.pickedSeats.length === 0){
-        this.$alert('抱歉！您暂时未选座，无法提交订单，请选座后提交订单。', '提交订单异常通知', {
+        this.$alert('抱歉！您暂时未选座，无法提交预约，请选座后提交预约。', '提交预约异常通知', {
           confirmButtonText: '我知道了',
           callback: action => {
             this.$router.push('/chooseSeat/' + this.sessionId)
@@ -177,7 +177,7 @@ export default {
       //获取场次座位信息
       const { data : curSession } = await axios.get('sysSession/find/' + this.sessionId)
       let sessionSeats = JSON.parse(curSession.data.sessionSeats)
-      //解析出订单选择的座位，更新座位信息
+      //解析出预约选择的座位，更新座位信息
       for (let seat of this.pickedSeats) {
         let row = seat.substring(0, seat.indexOf('排'))
         let col = Number.parseInt(seat.substring(seat.indexOf('排') + 1, seat.length - 1))
@@ -195,7 +195,7 @@ export default {
           sessionSeats[row][col - 1] = 3
         }
       }
-      console.log('提交订单后的座位状态')
+      console.log('提交预约后的座位状态')
       console.log(sessionSeats)
 
       this.addForm.userId = JSON.parse(window.sessionStorage.getItem('loginUser')).userId
@@ -204,7 +204,7 @@ export default {
       axios.defaults.headers.post['Content-Type'] = 'application/json'
       const { data: res } = await axios.post('sysBill', JSON.stringify({sysBill: this.addForm, sessionSeats: JSON.stringify(sessionSeats)}))
       // const { data: res} = await axios.post('sysBill', JSON.stringify(this.addForm));
-      if(res.code !== 200) return this.$message.error('添加订单失败！')
+      if(res.code !== 200) return this.$message.error('添加预约失败！')
       await this.$router.push('/billDetail/' + res.data.billId)
     }
   }

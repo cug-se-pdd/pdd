@@ -1,5 +1,5 @@
 <template>
-  <!-- 一部电影 -->
+  <!-- 一部活动 -->
   <div class="movie-item">
     <div v-on:mouseover="isHover = true" v-on:mouseleave="isHover = false">
       <!-- 海报 -->
