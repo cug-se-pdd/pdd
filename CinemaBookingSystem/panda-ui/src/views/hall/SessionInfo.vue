@@ -62,14 +62,14 @@
         <el-table-column prop="sysMovie.movieName" label="活动名称"></el-table-column>
 <!--        <el-table-column prop="languageVersion" label="语言"></el-table-column>-->
         <el-table-column prop="sessionDate" label="场次时间" width="100"></el-table-column>
-        <el-table-column prop="playTime" label="播放时间" width="110">
+        <el-table-column prop="playTime" label="活动时间" width="110">
           <template slot-scope="scope">
             <span>{{scope.row.playTime}} - {{scope.row.endTime}}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="sessionPrice" label="场次价格"></el-table-column>
+<!--        <el-table-column prop="sessionPrice" label="场次价格"></el-table-column>-->
         <el-table-column prop="seatNums" label="总座位数"></el-table-column>
-        <el-table-column prop="sallNums" label="已售"></el-table-column>
+        <el-table-column prop="sallNums" label="已预约"></el-table-column>
         <el-table-column prop="seatNums - sallNums" label="剩余">
           <template slot-scope="scope">
             <span>{{scope.row.seatNums - scope.row.sallNums}}</span>
@@ -141,16 +141,16 @@
               placeholder="选择日期">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="播放时间" prop="sessionTime">
+        <el-form-item label="活动时间" prop="sessionTime">
           <el-time-picker
             v-model="addForm.playTime"
             value-format = 'HH:mm'
-            placeholder="选择播放时间">
+            placeholder="选择活动时间">
           </el-time-picker>
         </el-form-item>
-        <el-form-item label="场次价格" prop="sessionPrice">
-          <el-input v-model="addForm.sessionPrice"></el-input>
-        </el-form-item>
+<!--        <el-form-item label="场次价格" prop="sessionPrice">-->
+<!--          <el-input v-model="addForm.sessionPrice"></el-input>-->
+<!--        </el-form-item>-->
         <el-form-item label="提示信息" prop="sessionTips">
           <el-input v-model="addForm.sessionTips"></el-input>
         </el-form-item>
@@ -196,16 +196,16 @@
               placeholder="选择日期">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="播放时间" prop="sessionTime">
+        <el-form-item label="活动时间" prop="sessionTime">
           <el-time-picker
             v-model="editForm.playTime"
             value-format = 'HH:mm'
-            placeholder="选择播放时间">
+            placeholder="选择活动时间">
           </el-time-picker>
         </el-form-item>
-        <el-form-item label="场次价格" prop="sessionPrice">
-          <el-input v-model="editForm.sessionPrice"></el-input>
-        </el-form-item>
+<!--        <el-form-item label="场次价格" prop="sessionPrice">-->
+<!--          <el-input v-model="editForm.sessionPrice"></el-input>-->
+<!--        </el-form-item>-->
         <el-form-item label="提示信息" prop="sessionTips">
           <el-input v-model="editForm.sessionTips"></el-input>
         </el-form-item>
@@ -267,7 +267,7 @@ export default {
         endTime: '',
         deadline: '',
         sessionDate: '',
-        sessionPrice: '',
+        sessionPrice: '1',
         sessionTips: '',
         sessionSeats: '',
         seatNums: 0
@@ -287,7 +287,7 @@ export default {
           { required: true, message: '请选择场次日期', trigger: 'blur' }
         ],
         playTime: [
-          { required: true, message: '请选择播放时间', trigger: 'blur' }
+          { required: true, message: '请选择活动时间', trigger: 'blur' }
         ],
         sessionPrice: [
           { required: true, message: '请输入场次价格', trigger: 'blur' }
@@ -310,7 +310,7 @@ export default {
           { required: true, message: '请选择场次日期', trigger: 'blur' }
         ],
         playTime: [
-          { required: true, message: '请选择播放时间', trigger: 'blur' }
+          { required: true, message: '请选择活动时间', trigger: 'blur' }
         ],
         sessionPrice: [
           { required: true, message: '请输入场次价格', trigger: 'blur' }

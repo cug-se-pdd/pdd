@@ -15,14 +15,14 @@
           <el-input v-model="inputMovieName" placeholder="请输入活动名称" clearable></el-input>
         </el-col>
         <el-col :span="5">
-          <el-select class="el-select-search" v-model="selectedMovieArea" placeholder="请选择活动地区" clearable>
-            <el-option
-                v-for="item in movieAreaList"
-                :key="item"
-                :label="item"
-                :value="item">
-            </el-option>
-          </el-select>
+<!--          <el-select class="el-select-search" v-model="selectedMovieArea" placeholder="请选择活动地区" clearable>-->
+<!--            <el-option-->
+<!--                v-for="item in movieAreaList"-->
+<!--                :key="item"-->
+<!--                :label="item"-->
+<!--                :value="item">-->
+<!--            </el-option>-->
+<!--          </el-select>-->
         </el-col>
         <el-col :span="4">
           <el-button class="el-button-search" icon="el-icon-search" @click="getMovieList">搜索</el-button>
@@ -55,7 +55,7 @@
       <el-table-column prop="movieName" label="活动名称"></el-table-column>
 <!--      <el-table-column prop="movieArea" label="活动区域"></el-table-column>-->
       <el-table-column prop="movieLength" label="活动时长（分钟）"></el-table-column>
-      <el-table-column prop="releaseDate" label="上映时间"></el-table-column>
+      <el-table-column prop="releaseDate" label="活动开始时间"></el-table-column>
       <el-table-column prop="movieBoxOffice" label="热度"></el-table-column>
 <!--      操作按钮-->
       <el-table-column label="操作" width="240">
@@ -106,10 +106,10 @@
 <!--            </el-option>-->
 <!--          </el-select>-->
 <!--        </el-form-item>-->
-        <el-form-item label="活动时长/分钟" prop="movieLength">
+        <el-form-item label="时长(分钟)" prop="movieLength">
           <el-input v-model="addForm.movieLength"></el-input>
         </el-form-item>
-        <el-form-item label="上映时间" prop="releaseDate">
+        <el-form-item label="活动开始时间" prop="releaseDate">
           <el-date-picker
               v-model="addForm.releaseDate"
               value-format="yyyy-MM-dd HH:mm:ss"
