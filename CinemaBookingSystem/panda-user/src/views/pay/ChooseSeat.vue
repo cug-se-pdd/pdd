@@ -12,7 +12,7 @@
           <span class="seat" :class="isSelected[0]"></span>
           <span style="margin: 0 20px">可选座位</span>
           <span class="seat" :class="isSelected[3]"></span>
-          <span style="margin: 0 20px">已售座位</span>
+          <span style="margin: 0 20px">不可选座位</span>
           <span class="seat" :class="isSelected[2]"></span>
           <span style="margin: 0 20px">已选座位</span>
         </div>
