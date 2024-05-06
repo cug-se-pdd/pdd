@@ -67,9 +67,9 @@
             <span>{{scope.row.playTime}} - {{scope.row.endTime}}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="sessionPrice" label="场次价格"></el-table-column>
+<!--        <el-table-column prop="sessionPrice" label="场次价格"></el-table-column>-->
         <el-table-column prop="seatNums" label="总座位数"></el-table-column>
-        <el-table-column prop="sallNums" label="已售"></el-table-column>
+        <el-table-column prop="sallNums" label="已预约"></el-table-column>
         <el-table-column prop="seatNums - sallNums" label="剩余">
           <template slot-scope="scope">
             <span>{{scope.row.seatNums - scope.row.sallNums}}</span>
@@ -148,9 +148,9 @@
             placeholder="选择播放时间">
           </el-time-picker>
         </el-form-item>
-        <el-form-item label="场次价格" prop="sessionPrice">
-          <el-input v-model="addForm.sessionPrice"></el-input>
-        </el-form-item>
+<!--        <el-form-item label="场次价格" prop="sessionPrice">-->
+<!--          <el-input v-model="addForm.sessionPrice"></el-input>-->
+<!--        </el-form-item>-->
         <el-form-item label="提示信息" prop="sessionTips">
           <el-input v-model="addForm.sessionTips"></el-input>
         </el-form-item>
@@ -203,9 +203,9 @@
             placeholder="选择播放时间">
           </el-time-picker>
         </el-form-item>
-        <el-form-item label="场次价格" prop="sessionPrice">
-          <el-input v-model="editForm.sessionPrice"></el-input>
-        </el-form-item>
+<!--        <el-form-item label="场次价格" prop="sessionPrice">-->
+<!--          <el-input v-model="editForm.sessionPrice"></el-input>-->
+<!--        </el-form-item>-->
         <el-form-item label="提示信息" prop="sessionTips">
           <el-input v-model="editForm.sessionTips"></el-input>
         </el-form-item>
@@ -267,7 +267,7 @@ export default {
         endTime: '',
         deadline: '',
         sessionDate: '',
-        sessionPrice: '',
+        sessionPrice: '1',
         sessionTips: '',
         sessionSeats: '',
         seatNums: 0
