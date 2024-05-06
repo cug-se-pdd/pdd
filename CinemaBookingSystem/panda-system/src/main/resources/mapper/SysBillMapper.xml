@@ -33,6 +33,11 @@
         select * from sys_bill where bill_id = #{id}
     </select>
 
+    <select id="getUrlById" parameterType="long" resultType="string">
+        select url from sys_bill where bill_id = #{id}
+    </select>
+
+
     <select id="findTimeoutBill" resultMap="BillMap">
         select * from sys_bill where sysdate() >= deadline and cancel_state = 0 and pay_state = 0
     </select>

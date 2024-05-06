@@ -61,4 +61,6 @@ public class SysBill implements Serializable {
 
     private SysUser sysUser;
 
+    private String url;
+
 }

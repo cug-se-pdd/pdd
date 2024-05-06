@@ -15,7 +15,8 @@
         </div>
         <div class="pay-info">
           <div class="pay-info-status">验证</div>
-          <div class="pay-info-desc">请在<span>{{minutes}}分钟{{seconds}}秒</span>内完成支付</div>
+          <div class="pay-info-desc">请在<span>{{minutes}}分钟{{seconds}}秒</span>内完成验证</div>
+
         </div>
       </div>
       <!-- 未支付，超时取消，15分钟 -->
@@ -59,7 +60,7 @@
             <th>活动</th>
 <!--            <th>语言版本</th>-->
             <th>播放时间</th>
-            <th>座位</th>
+            <th>座位{{billInfo.url}}</th>
             <th>提示信息</th>
           </tr>
           </thead>
@@ -87,15 +88,60 @@
           <span class="bill-cinema-name">{{billInfo.sysSession.sysHall.sysCinema.cinemaName}}</span>
           <div class="bill-cinema-info">
             <span>地址: {{billInfo.sysSession.sysHall.sysCinema.cinemaAddress}} </span>
-            <span>电话: {{billInfo.sysSession.sysHall.sysCinema.cinemaPhone}} </span>
+            活动要求：转发
+
           </div>
         </div>
+        <div class ="upload">
+
+          <el-upload
+            action="#"
+            list-type="picture-card"
+            :auto-upload="false">
+            <i slot="default" class="el-icon-plus"></i>
+            <div slot="file" slot-scope="{file}">
+              <img
+                class="el-upload-list__item-thumbnail"
+                :src="file.url" alt=""
+              >
+              <span class="el-upload-list__item-actions">
+        <span
+          class="el-upload-list__item-preview"
+          @click="handlePictureCardPreview(file)"
+        >
+          <i class="el-icon-zoom-in"></i>
+        </span>
+        <span
+          v-if="!disabled"
+          class="el-upload-list__item-delete"
+          @click="handleDownload(file)"
+        >
+          <i class="el-icon-download"></i>
+        </span>
+        <span
+          v-if="!disabled"
+          class="el-upload-list__item-delete"
+          @click="handleRemove(file)"
+        >
+          <i class="el-icon-delete"></i>
+        </span>
+      </span>
+            </div>
+          </el-upload>
+          <el-dialog :visible.sync="dialogVisible">
+            <img width="100%" :src="dialogImageUrl" alt="">
+          </el-dialog>
+          请在此上传验证图片
+        </div>
+
+
         <div class="submit-bill">
-          <div>总价：<span>{{(billInfo.sysSession.sessionPrice * billSeats.length).toFixed(1)}}</span></div>
+<!--          <div>总价：<span>{{(billInfo.sysSession.sessionPrice * billSeats.length).toFixed(1)}}</span></div>-->
           <div v-if="payState === false && cancelState === false && (minutes > 0 || seconds > 0)">
-            <el-button @click="payForBill" type="primary" style="width: 200px; margin-top: 20px;" round>立即支付</el-button></div>
+            <el-button @click="payForBill" type="primary" style="width: 200px; margin-top: 20px;" round>提交预约</el-button></div>
           <div v-if="payState === false && cancelState === false && (minutes > 0 || seconds > 0)">
             <el-button @click="cancelForBill" type="danger" style="width: 200px; margin-top: 20px;" round>取消预约</el-button></div>
+
         </div>
       </div>
     </div>
@@ -121,11 +167,15 @@ export default {
       },
       billSeats: [],
       payState: null,
+      url:null,
       cancelState: null,
       cancelTime: null,
       //计时
       minutes: 1,
       seconds: 0,
+      dialogImageUrl: '',
+      dialogVisible: false,
+      disabled: false
     }
   },
   created() {
@@ -152,6 +202,7 @@ export default {
       this.billInfo = res.data
 
       this.cancelTime = this.billInfo.cancelTime
+      this.url=this.billInfo.url
       console.log(this.billInfo)
       // 截止时间
       console.log(this.billInfo.deadline)
@@ -170,12 +221,37 @@ export default {
       const { data: res} = await axios.put('sysBill', JSON.stringify(this.billInfo))
       if(res.code !== 200) return this.$message.error('支付失败')
       this.payState = true
-      this.$alert('支付成功！您可以前往个人中心查看预约信息', '支付通知', {
+      this.$alert('预约成功！您可以前往个人中心查看预约信息', '预约通知', {
         confirmButtonText: '我知道了',
         callback: action => {
           this.$router.push('/bill')
         }
       })
+    },
+    handleAvatarSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === 'image/jpeg';
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG 格式!');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!');
+      }
+      return isJPG && isLt2M;
+    },
+    handleRemove(file) {
+      console.log(file);
+    },
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
+    handleDownload(file) {
+      console.log(file);
     },
     async cancelForBill() {
       //更新预约状态
@@ -418,6 +494,11 @@ export default {
 .submit-bill{
   margin-top: 40px;
 }
+.upload
+{
+  margin-top: 40px;
+  margin-right: 10%;
+}
 
 .submit-bill span{
   color: #f03d37;
@@ -428,5 +509,29 @@ export default {
 .submit-bill span:before{
   content: '￥';
   font-size: 20px;
+}
+
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
 }
 </style>

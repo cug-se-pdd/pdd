@@ -113,7 +113,7 @@
         select ss.*, sh.* from sys_movie sm
         join sys_session ss on sm.movie_id = ss.movie_id
         join sys_hall sh on ss.hall_id = sh.hall_id
-        where sm.movie_id = #{movieId} and ss.session_date &gt;= CURDATE() and ss.session_date &lt; ADDDATE(curdate(),5)
+        where sm.movie_id = #{movieId} and ss.session_date &gt;= CURDATE() and ss.session_date &lt; ADDDATE(curdate(),14)
         order by session_date
     </select>
 

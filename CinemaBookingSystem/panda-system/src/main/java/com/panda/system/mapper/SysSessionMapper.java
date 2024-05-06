@@ -32,6 +32,8 @@ public interface SysSessionMapper {
      */
     SysSession findSessionById(Long id);
 
+
+
     /**
      * 查询一个，不查询相关的信息
      *

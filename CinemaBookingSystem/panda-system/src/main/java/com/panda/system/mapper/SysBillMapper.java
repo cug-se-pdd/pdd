@@ -12,6 +12,7 @@ public interface SysBillMapper {
     SysBill findBillById(Long id);
 
     int addBill(SysBill sysBill);
+    String getUrlById(Long id);
 
     int updateBill(SysBill sysBill);
 
