@@ -38,7 +38,7 @@
         select * from sys_movie where movie_id = #{id}
     </select>
 
-    <!--根据id查询单个电影信息，不需要相关的额外信息-->
+    <!--根据id查询单个活动信息，不需要相关的额外信息-->
     <select id="findOneMovie" resultType="SysMovie" parameterType="long">
         select * from sys_movie where movie_id = #{id}
     </select>
@@ -81,11 +81,11 @@
         update sys_movie set del_state = 1 where movie_id = #{movieId}
     </update>
 
-    <!--查询指定影院的所有上映电影，包含主演名字、影片类别-->
+    <!--查询指定活动地点的所有上映活动，包含主演名字、活动类别-->
     <select id="findMovieByCinemaId" parameterType="Long" resultMap="SysMovieResult">
         select distinct sm.* from sys_movie sm
         join sys_session ss on sm.movie_id = ss.movie_id
-        where ss.session_date &gt;= CURDATE() and ss.session_date &lt; ADDDATE(curdate(),5)
+        where ss.session_date &gt;= CURDATE() and ss.session_date &lt; ADDDATE(curdate(),14)
     </select>
 
     <!-- 查询各种榜单信息 -->
@@ -96,14 +96,14 @@
         order by sm.movie_box_office desc
     </select>
 
-    <!-- 国内票房榜：已上映的国内电影中，按票房取前10 -->
+    <!-- 国内票房榜：已上映的国内活动中，按票房取前10 -->
     <select id="domesticBoxOfficeList" resultMap="SysMovieResult">
         select sm.* from sys_movie sm
         where del_state = 0 and sm.movie_area in ("中国大陆", "中国香港", "中国台湾") and sm.release_date &lt;= curdate()
         order by sm.movie_box_office desc
     </select>
-    
-    <!-- 国外票房榜：已上映的国外电影中，按票房取前10 -->
+
+    <!-- 国外票房榜：已上映的国外活动中，按票房取前10 -->
     <select id="foreignBoxOfficeList" resultMap="SysMovieResult">
         select sm.* from sys_movie sm
         where del_state = 0 and sm.movie_area not in ("中国大陆", "中国香港", "中国台湾") and sm.release_date &lt;= curdate()
