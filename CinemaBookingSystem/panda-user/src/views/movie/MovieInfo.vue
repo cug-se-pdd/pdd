@@ -11,10 +11,10 @@
           <div class="movie-info-msg">
             <h1 class="movie-name">{{movieInfo.movieName}}</h1>
 <!--            <h1>&nbsp;|</h1>-->
-            <h1>&nbsp;</h1>
-            <h1>&nbsp;</h1>
-            <h1>&nbsp;</h1>
-            <h3>&nbsp;</h3>
+<!--            <h1>&nbsp;</h1>-->
+<!--            <h1>&nbsp;</h1>-->
+<!--            <h1>&nbsp;</h1>-->
+<!--            <h3>&nbsp;</h3>-->
             <ul>
               <li>{{movieInfo.movieCategoryList}}</li>
 <!--              <li>{{movieInfo.movieArea}} / {{movieInfo.movieLength}}分钟</li>-->
