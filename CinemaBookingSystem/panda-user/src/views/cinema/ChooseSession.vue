@@ -18,7 +18,7 @@
             <div class="phone-number">电话: {{cinemaInfo.cinemaPhone}}</div>
             <div style="margin: 25px 0;">活动地点简介 ————————————————————</div>
 <!--            <div class="service"><span class="service-tag">免费停车</span>观影前1小时至观影后1小时内免费停车</div>-->
-<!--            <div class="service"><span class="service-tag">领快乐水</span>节假日期间，每张票可领取一瓶快乐水</div>-->
+<!--            <div class="service"><span class="service-tag">领快乐水</span>节假日期间，每张票可领取一瓶快乐水 </div>-->
             <div class="service"><span class="service-tag">211高校</span></div>
             <div class="service"><span class="service-tag">环境优美</span></div>
           </div>
