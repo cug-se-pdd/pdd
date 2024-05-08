@@ -9,8 +9,11 @@
     <div class="whole">
       <div class="left">
         <div class="panel">
+
+          <el-divider content-position="left"><h2 style="color: #ef4238">正在举办</h2></el-divider>
+
           <div class="panel-header">
-            <h2 style="color: #ef4238">正在举办</h2>
+            <h2 style="color: #ef4238"> </h2>
             <a href="/movie/movieOngoing">全部</a>
           </div>
           <div class="panel-content">
@@ -18,8 +21,11 @@
           </div>
         </div>
         <div class="panel">
+
+          <el-divider content-position="left"><h2 style="color: #2d98f3">即将举办</h2></el-divider>
+
           <div class="panel-header">
-            <h2 style="color: #2d98f3">即将举办</h2>
+            <h2 style="color: #2d98f3"> </h2>
             <a href="/movie/movieUpcoming">全部</a>
           </div>
           <div class="panel-content">
@@ -29,8 +35,11 @@
           </div>
         </div>
         <div class="panel">
+
+          <el-divider content-position="left"><h2 style="color: #ef4238">热门活动</h2></el-divider>
+
           <div class="panel-header">
-            <h2 style="color: #ef4238">热门活动</h2>
+            <h2 style="color: #ef4238"> </h2>
             <a href="/movie/movieClassics">全部</a>
           </div>
           <div class="panel-content">
