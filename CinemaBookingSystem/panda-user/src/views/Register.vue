@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import './test-clear.js';
 export default {
   name: "Register",
   data() {
