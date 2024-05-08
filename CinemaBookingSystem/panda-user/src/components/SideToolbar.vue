@@ -11,7 +11,9 @@
 
         <el-tabs type="border-card">
           <el-tab-pane label="小程序">
-            <img src=""
+            <img
+                width="280"
+                src="../assets/xcx.png"
             >
 
           </el-tab-pane>

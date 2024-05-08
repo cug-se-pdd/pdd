@@ -7,20 +7,7 @@
           <img style="width: 270px; height: 68px; margin-top: 6px;" src="../assets/homeLogo.jpg">
 <!--          <p style="width: 270px; height: 68px; margin-top: 10px; font-size: 40px; background-color: #2d98f3" >{{this.cinemaInfo.cinemaName.substring(0, this.cinemaInfo.cinemaName.indexOf('（'))}}</p>-->
         </a>
-        <el-dropdown @command="handleCommand" class="mini-app-dropdown">
-      <span class="xcx">
-        <el-avatar :src="xcx" :size="50"></el-avatar>
-        <i class="el-icon--left icon-arrow"></i>
-      </span>
-          <el-dropdown-menu slot="dropdown" class="xcx">
-            <el-card>
-              <img
-                width="200px"
-                height="200px"
-                src="../assets/xcx.png">
-            </el-card>
-          </el-dropdown-menu>
-        </el-dropdown>
+
         <el-menu
             :default-active="activeUrl"
             class="nav-menu"
