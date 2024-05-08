@@ -4,7 +4,7 @@
     <div v-on:mouseover="isHover = true" v-on:mouseleave="isHover = false">
       <!-- 海报 -->
       <a :href="movieInfoUrl">
-        <img class="poster" :src="this.global.base + movieItem.moviePoster">
+        <el-image class="poster" :src="this.global.base + movieItem.moviePoster" fit="contain"/>
       </a>
       <!-- 鼠标划过时的效果 -->
       <div class="movie-item-hover" v-if="isHover">

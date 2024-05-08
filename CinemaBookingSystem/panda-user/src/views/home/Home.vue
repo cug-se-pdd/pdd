@@ -1,9 +1,9 @@
 <template>
   <div>
-    <!-- 轮播图 -->
-    <el-carousel :height="carouselHeight">
+    <!-- 轮播图  :height="carouselHeight"  -->
+    <el-carousel :height="carouselHeight" type="card">
       <el-carousel-item v-for="item in posterList" :key="item.url">
-        <img :src="item.url" alt/>
+        <el-image :src="item.url" :fit="fit"/>
       </el-carousel-item>
     </el-carousel>
     <div class="whole">
@@ -135,7 +135,7 @@ export default {
     getHeight() {
       let clientWidth =   `${document.documentElement.clientWidth}`
       clientWidth *= 0.8
-      this.carouselHeight = clientWidth / 1700 * 630 + 'px'
+      this.carouselHeight = clientWidth / 1700 * 380 + 'px'
     },
     async getTotalBoxOfficeList(){
       const {data: resp} = await axios.get('sysMovie/find/rankingList/1', {params: this.queryInfo})
@@ -160,17 +160,17 @@ export default {
 }
 
 .whole{
-  width: 1200px;
+  width: 80%;
   margin: 30px auto;
   display: flex;
 }
 
 .left{
-  width: 70%;
+  width: 79%;
 }
 
 .right{
-  width: 30%;
+  width: 21%;
   margin-left: 100px;
 }
 
@@ -196,11 +196,11 @@ h2{
 }
 
 .movie-item{
-  margin-left: 0;
+  margin-left: 30px;
   margin-right: 30px;
 }
 
-.movie-item:nth-child(4n){
+.movie-item:nth-child(5n){
   margin-right: 0;
 }
 
