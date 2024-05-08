@@ -13,7 +13,7 @@
           <el-tab-pane label="小程序">
             <img
                 width="280"
-                src="../assets/xcx.png"
+                src="../assets/xcx_black.jpg"
             >
 
           </el-tab-pane>
