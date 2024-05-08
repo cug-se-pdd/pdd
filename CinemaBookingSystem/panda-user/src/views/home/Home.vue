@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 轮播图  :height="carouselHeight"  -->
-    <el-carousel :height="carouselHeight" type="card">
+    <el-carousel :height="carouselHeight" type="card" style="margin-top: 100px">
       <el-carousel-item v-for="item in posterList" :key="item.url">
         <el-image :src="item.url" :fit="fit"/>
       </el-carousel-item>
@@ -196,7 +196,7 @@ h2{
 }
 
 .movie-item{
-  margin-left: 30px;
+  margin-left: 25px;
   margin-right: 30px;
 }
 
