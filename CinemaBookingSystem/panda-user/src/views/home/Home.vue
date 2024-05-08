@@ -135,7 +135,7 @@ export default {
     getHeight() {
       let clientWidth =   `${document.documentElement.clientWidth}`
       clientWidth *= 0.8
-      this.carouselHeight = clientWidth / 1700 * 520 + 'px'
+      this.carouselHeight = clientWidth / 1700 * 630 + 'px'
     },
     async getTotalBoxOfficeList(){
       const {data: resp} = await axios.get('sysMovie/find/rankingList/1', {params: this.queryInfo})
