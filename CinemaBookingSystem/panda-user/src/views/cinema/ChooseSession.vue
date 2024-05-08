@@ -71,7 +71,7 @@
             </div>
             <!-- 展示场次的日期 -->
             <div class="show-date" v-if="sessions !== null && sessions.length !== 0">
-              <span>观影时间 :</span>
+              <span>活动时间 :</span>
               <span class="date-item"
                     :class="{active: activeDate === key}"
                     @click="activeDate = key"
