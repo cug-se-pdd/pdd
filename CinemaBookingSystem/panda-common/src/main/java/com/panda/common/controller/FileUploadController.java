@@ -36,6 +36,13 @@ public class FileUploadController {
         log.debug("上传文件名 : " + filename);
         return ResponseResult.success((Object) filename);
     }
+    @PostMapping("/bill")
+    public ResponseResult uploadBill(@RequestParam("file") MultipartFile file) throws IOException {
+        FileUploadUtils.setDefaultBaseDir(FileUploadUtils.billPath);
+        String filename = FileUploadUtils.upload(file);
+        log.debug("上传文件名 : " + filename);
+        return ResponseResult.success((Object) filename);
+    }
 
     @PostMapping("/cinema")
     public ResponseResult uploadCinema(@RequestParam("file") MultipartFile file) throws IOException {

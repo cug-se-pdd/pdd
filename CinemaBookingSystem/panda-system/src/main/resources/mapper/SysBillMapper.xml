@@ -66,6 +66,7 @@
         <if test="payState != null">pay_state = #{payState}, </if>
         <if test="seats != null and seats != ''">seats = #{seats}, </if>
         <if test="cancelTime != null ">cancel_time = #{cancelTime}, </if>
+        <if test="url != null ">url = #{url}, </if>
         create_time = sysdate()
         where bill_id = #{billId}
     </update>

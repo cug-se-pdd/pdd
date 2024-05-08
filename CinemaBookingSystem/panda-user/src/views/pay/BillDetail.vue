@@ -84,68 +84,90 @@
       </div>
       <!-- 活动地点信息、提交预约 -->
       <div class="bill-info-area">
+        <el-row :gutter="20" type="flex" justify="center">
+          <el-col :span="18">
+
+
+
+
         <div class="cinema-info">
-          <span class="bill-cinema-name">{{billInfo.sysSession.sysHall.sysCinema.cinemaName}}</span>
+          <span class="bill-cinema-name">{{ billInfo.sysSession.sysMovie.movieName }}</span>
           <div class="bill-cinema-info">
-            <span>地址: {{billInfo.sysSession.sysHall.sysCinema.cinemaAddress}} </span>
-            活动要求：转发
+            <span>活动要求：
+              {{ billInfo.sysSession.sysMovie.movieArea }} </span>
+
 
           </div>
         </div>
-        <div class ="upload">
+
+        <!-- 统一位置的Upload和Image组件 -->
+
+        <div class="upload-image-container">
+          <!-- 上传组件：当还未支付且未取消，并且时间还剩余时显示 -->
 
           <el-upload
+            v-if="payState === false && cancelState === false && (minutes > 0 || seconds > 0)"
             action="#"
             list-type="picture-card"
-            :auto-upload="false">
+            :file-list="poster"
+            :on-exceed="handleExceed"
+            :auto-upload="false"
+            :on-change="handleChangeP"
+            :on-success="handleSuccessP"
+            :on-error="handleError"
+            ref="posterRef"
+            :http-request="submitFileP"
+            class="upload-component"
+          >
             <i slot="default" class="el-icon-plus"></i>
-            <div slot="file" slot-scope="{file}">
-              <img
-                class="el-upload-list__item-thumbnail"
-                :src="file.url" alt=""
-              >
+            <div slot="file" slot-scope="{ file }">
+              <img class="el-upload-list__item-thumbnail" :src="file.url" alt="">
               <span class="el-upload-list__item-actions">
-        <span
-          class="el-upload-list__item-preview"
-          @click="handlePictureCardPreview(file)"
-        >
-          <i class="el-icon-zoom-in"></i>
+          <span class="el-upload-list__item-preview" @click="handlePictureCardPreview(file)">
+            <i class="el-icon-zoom-in"></i>
+          </span>
+          <span v-if="!disabled" class="el-upload-list__item-delete" @click="handleRemove(file)">
+            <i class="el-icon-delete"></i>
+          </span>
         </span>
-        <span
-          v-if="!disabled"
-          class="el-upload-list__item-delete"
-          @click="handleDownload(file)"
-        >
-          <i class="el-icon-download"></i>
-        </span>
-        <span
-          v-if="!disabled"
-          class="el-upload-list__item-delete"
-          @click="handleRemove(file)"
-        >
-          <i class="el-icon-delete"></i>
-        </span>
-      </span>
             </div>
           </el-upload>
-          <el-dialog :visible.sync="dialogVisible">
-            <img width="100%" :src="dialogImageUrl" alt="">
-          </el-dialog>
-          请在此上传验证图片
+          <!-- 图像显示组件：当支付已完成或条件不满足显示上传组件时显示 -->
+          <div v-else class="image-component">
+            <el-image
+              fit="cover"
+              class="default-img"
+              v-for="(item,index) in billInfo.url"
+              :key="index"
+              :src="item"
+              :preview-src-list="billInfo.url">
+            ></el-image>
+          </div>
+
+          <div class="tag">
+            <el-tag type="info">按活动要求上传验证图片</el-tag>
+          </div>
+
         </div>
+          </el-col>
+        </el-row>
+        <el-row type="flex" justify="center" class="button-row">
+          <el-col :span="12">
+            <div class="button-group" v-if="payState === false && cancelState === false && (minutes > 0 || seconds > 0)">
+              <el-button @click="payForBill" type="primary" style="margin-right: 10px;" round>提交预约</el-button>
+              <el-button @click="cancelForBill" type="danger" round>取消预约</el-button>
+            </div>
+          </el-col>
+        </el-row>
 
 
-        <div class="submit-bill">
-<!--          <div>总价：<span>{{(billInfo.sysSession.sessionPrice * billSeats.length).toFixed(1)}}</span></div>-->
-          <div v-if="payState === false && cancelState === false && (minutes > 0 || seconds > 0)">
-            <el-button @click="payForBill" type="primary" style="width: 200px; margin-top: 20px;" round>提交预约</el-button></div>
-          <div v-if="payState === false && cancelState === false && (minutes > 0 || seconds > 0)">
-            <el-button @click="cancelForBill" type="danger" style="width: 200px; margin-top: 20px;" round>取消预约</el-button></div>
 
-        </div>
+
       </div>
+
     </div>
-  </div>
+    </div>
+
 </template>
 
 <script>
@@ -163,7 +185,9 @@ export default {
               user: {}
             }
           }
-        }
+        },
+        url:[]
+        ,
       },
       billSeats: [],
       payState: null,
@@ -175,7 +199,11 @@ export default {
       seconds: 0,
       dialogImageUrl: '',
       dialogVisible: false,
-      disabled: false
+      disabled: false,
+      poster: [],
+      pictureList: [],
+      imageSrc:[],
+      httpURL: this.global.base
     }
   },
   created() {
@@ -203,6 +231,9 @@ export default {
 
       this.cancelTime = this.billInfo.cancelTime
       this.url=this.billInfo.url
+      this.imageSrc=this.billInfo.url
+
+
       console.log(this.billInfo)
       // 截止时间
       console.log(this.billInfo.deadline)
@@ -211,11 +242,16 @@ export default {
       this.payState = this.billInfo.payState
       this.cancelState = this.billInfo.cancelState
       console.log('the create_time'+this.billInfo.createTime)
+      this.billInfo.url = JSON.parse(this.billInfo.url).map((obj, index) => {
+        return this.httpURL + obj
+      })
       this.computeLeftTime()
     },
     async payForBill() {
+      await this.submitFileP()
       //更新预约状态
       this.billInfo.payState = true
+      this.billInfo.url=JSON.stringify(this.pictureList)
       //更新预约信息和场次座位信息
       axios.defaults.headers.put['Content-Type'] = 'application/json'
       const { data: res} = await axios.put('sysBill', JSON.stringify(this.billInfo))
@@ -246,9 +282,37 @@ export default {
     handleRemove(file) {
       console.log(file);
     },
+    handleChangeP(file, filelist) {
+      this.poster = filelist
+      console.log(this.poster)
+    },
+    handleSuccessP(response) {
+      this.pictureList.push(response.data)
+      this.addForm = JSON.stringify(this.pictureList)
+      this.editForm = JSON.stringify(this.pictureList)
+    },
+    handleError(err) {
+      console.log(err)
+    },
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;
+    },
+    async submitFileP() {
+      const _this = this
+      for (let i = 0; i < this.poster.length; i++) {
+        let formData = new FormData()
+        if (this.poster[i].status === 'success') {
+          let s = this.poster[i].url
+          this.pictureList.push(s.substring(s.indexOf('/images')))
+          continue
+        }
+        let file = this.poster[i].raw
+        formData.append('file', file)
+        await axios.post('upload/bill', formData).then(response => {
+          _this.pictureList.push(response.data.data)
+        })
+      }
     },
     handleDownload(file) {
       console.log(file);
@@ -291,6 +355,9 @@ export default {
         this.minutes = Math.floor(diff / 60)
         this.seconds = Math.floor(diff % 60)
       }
+    },
+    handleExceed(){
+      this.$message.error('活动封面不能超过一张!')
     },
     //计时转换数字格式
     num: function (n) {
@@ -477,8 +544,7 @@ export default {
 }
 
 .bill-info-area{
-  display: flex;
-  justify-content: space-between;
+
 }
 
 .bill-cinema-name{
@@ -493,6 +559,8 @@ export default {
 
 .submit-bill{
   margin-top: 40px;
+  position: absolute;
+
 }
 .upload
 {
@@ -534,4 +602,28 @@ export default {
   height: 178px;
   display: block;
 }
+
+.button-row {
+  margin-top: 20px; /* 调整按钮与上方元素的距离 */
+}
+
+.button-group {
+  text-align: center; /* 确保所有按钮都在其列内居中 */
+}
+.upload-image-container
+{
+  text-align: center; /* 确保所有按钮都在其列内居中 */
+  margin-top: 20px;
+}
+.cinema-info
+{
+  text-align: center;
+
+}
+.tag
+{
+  margin-top: 8px;
+  text-align: center;
+}
+
 </style>

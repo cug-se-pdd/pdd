@@ -39,6 +39,7 @@ public class FileUploadUtils {
     public static final String moviePath = "/movie";
     public static final String userPath = "/user";
 
+    public static final String billPath = "/bill";
 
     /**
      * 默认上传的地址

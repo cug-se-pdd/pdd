@@ -186,7 +186,7 @@
           <el-input v-model="editForm.movieName" disabled></el-input>
         </el-form-item>
 
-<!--        <el-form-item label="活动区域" prop="movieArea">-->
+<!--        <el-form-item label="活动要求" prop="movieArea">-->
 <!--          <el-select v-model="editForm.movieArea" placeholder="请选择活动区域" clearable >-->
 <!--            <el-option-->
 <!--              v-for="item in movieAreaList"-->
