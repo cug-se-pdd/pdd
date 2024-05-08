@@ -71,7 +71,7 @@
             </div>
             <!-- 展示场次的日期 -->
             <div class="show-date" v-if="sessions !== null && sessions.length !== 0">
-              <span>观影时间 :</span>
+              <span>活动时间 :</span>
               <span class="date-item"
                     :class="{active: activeDate === key}"
                     @click="activeDate = key"
@@ -84,11 +84,11 @@
                   stripe
                   style="width: 100%">
                 <el-table-column
-                    label="放映时间">
+                    label="活动时间">
                   <template slot-scope="scope">
                     <span class="begin-time">{{scope.row.playTime}}</span>
                     <br/>
-                    <span class="end-time">{{scope.row.endTime}}散场</span>
+                    <span class="end-time">{{scope.row.endTime}}结束</span>
                   </template>
                 </el-table-column>
 <!--                <el-table-column-->
@@ -96,7 +96,7 @@
 <!--                    label="语言版本">-->
 <!--                </el-table-column>-->
                 <el-table-column
-                    label="放映厅">
+                    label="活动场馆">
                   <template slot-scope="scope">
                     {{scope.row.sysHall.hallName}}
                   </template>
@@ -114,9 +114,9 @@
                   </template>
                 </el-table-column>
                 <el-table-column
-                    label="选座购票">
+                    label="预约活动">
                   <template slot-scope="scope">
-                    <el-button type="primary" round @click="toChooseSeat(scope.row.sessionId)">选座购票</el-button>
+                    <el-button type="primary" round @click="toChooseSeat(scope.row.sessionId)">我要预约</el-button>
                   </template>
                 </el-table-column>
               </el-table>

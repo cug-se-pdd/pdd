@@ -12,7 +12,7 @@
         </div>
         <div class="middle2">
           <a :href="'/movieInfo/' + item.movieId"><p class="name">{{ item.movieName }}</p></a>
-          <p class="releaseTime">上映时间：{{ item.releaseDate.split(" ")[0] }}</p>
+          <p class="releaseTime">开始时间：{{ item.releaseDate.split(" ")[0] }}</p>
         </div>
       </div>
     </div>

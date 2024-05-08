@@ -21,7 +21,7 @@
             </el-popover>
           </span>
         <br/>
-        <el-button @click="toChooseSession(cinemaInfo.cinemaId)" type="primary" round size="medium" align="left">选座购票</el-button>
+        <el-button @click="toChooseSession(cinemaInfo.cinemaId)" type="primary" round size="medium" align="left">查看详情</el-button>
       </div>
       <div class="list-left-select"></div>
     </div>

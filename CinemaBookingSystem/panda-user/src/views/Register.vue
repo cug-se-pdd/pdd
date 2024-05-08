@@ -33,7 +33,7 @@
     </div>
     <div class="footer-mini"></div>
     <div class="footer">
-      <img style="width: 512px; height: 70px" src="../assets/register-footer.jpg">
+      <img style="width: 800px; height: 300px" src="../assets/register-footer.jpg">
     </div>
   </div>
 </template>
