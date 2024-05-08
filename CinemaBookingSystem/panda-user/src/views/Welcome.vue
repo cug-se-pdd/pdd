@@ -35,7 +35,9 @@
       </div>
     </el-header>
     <el-main>
-      <router-view></router-view>
+      <router-view>
+
+      </router-view>
     </el-main>
     <el-footer>
       <div class="footer-mini"></div>
@@ -126,50 +128,59 @@ export default {
 </script>
 
 <style scoped>
-.el-header{
+.el-header {
+  position: fixed; /* 设置导航栏为固定位置 */
+  top: 0; /* 定位到视口的顶部 */
+  left: 0; /* 左对齐到视口 */
+  right: 0; /* 右对齐到视口 */
   height: 80px !important;
-  border-bottom: 1px solid #e6e6e6;
+  z-index: 1000; /* 确保导航栏位于最顶层 */
+  background-color: #fff; /* 设置背景颜色为白色，或其他你喜欢的颜色 */
+  border-bottom: 1px solid #e6e6e6; /* 保留边框线 */
+  width: 100%; /* 使导航栏宽度与视口一致 */
 }
 
-.header-inner{
+/* 为主内容添加上边距，避免被导航栏遮挡 */
+.el-main {
+  padding-top: 80px; /* 这个值应与 .el-header 的高度相同或稍大 */
+}
+
+/* 如果有其他全局的padding或margin可能需要调整 */
+body {
+  margin: 0; /* 移除默认的margin */
+}
+
+.header-inner {
   width: 75%;
-  margin: 0 12.5%;
+  margin: 0 auto;
   display: flex;
 }
 
-.logo{
+.logo {
   height: 80px;
   width: 200px;
 }
 
-.nav-menu{
+.nav-menu {
   border-bottom: 0px solid #eee !important;
   height: 60px;
   margin: 9px auto;
 }
 
-.el-menu-item{
-  font-size: 20px;
-}
-
-.el-menu-item:hover{
-  color: #409EFF !important;
-}
-
-.searchContainer{
+.searchContainer {
   padding: 20px 0;
   display: flex;
 }
 
-.searchBar >>> input{
+.searchBar >>> input {
   border-radius: 50px;
 }
 
-#searchBtn{
+#searchBtn {
   transform: translate(-100%, 0);
 }
 
-.el-dropdown-link{
+.el-dropdown-link {
   width: 70px;
   margin: 15px 0;
   display: flex;
@@ -179,32 +190,21 @@ export default {
 
 .icon-arrow {
   transition: all 0.2s ease-in-out;
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
 }
 
-.el-dropdown-link:hover .icon-arrow{
-  /* 定义动画的状态 */
-  -webkit-transform: rotate(180deg) scale(1);
-  -moz-transform: rotate(180deg) scale(1);
-  -o-transform: rotate(180deg) scale(1);
-  -transform: rotate(180deg) scale(1);
+.el-dropdown-link:hover .icon-arrow {
+  transform: rotate(180deg) scale(1);
 }
 
-.footer-mini{
+.footer-mini {
   border-top: 1px solid #EEE;
   padding-top: 20px;
   text-align: center;
 }
 
-.footer{
+.footer {
   margin-top: 20px;
   display: flex;
   justify-content: center;
-}
-
-.el-main{
-  padding: 0px;
 }
 </style>
