@@ -57,7 +57,9 @@
       </router-view>
     </el-main>
     <el-footer>
-      <div class="footer-mini"></div>
+      <div class="footer-mini">
+        <el-link href="https://cs.cug.edu.cn/" target="_blank">Copyright© 2020-2024 · 中国地质大学（武汉）计算机学院</el-link>
+      </div>
       <div class="footer">
         <img style="width: 800px; height: 300px" src="../assets/register-footer.jpg">
 <!--        <p style=" font-size: 40px; background-color: white">看活动，就上-{ {{this.cinemaInfo.cinemaName}} }</p>-->
