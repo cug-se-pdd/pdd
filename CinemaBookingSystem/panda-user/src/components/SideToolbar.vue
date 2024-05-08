@@ -32,9 +32,44 @@
         <el-button slot="reference" class="item" icon="el-icon-mobile-phone"></el-button>
       </el-popover>
 
-      <el-tooltip class="item" effect="dark" content="客服" placement="left">
-        <el-button icon="el-icon-service" @click="contactSupport"></el-button>
-      </el-tooltip>
+      <el-popover
+          placement="left"
+          width="300"
+          trigger="click"
+          v-model="showChat">
+        <template slot="reference">
+          <el-tooltip class="item" effect="dark" content="聊天" placement="left">
+            <el-button icon="el-icon-message"></el-button>
+          </el-tooltip>
+        </template>
+
+        <div class="chat-container">
+          <div class="messages">
+            <div
+                class="message"
+                v-for="(msg, index) in messages"
+                :key="index"
+                :class="{ 'is-user': msg.isUser }">
+              {{ msg.text }}
+            </div>
+          </div>
+          <div class="chat-input">
+            <el-input
+                v-model="inputText"
+                placeholder="输入消息..."
+                @keyup.enter="sendMsg">
+            </el-input>
+            <el-button
+                icon="el-icon-send"
+                @click="sendMsg"></el-button>
+          </div>
+        </div>
+      </el-popover>
+
+
+
+
+
 
       <el-tooltip class="item" effect="dark" content="返回顶部" placement="left">
         <el-button icon="el-icon-arrow-up" @click="goTop"></el-button>
@@ -49,7 +84,11 @@ export default {
   data() {
     return {
       showQR: false,
+      showGPT:false,
       selectedTab: '下载 APP',
+      showChat: false,
+      inputText: '',
+      messages: [],
       qrTabs: [
         { label: "下载 APP", imgSrc: "https://g.csdnimg.cn/side-toolbar/3.4/images/qr_app.png", desc: "程序员都在用的中文IT技术交流社区" },
         { label: "公众号", imgSrc: "https://g.csdnimg.cn/side-toolbar/3.4/images/qr_wechat.png", desc: "专业的中文 IT 技术社区，与千万技术人共成长" },
@@ -64,8 +103,18 @@ export default {
     toggleQR() {
       this.showQR = !this.showQR;
     },
-    contactSupport() {
-      console.log('联系客服');
+    toggleGPT() {
+      this.showGPT = !this.showGPT;
+    },
+    sendMsg() {
+      if (this.inputText.trim() === '') return;
+      this.messages.push({ text: this.inputText, isUser: true });
+      this.inputText = ''; // 清空输入框
+
+      // 这里模拟ChatGPT的响应
+      setTimeout(() => {
+        this.messages.push({ text: "这是一个模拟的响应！", isUser: false });
+      }, 1000);
     },
     goTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -96,5 +145,42 @@ export default {
   width: 60px;
   height: 60px;
   text-align: center;
+}
+
+.csdn-side-toolbar {
+  position: fixed;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.chat-container {
+  max-height: 300px;
+  overflow: auto;
+  border: 1px solid #ccc;
+  padding: 5px;
+  background-color: white;
+}
+
+.messages {
+  height: 250px;
+  overflow-y: scroll;
+}
+
+.message {
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #f3f3f3;
+}
+
+.message.is-user {
+  text-align: right;
+  background-color: #d3f261;
+}
+
+.chat-input {
+  display: flex;
+  align-items: center;
 }
 </style>
