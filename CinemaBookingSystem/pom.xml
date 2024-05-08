@@ -13,7 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>panda</name>
-	<description>活动售票系统</description>
+	<description>电影售票系统</description>
 
 	<!--加入子模块-->
 	<modules>
