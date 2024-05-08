@@ -12,49 +12,59 @@
 
           <el-divider content-position="left"><h2 style="color: #ef4238">正在举办</h2></el-divider>
 
-          <div class="panel-header">
-            <h2 style="color: #ef4238"> </h2>
-            <a href="/movie/movieOngoing">全部</a>
-          </div>
-          <div class="panel-content">
-            <movie-item :movieItem="item" v-for="(item, index) in ongoingMovieList" :key="index"></movie-item>
-          </div>
+          <el-card class="box-card" shadow="hover">
+            <div class="panel-header">
+              <h2 style="color: #ef4238"> </h2>
+              <a href="/movie/movieOngoing">全部</a>
+            </div>
+            <div class="panel-content">
+              <movie-item :movieItem="item" v-for="(item, index) in ongoingMovieList" :key="index"></movie-item>
+            </div>
+          </el-card>
+
         </div>
         <div class="panel">
 
           <el-divider content-position="left"><h2 style="color: #2d98f3">即将举办</h2></el-divider>
 
-          <div class="panel-header">
-            <h2 style="color: #2d98f3"> </h2>
-            <a href="/movie/movieUpcoming">全部</a>
-          </div>
-          <div class="panel-content">
-            <div class="panel-content">
-              <movie-item :movieItem="item" v-for="(item,index) in upcomingMovieList" :key="index"></movie-item>
+          <el-card class="box-card" shadow="hover">
+            <div class="panel-header">
+              <h2 style="color: #2d98f3"> </h2>
+              <a href="/movie/movieUpcoming">全部</a>
             </div>
-          </div>
+            <div class="panel-content">
+              <div class="panel-content">
+                <movie-item :movieItem="item" v-for="(item,index) in upcomingMovieList" :key="index"></movie-item>
+              </div>
+            </div>
+          </el-card>
         </div>
+
         <div class="panel">
 
-          <el-divider content-position="left"><h2 style="color: #ef4238">热门活动</h2></el-divider>
+          <el-divider content-position="left"><h2 style="color: #ef4238;" >热门活动</h2></el-divider>
 
-          <div class="panel-header">
-            <h2 style="color: #ef4238"> </h2>
-            <a href="/movie/movieClassics">全部</a>
-          </div>
-          <div class="panel-content">
-            <div class="panel-content">
-              <movie-item :movieItem="item" v-for="(item,index) in classicMovieList" :key="index"></movie-item>
+          <el-card class="box-card" shadow="hover">
+            <div class="panel-header">
+              <h2 style="color: #ef4238"> </h2>
+              <a href="/movie/movieClassics">全部</a>
             </div>
-          </div>
+            <div class="panel-content">
+              <div class="panel-content">
+                <movie-item :movieItem="item" v-for="(item,index) in classicMovieList" :key="index"></movie-item>
+              </div>
+            </div>
+          </el-card>
         </div>
       </div>
       <div class="right">
         <div class="panel">
+          <el-card class="box-card" shadow="hover">
           <div class="panel-header">
             <h2 style="color: #ffb400">热度榜</h2>
             <a href="/rankingList/totalBoxOfficeList">查看完整榜单</a>
           </div>
+          </el-card>
           <div class="panel-content">
             <div class="board" v-for="(item, index) in totalBoxOfficeList">
               <div class="board-left">
@@ -205,11 +215,11 @@ h2{
 }
 
 .movie-item{
-  margin-left: 25px;
-  margin-right: 30px;
+  margin-left: 45px;
+  margin-right: 45px;
 }
 
-.movie-item:nth-child(5n){
+.movie-item:nth-child(4n){
   margin-right: 0;
 }
 
@@ -262,4 +272,9 @@ h2{
   margin: 0px 0px 50px 0px;
 }
 
+.box-card{
+  border-radius: 15px;
+  background-color: rgba(255,255,255,0.6);
+
+}
 </style>
