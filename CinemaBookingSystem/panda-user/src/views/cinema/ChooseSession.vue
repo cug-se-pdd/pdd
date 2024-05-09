@@ -30,7 +30,7 @@
       <div class="movie-info-detail clearfix">
         <div class="main-content">
           <div class="crumbs-nav-container">
-            <a href="/welcome">panda活动</a> &gt; <a href="/aboutUs"> {{cinemaInfo.cinemaName}}</a>
+            <a href="/welcome">票多多</a> &gt; <a href="/aboutUs"> {{cinemaInfo.cinemaName}}</a>
           </div>
           <!-- 活动地点正在上映的所有活动 -->
           <div class="movie-list-container"
