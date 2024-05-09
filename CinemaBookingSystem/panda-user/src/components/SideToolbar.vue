@@ -22,10 +22,11 @@
           </el-tab-pane>
           <el-tab-pane label="联系作者">
            这是中国地质大学软件工程专业<br>
-
             软件过程综合实践实习项目<br>
             队员：xx<br>
-            git仓库地址 ：https://github.com/wzwzwz1/pqq<br>
+            我们的项目已在GitHub开源<br>
+            <el-link href="https://github.com/wzwzwz1/pqq" target="_blank">-> 点我跳转GitHub <-</el-link>
+            <br>
           </el-tab-pane>
 
         </el-tabs>
