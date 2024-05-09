@@ -42,7 +42,7 @@
       <div class="movie-info-detail clearfix">
         <div class="main-content">
           <div class="crumbs-nav-container">
-            <a href="/welcome">panda电影</a> &gt; <a href="/movie">活动</a> &gt; {{movieInfo.movieName}}
+            <a href="/welcome">票多多</a> &gt; <a href="/movie">活动</a> &gt; {{movieInfo.movieName}}
           </div>
           <el-tabs v-model="activeName">
             <el-tab-pane label="介绍" name="introduction">
