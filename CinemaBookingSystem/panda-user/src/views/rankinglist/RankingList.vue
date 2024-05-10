@@ -4,9 +4,9 @@
         :default-active="$route.path"
         class="el-menu-demo"
         mode="horizontal"
-        background-color="#545c64"
-        text-color="#fff"
-        active-text-color="#ffd04b"
+        active-text-color="#409eff"
+        background-color="#ffffff"
+        text-color="#303133"
         router>
       <el-menu-item v-for="item in menuList" :key="item.id" :index="item.path">{{ item.name }}</el-menu-item>
     </el-menu>
