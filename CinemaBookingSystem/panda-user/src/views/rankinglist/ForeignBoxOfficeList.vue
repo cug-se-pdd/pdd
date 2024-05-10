@@ -5,9 +5,13 @@
         <div class="left">
           <i class="board-index">{{index+1}}</i>
         </div>
-        <div class="middle1">
+        <div class="middle1" style="width: 160px;height: auto ;">
           <a :href="'/movieInfo/' + item.movieId">
-            <img :src="global.base + JSON.parse(item.moviePoster)[0]" :alt="item.movieName">
+            <el-image
+
+              :src="global.base + JSON.parse(item.moviePoster)[0]"
+              :alt="item.movieName"
+              :fit="contain"/>
           </a>
         </div>
         <div class="middle2">
