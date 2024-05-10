@@ -165,6 +165,7 @@ export default {
         return
       }
       // 校验是否选座，未选座则警告
+      // 最小座位是 1
       if (this.pickedSeats.length === 0){
         this.$alert('抱歉！您暂时未选座，无法提交预约，请选座后提交预约。', '提交预约异常通知', {
           confirmButtonText: '我知道了',
