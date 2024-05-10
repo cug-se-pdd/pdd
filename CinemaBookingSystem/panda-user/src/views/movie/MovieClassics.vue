@@ -20,7 +20,7 @@
     </div>
   </div>
 </template>
-<!--`111111-->
+<!--`11111-->
 <script>
 import movieItem from "../../components/movie/movie-item";
 import moment from "moment";
