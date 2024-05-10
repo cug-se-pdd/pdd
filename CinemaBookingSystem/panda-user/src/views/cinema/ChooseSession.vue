@@ -33,21 +33,23 @@
             <a href="/welcome">票多多</a> &gt; <a href="/aboutUs"> {{cinemaInfo.cinemaName}}</a>
           </div>
           <!-- 活动地点正在上映的所有活动 -->
-          <div class="movie-list-container"
-               v-if="cinemaInfo.sysMovieList !== null
-                      && cinemaInfo.sysMovieList.length !== 0">
-            <span class="scroll-prev scroll-btn" @click="prevPage"></span>
-            <span class="scroll-next scroll-btn" @click="nextPage"></span>
-            <div class="movie-list" ref="movieListRef" :style="'left:' + left + 'px'">
-              <div class="movie"
-                   v-for="item in cinemaInfo.sysMovieList"
-                   :key="item.movieId"
-                   :class="{active: item.movieId === activeMovie}"
-                   @click="activeMovie = item.movieId">
-                <img :src="global.base + JSON.parse(item.moviePoster)[0]"/>
-              </div>
-            </div>
-          </div>
+<!--          <div class="movie-list-container"-->
+<!--               v-if="cinemaInfo.sysMovieList !== null-->
+<!--                      && cinemaInfo.sysMovieList.length !== 0">-->
+<!--            <span class="scroll-prev scroll-btn" @click="prevPage"></span>-->
+<!--            <span class="scroll-next scroll-btn" @click="nextPage"></span>-->
+<!--            <div class="movie-list" ref="movieListRef" :style="'left:' + left + 'px'">-->
+<!--              <div class="movie"-->
+<!--                   v-for="item in cinemaInfo.sysMovieList"-->
+<!--                   :key="item.movieId"-->
+<!--                   :class="{active: item.movieId === activeMovie}"-->
+<!--                   @click="activeMovie = item.movieId"-->
+
+<!--              >-->
+<!--                <img :src="global.base + JSON.parse(item.moviePoster)[0]"/>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
 
           <!-- 当前选中活动信息 -->
           <div class="show-list"
@@ -135,6 +137,7 @@ export default {
   data() {
     return {
       cinemaId: this.$route.params.cinemaId,
+      movieId: this.$route.params.movieId,
       cinemaInfo: {
         user: {},
         cinemaPicture: [],
@@ -155,7 +158,7 @@ export default {
       },
       sessionDict: {},
       sessions: [],
-      activeMovie: 0,
+      activeMovie: this.$route.params.movieId,
       activeDate: '',
       left: 0,
       movieListWidth: 0
@@ -164,12 +167,22 @@ export default {
   watch:{
     'activeMovie'() {
       this.getNewSessionList()
+    },
+    '$route.params.movieId'(newVal) {
+      this.activeMovie = newVal;
+      this.getNewSessionList();
     }
   },
   created() {
-    this.getCinemaMovieList()
+    this.initializePage();
+
   },
   methods: {
+    async initializePage() {
+      await this.getCinemaMovieList(); // 等待此异步操作完成
+      this.activeMovie = this.movieId; // 确保activeMovie设置在获取新会话列表之前
+      await this.getNewSessionList(); // 再执行第二个异步操作
+    },
     async getCinemaMovieList() {
       const { data : res} = await axios.get('sysCinema/find/' + this.cinemaId)
       this.cinemaInfo = res.data.cinema
@@ -181,7 +194,7 @@ export default {
       if (this.sessions === null) {
         this.sessions = []
       } else {
-        this.activeMovie = this.sessions[0].movieId
+        this.activeMovie = this.movieId
       }
 
       for(let movie of this.cinemaInfo.sysMovieList) {
@@ -201,7 +214,7 @@ export default {
       this.activeDate = this.sessions.length === 0 ? '' : this.sessions[0].sessionDate
     },
     async getNewSessionList() {
-      const { data : res} = await axios.get('sysCinema/find/' + this.cinemaId + '/' + this.activeMovie)
+      const { data : res} = await axios.get('sysCinema/find/' + this.cinemaId + '/' + this.movieId)
       if(res.code !== 200) return this.$message.error('获取信息失败')
       this.sessions = res.data.sessions
       //处理场次数据，按日期分组

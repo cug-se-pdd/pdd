@@ -75,7 +75,7 @@ const routes = [
         component: AboutUs
       },
       {
-        path: '/chooseSession/:cinemaId',
+        path: '/chooseSession/:cinemaId/:movieId',
         name: '活动地点详细信息',
         component: ChooseSession
       },
