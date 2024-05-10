@@ -3,8 +3,8 @@
     <el-steps :active="2" align-center>
       <el-step title="选择活动场次"></el-step>
       <el-step title="选择座位"></el-step>
-      <el-step title="15分钟内付款"></el-step>
-      <el-step title="活动地点取票观影"></el-step>
+      <el-step title="15分钟内提交"></el-step>
+      <el-step title="活动地点取票参与"></el-step>
     </el-steps>
     <div class="whole">
       <div class="left">
@@ -17,7 +17,7 @@
           <span style="margin: 0 20px">已选座位</span>
         </div>
 
-        <div class="screen">银幕中央</div>
+        <div class="screen">场馆中央</div>
 
         <div class="seat-content">
             <div class="row" v-for="(value, key) in seats">
@@ -62,8 +62,8 @@
               <span>{{session.sessionDate}} {{session.playTime}}</span>
             </div>
             <div class="info-item">
-              <span>票价：</span>
-              <span>￥{{session.sessionPrice}}/张</span>
+              <span>热度：</span>
+              <span>￥{{session.sessionPrice}}</span>
             </div>
             <span style="color: #999">座位：</span>
             <div class="seat-chose">
@@ -165,6 +165,7 @@ export default {
         return
       }
       // 校验是否选座，未选座则警告
+      // 最小座位是 1
       if (this.pickedSeats.length === 0){
         this.$alert('抱歉！您暂时未选座，无法提交预约，请选座后提交预约。', '提交预约异常通知', {
           confirmButtonText: '我知道了',

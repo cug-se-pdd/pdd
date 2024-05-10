@@ -22,7 +22,7 @@ public class SysHall implements Serializable {
 
     private Long hallId;
 
-    @NotBlank(message = "影厅名称不能为空")
+    @NotBlank(message = "场馆名称不能为空")
     private String hallName;
 
     private String hallCategory;
@@ -30,18 +30,18 @@ public class SysHall implements Serializable {
     //排开始标号：'1' / 'A' 等
     private String rowStart;
 
-    //影厅排数
-    @Min(value = 3, message = "排数不能小于3")
+    //场馆排数
+    @Min(value = 1, message = "排数不能小于1")
     @Max(value = 50, message = "排数不能大于50")
     private Integer rowNums;
 
     //每排座位数
-    @Min(value = 3, message = "每排座位数不能小于3")
+    @Min(value = 1, message = "每排座位数不能小于1")
     @Max(value = 50, message = "每排座位数不能大于50")
     private Integer seatNumsRow;
 
     //总可用座位数，可以通过安排座位禁用指定座位
-    @Min(value = 9, message = "座位数不能小于9")
+    @Min(value = 1, message = "座位数不能小于1")
     @Max(value = 2500, message = "座位数不能大于2500")
     private Integer seatNums;
 
@@ -50,7 +50,7 @@ public class SysHall implements Serializable {
 
     private Boolean delState;
 
-    //影厅表的多表连接
+    //场馆表的多表连接
     private SysCinema sysCinema;
 
 }
