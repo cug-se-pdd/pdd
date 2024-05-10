@@ -38,7 +38,7 @@
         </el-dropdown>
       </div>
     </el-header>
-    <el-main>
+    <el-main style="margin-top: 80px">
       <router-view>
 
       </router-view>
