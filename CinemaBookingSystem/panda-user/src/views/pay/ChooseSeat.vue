@@ -165,15 +165,15 @@ export default {
         return
       }
       // 校验是否选座，未选座则警告
-      // if (this.pickedSeats.length === 0){
-      //   this.$alert('抱歉！您暂时未选座，无法提交预约，请选座后提交预约。', '提交预约异常通知', {
-      //     confirmButtonText: '我知道了',
-      //     callback: action => {
-      //       this.$router.push('/chooseSeat/' + this.sessionId)
-      //     }
-      //   })
-      //   return
-      // }
+      if (this.pickedSeats.length === 0){
+        this.$alert('抱歉！您暂时未选座，无法提交预约，请选座后提交预约。', '提交预约异常通知', {
+          confirmButtonText: '我知道了',
+          callback: action => {
+            this.$router.push('/chooseSeat/' + this.sessionId)
+          }
+        })
+        return
+      }
       //获取场次座位信息
       const { data : curSession } = await axios.get('sysSession/find/' + this.sessionId)
       let sessionSeats = JSON.parse(curSession.data.sessionSeats)

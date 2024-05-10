@@ -31,17 +31,17 @@ public class SysHall implements Serializable {
     private String rowStart;
 
     //场馆排数
-    @Min(value = 0, message = "排数不能小于0")
+    @Min(value = 1, message = "排数不能小于1")
     @Max(value = 50, message = "排数不能大于50")
     private Integer rowNums;
 
     //每排座位数
-    @Min(value = 0, message = "每排座位数不能小于0")
+    @Min(value = 1, message = "每排座位数不能小于1")
     @Max(value = 50, message = "每排座位数不能大于50")
     private Integer seatNumsRow;
 
     //总可用座位数，可以通过安排座位禁用指定座位
-    @Min(value = 0, message = "座位数不能小于0")
+    @Min(value = 1, message = "座位数不能小于1")
     @Max(value = 2500, message = "座位数不能大于2500")
     private Integer seatNums;
 
