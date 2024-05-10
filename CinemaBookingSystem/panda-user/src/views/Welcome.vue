@@ -45,7 +45,9 @@
     </el-main>
     <el-footer>
       <div class="footer-mini">
-        <el-link href="https://cs.cug.edu.cn/" target="_blank">Copyright© 2020-2024 · 中国地质大学（武汉）计算机学院</el-link>
+        <el-link href="https://github.com/wzwzwz1/pqq" target="_blank">Copyright© 2024 · 票多多开发团队</el-link>
+        <br>
+        <el-link href="https://cs.cug.edu.cn/" target="_blank">中国地质大学（武汉）计算机学院</el-link>
       </div>
       <div class="footer">
         <img style="width: 800px; height: 300px" src="../assets/register-footer.jpg">
