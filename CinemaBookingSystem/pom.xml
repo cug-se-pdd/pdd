@@ -15,7 +15,7 @@
 	<name>panda</name>
 	<description>电影售票系统</description>
 
-	<!--加入子模块-->
+	<!--加入子模1111块-->
 	<modules>
 		<module>panda-admin</module>
 		<module>panda-common</module>
