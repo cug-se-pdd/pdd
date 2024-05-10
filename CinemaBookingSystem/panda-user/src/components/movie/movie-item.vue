@@ -10,7 +10,7 @@
       <div class="movie-item-hover" v-if="isHover">
         <!-- 海报 -->
         <a :href="movieInfoUrl">
-          <img class="poster-hover" :src="this.global.base + movieItem.moviePoster">
+          <el-image class="poster-hover" :src="this.global.base + movieItem.moviePoster" fit="cover"/>
           <!-- 鼠标划过时显示的信息 -->
           <div class="movie-hover-info">
             <div class="title-hover">
