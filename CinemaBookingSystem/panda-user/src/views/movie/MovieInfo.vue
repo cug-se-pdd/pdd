@@ -4,7 +4,7 @@
       <div class="header-inner clearfix">
         <div class="movie-info-left">
           <div class="avatar-shadow">
-            <img class="avatar" :src="movieInfo.moviePoster">
+            <el-image class="avatar" :src="movieInfo.moviePoster"/>
           </div>
         </div>
         <div class="movie-info-right">
