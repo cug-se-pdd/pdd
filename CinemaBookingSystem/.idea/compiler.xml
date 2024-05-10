@@ -15,6 +15,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="CinemaBookingSystem" options="-parameters" />
       <module name="panda" options="-parameters" />
       <module name="panda-admin" options="-parameters" />
       <module name="panda-common" options="-parameters" />
