@@ -26,7 +26,7 @@
         </a>
       </div>
     </div>
-    <!-- 标题 -->
+    <!-- 标题  -->
     <div class="title-style">
       <a href="/movieInfo">{{movieItem.movieName}}</a>
     </div>
