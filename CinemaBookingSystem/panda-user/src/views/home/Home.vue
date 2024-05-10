@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 轮播图  :height="carouselHeight"  -->
-    <el-carousel :height="carouselHeight" type="card" style="margin-top: 100px">
+    <el-carousel :height="carouselHeight" type="card">
       <el-carousel-item v-for="item in posterList" :key="item.url">
         <el-image :src="item.url" :fit="fit"/>
       </el-carousel-item>
