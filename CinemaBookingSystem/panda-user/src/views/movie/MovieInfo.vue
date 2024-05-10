@@ -154,8 +154,12 @@ export default {
     },
     //转到购票页面
     toChooseSession(){
-      let cinemaId = 1
-      this.$router.push('/chooseSession/' + cinemaId)
+      let cinemaId = 1;
+      let movieId = 1;
+      movieId=this.movieId
+
+      // 使用模板字符串和反引号
+      this.$router.push(`/chooseSession/${cinemaId}/${movieId}`);
     }
   }
 }
