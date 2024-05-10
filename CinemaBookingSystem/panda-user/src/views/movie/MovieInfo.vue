@@ -13,8 +13,6 @@
 <!--            <h1>&nbsp;|</h1>-->
 <!--            <h1>&nbsp;</h1>-->
 <!--            <h1>&nbsp;</h1>-->
-<!--            <h1>&nbsp;</h1>-->
-<!--            <h3>&nbsp;</h3>-->
             <ul>
               <li>{{movieInfo.movieCategoryList}}</li>
 <!--              <li>{{movieInfo.movieArea}} / {{movieInfo.movieLength}}分钟</li>-->
