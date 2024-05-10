@@ -18,7 +18,7 @@
 
           </el-tab-pane>
           <el-tab-pane label="公众号">
-
+<!--没有公众号-->
           </el-tab-pane>
           <el-tab-pane label="联系作者">
            这是中国地质大学软件工程专业<br>
