@@ -11,7 +11,7 @@
         <!-- 海报 -->
         <a :href="movieInfoUrl">
           <el-image class="poster-hover" :src="this.global.base + movieItem.moviePoster" fit="cover"/>
-          <!-- 鼠标划过时显示的信息 -->
+          <!-- 鼠标划过时显示的信息  -->
           <div class="movie-hover-info">
             <div class="title-hover">
               <span class="name-tags">{{movieItem.movieName}}</span>
