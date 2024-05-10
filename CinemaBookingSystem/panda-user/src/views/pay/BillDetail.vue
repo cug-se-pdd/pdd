@@ -134,14 +134,21 @@
           </el-upload>
           <!-- 图像显示组件：当支付已完成或条件不满足显示上传组件时显示 -->
           <div v-else class="image-component">
-            <el-image
-              fit="cover"
-              class="default-img"
-              v-for="(item,index) in billInfo.url"
-              :key="index"
-              :src="item"
-              :preview-src-list="billInfo.url">
-            ></el-image>
+<!--            <el-image-->
+<!--              fit="cover"-->
+<!--              class="default-img"-->
+<!--              v-for="(item,index) in billInfo.url"-->
+<!--              :key="index"-->
+<!--              :src="item"-->
+<!--              :preview-src-list="billInfo.url">-->
+<!--            ></el-image>-->
+            <el-carousel :interval="4000" type="card" height="400px">
+              <el-carousel-item  v-for="(item,index) in billInfo.url"
+                                 :key="index"
+                                 :src="item">
+                <el-image style="width: 400px; height: 400px" :src="item" :fit="contain"/>
+              </el-carousel-item>
+            </el-carousel>
           </div>
 
           <div class="tag">
