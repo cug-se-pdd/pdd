@@ -3,7 +3,7 @@
     <el-steps :active="3" align-center>
       <el-step title="选择活动场次"></el-step>
       <el-step title="选择座位"></el-step>
-      <el-step title="15分钟内付款"></el-step>
+      <el-step title="15分钟内提交"></el-step>
       <el-step title="活动地点取票观影" status="wait"></el-step>
     </el-steps>
     <div class="bill-info-container">
@@ -25,7 +25,7 @@
           <img src="../../assets/bill-invalid.png">
         </div>
         <div class="pay-info">
-          <div class="pay-info-status invalid">由于预约超时未支付，已失效</div>
+          <div class="pay-info-status invalid">由于预约超时未提交，已失效</div>
         </div>
       </div>
       <div class="bill-info-status finish" v-if="payState === true">
@@ -59,8 +59,9 @@
           <tr>
             <th>活动</th>
 <!--            <th>语言版本</th>-->
-            <th>播放时间</th>
-            <th>座位{{billInfo.url}}</th>
+            <th>活动时间</th>
+<!--            <th>座位{{billInfo.url}}</th>-->
+            <th>座位</th>
             <th>提示信息</th>
           </tr>
           </thead>
