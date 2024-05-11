@@ -26,6 +26,7 @@
         </div>
         <div class="pay-info">
           <div class="pay-info-status invalid">由于预约超时未提交，已失效</div>
+
         </div>
       </div>
       <div class="bill-info-status finish" v-if="payState === true">
@@ -132,7 +133,12 @@
           </span>
         </span>
             </div>
+            <div class="tag">
+              <el-tag type="info">按活动要求上传验证图片</el-tag>
+            </div>
           </el-upload>
+
+
           <!-- 图像显示组件：当支付已完成或条件不满足显示上传组件时显示 -->
           <div v-else class="image-component">
 <!--            <el-image-->
@@ -150,11 +156,13 @@
                 <el-image style="width: 400px; height: 400px" :src="item" :fit="contain"/>
               </el-carousel-item>
             </el-carousel>
+
+            <img src="../../assets/hxm.png">
+
+
           </div>
 
-          <div class="tag">
-            <el-tag type="info">按活动要求上传验证图片</el-tag>
-          </div>
+
 
         </div>
           </el-col>
@@ -203,7 +211,7 @@ export default {
       cancelState: null,
       cancelTime: null,
       //计时
-      minutes: 1,
+      minutes: 15,
       seconds: 0,
       dialogImageUrl: '',
       dialogVisible: false,

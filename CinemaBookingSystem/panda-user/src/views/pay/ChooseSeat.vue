@@ -61,18 +61,18 @@
               <span>场次：</span>
               <span>{{session.sessionDate}} {{session.playTime}}</span>
             </div>
-            <div class="info-item">
-              <span>热度：</span>
-              <span>￥{{session.sessionPrice}}</span>
-            </div>
+<!--            <div class="info-item">-->
+<!--              <span>热度：</span>-->
+<!--              <span>￥{{session.sessionPrice}}</span>-->
+<!--            </div>-->
             <span style="color: #999">座位：</span>
             <div class="seat-chose">
               <span class="ticket" v-if="pickedSeats.length > 0" v-for="item in pickedSeats">{{ item }}</span>
             </div>
-            <div class="info-item" style="align-items: center">
-              <span style="color: #333">总价：</span>
-              <span style="font-size: 20px;color: #f03d37">￥{{session.sessionPrice * pickedSeats.length}}</span>
-            </div>
+<!--            <div class="info-item" style="align-items: center">-->
+<!--              <span style="color: #333">总价：</span>-->
+<!--              <span style="font-size: 20px;color: #f03d37">￥{{session.sessionPrice * pickedSeats.length}}</span>-->
+<!--            </div>-->
             <div style="text-align: center;margin-top: 30px">
               <el-button type="danger" round @click="submitBill">提交预约</el-button>
             </div>
@@ -286,19 +286,18 @@ export default {
   margin: 40px 0 40px 0;
 }
 
-.row{
-  white-space: nowrap;
-  margin-top: 10px;
-  padding: 0 10px;
-  text-align: center;
+.row {
   display: flex;
+  justify-content: center;  /* 使用flex布局居中每一排座位 */
+  transform: translateX(-10px);  /* 向左移动10px */
+  margin-top: 10px;
 }
 
 
-.seat-content{
-  margin-bottom: 40px;
-  overflow-x: scroll;
-  width: 90%;
+.seat-content {
+  width: 100%;  /* 使用整个容器的宽度 */
+  overflow-x: auto;  /* 允许横向滚动 */
+  text-align: center;  /* 居中座位行 */
   padding: 10px;
 }
 

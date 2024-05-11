@@ -1,6 +1,14 @@
 <template>
   <div class="movie-container">
     <div class="header">
+      <div class="guass">
+
+
+      <video autoplay muted loop class="header-video">
+        <source src="../../assets/6184263-uhd_4096_2160_25fps.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+    </div>
       <div class="header-inner clearfix">
         <div class="movie-info-left">
           <div class="avatar-shadow">
@@ -175,18 +183,39 @@ a{
   cursor:pointer;
 }
 
-.header{
-  padding: 0;
+.header {
+  position: relative; /* 使得视频可以定位相对于这个容器 */
+  overflow: hidden; /* 防止视频溢出容器 */
   width: 100%;
   min-width: 1200px;
-  background: url('../../assets/movie-info-background.jpg')
+
 }
 
-.header-inner{
-  width: 1200px;
-  margin: 0 auto;
-  position: relative;
+.header-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* 覆盖整个.header区域 */
+  object-fit: cover; /* 保持视频的宽高比，覆盖整个容器 */
+  z-index: 1; /* 确保视频在内容之后，不干扰内容 */
+  filter: blur(5px); /* 应用高斯模糊效果 */
+  border-radius: 20px;
 }
+.header-inner {
+  width: 1200px;
+  margin-top: 10px;
+  margin-left: 20%;
+  margin-bottom: 1%;
+
+  position: relative;
+  z-index: 2; /* 确保头部内容显示在视频之上 */
+
+
+}
+
+
+
 
 .clearfix::before, .clearfix::after{
   content: " ";
@@ -468,5 +497,6 @@ ul li{
 .user-name{
   margin-top: 2px;
 }
+
 
 </style>

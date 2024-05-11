@@ -98,7 +98,7 @@
 <!--                    label="语言版本">-->
 <!--                </el-table-column>-->
                 <el-table-column
-                    label="活动场馆">
+                    label="活动场地">
                   <template slot-scope="scope">
                     {{scope.row.sysHall.hallName}}
                   </template>
@@ -109,12 +109,12 @@
                     {{scope.row.sessionTips === null ? '无' : scope.row.sessionTips}}
                   </template>
                 </el-table-column>
-                <el-table-column
-                    label="售价">
-                  <template slot-scope="scope">
-                    <span class="sell-price"><span class="stonefont">{{scope.row.sessionPrice}}</span></span>
-                  </template>
-                </el-table-column>
+<!--                <el-table-column-->
+<!--                    label="售价">-->
+<!--                  <template slot-scope="scope">-->
+<!--                    <span class="sell-price"><span class="stonefont">{{scope.row.sessionPrice}}</span></span>-->
+<!--                  </template>-->
+<!--                </el-table-column>-->
                 <el-table-column
                     label="预约活动">
                   <template slot-scope="scope">
