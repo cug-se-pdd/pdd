@@ -51,7 +51,7 @@
       </div>
       <div class="footer">
         <img style="width: 800px; height: 300px" src="../assets/register-footer.jpg">
-<!--        <p style=" font-size: 40px; background-color: white">看活动，就上-{ {{this.cinemaInfo.cinemaName}} }</p>-->
+<!--        <p style=" font-size: 40px; background-color: white">看活动，就上-{ {{this.cinemaInfo.cinemaName}} } </p>-->
       </div>
       <el-backtop></el-backtop>
     </el-footer>
