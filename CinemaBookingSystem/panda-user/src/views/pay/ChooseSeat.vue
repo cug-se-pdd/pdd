@@ -7,7 +7,11 @@
       <el-step title="活动地点取票参与"></el-step>
     </el-steps>
     <div class="whole">
-      <div class="left">
+      <div class="left-non" v-if="this.session.sysMovie.movieLength===120">
+
+      </div>
+
+      <div class="left" v-else>
         <div class="seat-example">
           <span class="seat" :class="isSelected[0]"></span>
           <span style="margin: 0 20px">可选座位</span>
@@ -18,6 +22,7 @@
         </div>
 
         <div class="screen">场馆中央</div>
+
 
         <div class="seat-content">
             <div class="row" v-for="(value, key) in seats">
@@ -65,10 +70,19 @@
 <!--              <span>热度：</span>-->
 <!--              <span>￥{{session.sessionPrice}}</span>-->
 <!--            </div>-->
+
+            <div v-if="!(this.session.sysMovie.movieLength===120)">
+
+
             <span style="color: #999">座位：</span>
-            <div class="seat-chose">
-              <span class="ticket" v-if="pickedSeats.length > 0" v-for="item in pickedSeats">{{ item }}</span>
+
+
+              <div class="seat-chose">
+                <span class="ticket" v-if="pickedSeats.length > 0" v-for="item in pickedSeats">{{ item }}</span>
+              </div>
+
             </div>
+
 <!--            <div class="info-item" style="align-items: center">-->
 <!--              <span style="color: #333">总价：</span>-->
 <!--              <span style="font-size: 20px;color: #f03d37">￥{{session.sessionPrice * pickedSeats.length}}</span>-->
@@ -101,7 +115,8 @@ export default {
       sessionId: this.$route.params.sessionId,
       session: {
         sysMovie: {
-          movieCategoryList: []
+          movieCategoryList: [],
+          movieLength:''
         },
         sysCinema: {},
         sysHall: {}
@@ -123,6 +138,7 @@ export default {
       if(resp.code !== 200) return this.$message.error(resp.msg)
       this.session = resp.data
       this.session.sysMovie.moviePoster = this.global.base + JSON.parse(this.session.sysMovie.moviePoster)[0]
+      this.session.sysMovie.movieLength=resp.data.sysMovie.movieLength
       this.seats = JSON.parse(resp.data.sessionSeats)
       this.session.sysMovie.movieCategoryList = this.session.sysMovie.movieCategoryList.map((obj, index) => {
         return obj.movieCategoryName
@@ -167,13 +183,14 @@ export default {
       // 校验是否选座，未选座则警告
       // 最小座位是 1
       if (this.pickedSeats.length === 0){
-        this.$alert('抱歉！您暂时未选座，无法提交预约，请选座后提交预约。', '提交预约异常通知', {
-          confirmButtonText: '我知道了',
-          callback: action => {
-            this.$router.push('/chooseSeat/' + this.sessionId)
-          }
-        })
-        return
+        // this.$alert('抱歉！您暂时未选座，无法提交预约，请选座后提交预约。', '提交预约异常通知', {
+        //   confirmButtonText: '我知道了',
+        //   callback: action => {
+        //     this.$router.push('/chooseSeat/' + this.sessionId)
+        //   }
+        // })
+        // return
+
       }
       //获取场次座位信息
       const { data : curSession } = await axios.get('sysSession/find/' + this.sessionId)
@@ -232,6 +249,16 @@ export default {
   justify-content: center;
   align-items: center;
   border-right: 1px solid #e5e5e5;
+}
+.left-non{
+  width: 820px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid #e5e5e5;
+
+
 }
 
 .right{

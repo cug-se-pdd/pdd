@@ -12,7 +12,7 @@
       <div class="header-inner clearfix">
         <div class="movie-info-left">
           <div class="avatar-shadow">
-            <el-image class="avatar" :src="movieInfo.moviePoster"/>
+            <el-image class="avatar" :src="movieInfo.moviePoster" fit="cover"/>
           </div>
         </div>
         <div class="movie-info-right">
@@ -75,12 +75,27 @@
                       <div v-if="movieInfo.moviePictures.length === 0">
                         暂无图片资源
                       </div>
+                      <div v-if="this.$route.params.movieId==='39'">
+
+
+                        <video ref="videoPlayer"
+                               :src="videoSource"
+
+                               controls>
+                        </video>
+
+
+                      </div>
+                      <div v-else>
+
+
                       <el-image
                           class="default-img"
                           :src="movieInfo.moviePictures[0]"
                           :preview-src-list="movieInfo.moviePictures"
                           v-if="movieInfo.moviePictures.length > 0">
                       </el-image>
+                      </div>
                       <div class="little-pictures">
                         <el-image
                             class="default-img"
@@ -137,7 +152,13 @@ export default {
       movieId: this.$route.params.movieId,
       activeName: 'introduction',
       colors: ['#99A9BF', '#F7BA2A', '#FF9900'],
-      httpURL: this.global.base
+      httpURL: this.global.base,
+// 将这里替换为你的视频文件路径
+      videoSource: require('../../assets/6184263-uhd_4096_2160_25fps.mp4'),
+      videoWidth: 640,  // 默认宽度
+      videoHeight: 480, // 默认高度
+      playing: false
+
     }
   },
   created() {
@@ -168,6 +189,16 @@ export default {
 
       // 使用模板字符串和反引号
       this.$router.push(`/chooseSession/${cinemaId}/${movieId}`);
+    },
+    togglePlay() {
+      const videoElement = this.$refs.videoPlayer;
+      if (!this.playing) {
+        videoElement.play();
+        this.playing = true;
+      } else {
+        videoElement.pause();
+        this.playing = false;
+      }
     }
   }
 }
@@ -497,6 +528,12 @@ ul li{
 .user-name{
   margin-top: 2px;
 }
-
+video {
+  max-width: 100%;
+}
+button {
+  margin-top: 10px;
+  cursor: pointer;
+}
 
 </style>
