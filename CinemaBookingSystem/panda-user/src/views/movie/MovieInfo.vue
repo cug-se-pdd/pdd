@@ -159,6 +159,7 @@
                         暂无图片资源
                       </div>
                       <el-image
+                        fit="cover"
                         class="default-img"
                         :src="movieInfo.moviePictures[0]"
                         :preview-src-list="movieInfo.moviePictures"
@@ -166,6 +167,7 @@
                       </el-image>
                       <div class="little-pictures">
                         <el-image
+                          fit="cover"
                           class="default-img"
                           v-for="(item,index) in movieInfo.moviePictures.slice(1)"
                           :key="index"
