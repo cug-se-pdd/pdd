@@ -64,6 +64,89 @@
                     </span>
                   </div>
                 </div>
+
+                <div v-if="this.$route.params.movieId==='39'" class="module">
+                  <div class="mod-title">
+                    <h2>精彩视频</h2>
+                  </div>
+                  <div class="mod-content">
+                    <video ref="videoPlayer"
+                           :src="videoSource"
+                           controls>
+                    </video>
+                  </div>
+
+
+                </div>
+
+<!--                &lt;!&ndash; 图集 &ndash;&gt;-->
+<!--                <div class="module">-->
+<!--                  <div class="mod-title">-->
+<!--                    <h2>图集</h2>-->
+<!--                    <a class="more" @click="showPictures">全部</a>-->
+<!--                  </div>-->
+<!--                  <div class="mod-content">-->
+<!--                    <div class="pictures-list">-->
+<!--                      <div v-if="movieInfo.moviePictures.length === 0">-->
+<!--                        暂无图片资源-->
+<!--                      </div>-->
+<!--&lt;!&ndash;                      <div v-if="this.$route.params.movieId==='39'">&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;                        <video ref="videoPlayer"&ndash;&gt;-->
+<!--&lt;!&ndash;                               :src="videoSource"&ndash;&gt;-->
+
+<!--&lt;!&ndash;                               controls>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </video>&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;                      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <div v-else>&ndash;&gt;-->
+
+
+<!--                      <el-image-->
+<!--                          class="default-img"-->
+<!--                          :src="movieInfo.moviePictures[0]"-->
+<!--                          :preview-src-list="movieInfo.moviePictures"-->
+<!--                          v-if="movieInfo.moviePictures.length > 0"-->
+<!--                          fit="cover">-->
+<!--                      </el-image>-->
+<!--                      </div>-->
+<!--                      <div class="little-pictures">-->
+<!--                        <el-image-->
+<!--                            class="default-img"-->
+<!--                            v-for="(item,index) in movieInfo.moviePictures.slice(1)"-->
+<!--                            :key="index"-->
+<!--                            :src="item"-->
+<!--                            :preview-src-list="movieInfo.moviePictures"-->
+<!--                            fit="cover">-->
+<!--                        </el-image>-->
+<!--&lt;!&ndash;                      </div>&ndash;&gt;-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </el-tab-pane>-->
+<!--            <el-tab-pane label="图集" name="pictures">-->
+<!--              <div class="tab-body">-->
+<!--                <div class="pictures-list">-->
+<!--                  <div class="little-pictures">-->
+<!--                    <div v-if="movieInfo.moviePictures.length == 0">-->
+<!--                      暂无图片资源-->
+<!--                    </div>-->
+<!--                    <el-image-->
+<!--                        fit="cover"-->
+<!--                        class="default-img"-->
+<!--                        v-for="(item,index) in movieInfo.moviePictures"-->
+<!--                        :key="index"-->
+<!--                        :src="item"-->
+<!--                        :preview-src-list="movieInfo.moviePictures">-->
+<!--                    </el-image>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </el-tab-pane>-->
+
                 <!-- 图集 -->
                 <div class="module">
                   <div class="mod-title">
@@ -75,34 +158,19 @@
                       <div v-if="movieInfo.moviePictures.length === 0">
                         暂无图片资源
                       </div>
-                      <div v-if="this.$route.params.movieId==='39'">
-
-
-                        <video ref="videoPlayer"
-                               :src="videoSource"
-
-                               controls>
-                        </video>
-
-
-                      </div>
-                      <div v-else>
-
-
                       <el-image
-                          class="default-img"
-                          :src="movieInfo.moviePictures[0]"
-                          :preview-src-list="movieInfo.moviePictures"
-                          v-if="movieInfo.moviePictures.length > 0">
+                        class="default-img"
+                        :src="movieInfo.moviePictures[0]"
+                        :preview-src-list="movieInfo.moviePictures"
+                        v-if="movieInfo.moviePictures.length > 0">
                       </el-image>
-                      </div>
                       <div class="little-pictures">
                         <el-image
-                            class="default-img"
-                            v-for="(item,index) in movieInfo.moviePictures.slice(1)"
-                            :key="index"
-                            :src="item"
-                            :preview-src-list="movieInfo.moviePictures">
+                          class="default-img"
+                          v-for="(item,index) in movieInfo.moviePictures.slice(1)"
+                          :key="index"
+                          :src="item"
+                          :preview-src-list="movieInfo.moviePictures">
                         </el-image>
                       </div>
                     </div>
@@ -118,17 +186,19 @@
                       暂无图片资源
                     </div>
                     <el-image
-                        fit="cover"
-                        class="default-img"
-                        v-for="(item,index) in movieInfo.moviePictures"
-                        :key="index"
-                        :src="item"
-                        :preview-src-list="movieInfo.moviePictures">
+                      fit="cover"
+                      class="default-img"
+                      v-for="(item,index) in movieInfo.moviePictures"
+                      :key="index"
+                      :src="item"
+                      :preview-src-list="movieInfo.moviePictures">
                     </el-image>
                   </div>
                 </div>
               </div>
             </el-tab-pane>
+
+
           </el-tabs>
         </div>
       </div>
