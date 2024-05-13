@@ -20,12 +20,12 @@
             <span>放映厅：{{item.sysSession.sysHall.hallName}}({{item.sysSession.sysHall.hallCategory}})</span>
             <span></span>
           </div>
-          <div class="show-time">播放时间：{{item.sysSession.sessionDate + ' ' + item.sysSession.playTime + ' - ' + item.sysSession.endTime}}</div>
+          <div class="show-time">活动时间：{{item.sysSession.sessionDate + ' ' + item.sysSession.playTime + ' - ' + item.sysSession.endTime}}</div>
         </div>
-        <div class="order-price">
-          ￥{{item.sysSession.sessionPrice * JSON.parse(item.seats).length}} (
-          {{JSON.parse(item.seats).length}}*{{item.sysSession.sessionPrice}}/张 )
-        </div>
+<!--        <div class="order-price">-->
+<!--          ￥{{item.sysSession.sessionPrice * JSON.parse(item.seats).length}} (-->
+<!--          {{JSON.parse(item.seats).length}}*{{item.sysSession.sessionPrice}}/张 )-->
+<!--        </div>-->
         <div class="order-status">
           {{item.payState?'已完成':'未完成'}}
         </div>

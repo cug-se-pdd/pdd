@@ -3,7 +3,7 @@
     <el-header>
       <div class="span-container" style="padding: 5px" @click="toWelcome">
         <span>&nbsp;&nbsp;</span>
-        <img src="../assets/logo.png" alt="" height="40px" width="40px">
+        <img src="../assets/favicon.png" alt="" height="40px" width="40px">
         <span>活动管理系统</span>
       </div>
       <el-button type="info" @click="logout">退出</el-button>
@@ -62,7 +62,7 @@ export default {
       menuList: [],
       iconList: {
         '1': 'el-icon-s-home',
-        '2': 'el-icon-video-camera-solid',
+        '2': 'el-icon-edit',
         '3': 'el-icon-s-help',
         '4': 'el-icon-message-solid',
         '5': 'el-icon-s-custom',
@@ -143,7 +143,7 @@ div > span{
 }
 
 .el-main{
-  background: url("../assets/welcome.jpg");
+  //background: url("../assets/welcome.jpg");
   background-size: cover;
 }
 

@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import './test-clear.js';
 export default {
   name: "Login",
   data() {
@@ -89,7 +90,7 @@ export default {
 
 <style scoped>
 .login_container{
-  background-image: url("../assets/login-background.jpg");
+  //background-image: url("../assets/login-background.jpg");
   height: 100%;
 }
 
