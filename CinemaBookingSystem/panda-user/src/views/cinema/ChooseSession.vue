@@ -1,27 +1,35 @@
 <template>
   <div>
     <div class="header">
+      <div class="guass">
+
+
+        <video autoplay muted loop class="header-video">
+          <source src="../../assets/6184263-uhd_4096_2160_25fps.mp4" type="video/mp4">
+          Your browser does not support HTML5 video.
+        </video>
+      </div>
       <div class="header-inner clearfix">
         <div class="movie-info-left">
-          <div class="avatar-shadow">
-            <el-image class="avatar" :src="cinemaInfo.cinemaPicture[0]"
-                      :preview-src-list="cinemaInfo.cinemaPicture">
-            </el-image>
-          </div>
+<!--          <div class="avatar-shadow">-->
+<!--            <el-image class="avatar" :src="cinemaInfo.cinemaPicture[0]"-->
+<!--                      :preview-src-list="cinemaInfo.cinemaPicture">-->
+<!--            </el-image>-->
+<!--          </div>-->
         </div>
         <div class="movie-info-right">
-          <div class="movie-info-msg">
-            <br/>
-            <h1 class="movie-name">{{cinemaInfo.cinemaName}}</h1>
-            <br/>
-            <div class="phone-number">{{cinemaInfo.cinemaAddress}}</div>
-            <div class="phone-number">电话: {{cinemaInfo.cinemaPhone}}</div>
-            <div style="margin: 25px 0;">活动地点简介 ————————————————————</div>
-<!--            <div class="service"><span class="service-tag">免费停车</span>观影前1小时至观影后1小时内免费停车 </div>-->
-<!--            <div class="service"><span class="service-tag">领快乐水</span>节假日期间，每张票可领取一瓶快乐水 </div>-->
-            <div class="service"><span class="service-tag">211高校</span></div>
-            <div class="service"><span class="service-tag">环境优美</span></div>
-          </div>
+<!--          <div class="movie-info-msg">-->
+<!--            <br/>-->
+<!--            <h1 class="movie-name">{{cinemaInfo.cinemaName}}</h1>-->
+<!--            <br/>-->
+<!--            <div class="phone-number">{{cinemaInfo.cinemaAddress}}</div>-->
+<!--            <div class="phone-number">电话: {{cinemaInfo.cinemaPhone}}</div>-->
+<!--            <div style="margin: 25px 0;">活动地点简介 ————————————————————</div>-->
+<!--&lt;!&ndash;            <div class="service"><span class="service-tag">免费停车</span>观影前1小时至观影后1小时内免费停车 </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="service"><span class="service-tag">领快乐水</span>节假日期间，每张票可领取一瓶快乐水 </div>&ndash;&gt;-->
+<!--            <div class="service"><span class="service-tag">211高校</span></div>-->
+<!--            <div class="service"><span class="service-tag">环境优美</span></div>-->
+<!--          </div>-->
         </div>
       </div>
     </div>
@@ -259,11 +267,22 @@ a{
 
 .header{
   padding: 0;
+  position: relative; /* 使得视频可以定位相对于这个容器 */
+  overflow: hidden; /* 防止视频溢出容器 */
   width: 100%;
   min-width: 1200px;
-  background: url('../../assets/movie-info-background.jpg')
 }
-
+.header-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* 覆盖整个.header区域 */
+  object-fit: cover; /* 保持视频的宽高比，覆盖整个容器 */
+  z-index: 1; /* 确保视频在内容之后，不干扰内容 */
+  filter: blur(5px); /* 应用高斯模糊效果 */
+  border-radius: 20px;
+}
 .header-inner{
   width: 1200px;
   margin: 0 auto;
