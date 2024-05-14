@@ -17,7 +17,7 @@
           <div class="movie-name">《{{item.sysSession.sysMovie.movieName}}》</div>
           <div class="cinema-name">{{item.sysSession.sysHall.sysCinema.cinemaName}}</div>
           <div class="hall-ticket">
-            <span>放映厅：{{item.sysSession.sysHall.hallName}}({{item.sysSession.sysHall.hallCategory}})</span>
+            <span>活动场地：{{item.sysSession.sysHall.hallName}}({{item.sysSession.sysHall.hallCategory}})</span>
             <span></span>
           </div>
           <div class="show-time">活动时间：{{item.sysSession.sessionDate + ' ' + item.sysSession.playTime + ' - ' + item.sysSession.endTime}}</div>

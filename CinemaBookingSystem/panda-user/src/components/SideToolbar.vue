@@ -25,6 +25,7 @@
             软件过程综合实践实习项目<br>
             队员：xx<br>
             我们的项目已在GitHub开源<br>
+
             <el-link href="https://github.com/wzwzwz1/pqq" target="_blank">-> 点我跳转GitHub <-</el-link>
             <br>
           </el-tab-pane>
@@ -33,36 +34,27 @@
         <el-button slot="reference" class="item" icon="el-icon-mobile-phone"></el-button>
       </el-popover>
 
-      <el-popover
-          placement="left"
-          width="300"
-          trigger="click"
-          v-model="showChat">
+      <el-popover placement="left" width="300"  trigger="click" v-model="showChat">
         <template slot="reference">
           <el-tooltip class="item" effect="dark" content="聊天" placement="left">
             <el-button icon="el-icon-message"></el-button>
           </el-tooltip>
         </template>
-
         <div class="chat-container">
-          <div class="messages">
-            <div
-                class="message"
-                v-for="(msg, index) in messages"
-                :key="index"
-                :class="{ 'is-user': msg.isUser }">
+
+          <div class="messages-container">
+          <div class="message" v-for="(msg, index) in messages" :key="index" :class="{ 'is-user': msg.isUser }">
+            <img src="../assets/bot-avatar.png" class="avatar">
+            <div class="bubble">
               {{ msg.text }}
             </div>
           </div>
+          </div>
+
+
           <div class="chat-input">
-            <el-input
-                v-model="inputText"
-                placeholder="输入消息..."
-                @keyup.enter="sendMsg">
-            </el-input>
-            <el-button
-                icon="el-icon-send"
-                @click="sendMsg"></el-button>
+            <el-input v-model="inputText" placeholder="输入消息..." @keyup.enter="sendMsg"></el-input>
+            <el-button icon="el-icon-send" @click="sendMsg">发送</el-button>
           </div>
         </div>
       </el-popover>
@@ -90,6 +82,8 @@ export default {
       showChat: false,
       inputText: '',
       messages: [],
+
+      queryCount: 0 , // 添加计数器
       qrTabs: [
         { label: "下载 APP", imgSrc: "https://g.csdnimg.cn/side-toolbar/3.4/images/qr_app.png", desc: "程序员都在用的中文IT技术交流社区" },
         { label: "公众号", imgSrc: "https://g.csdnimg.cn/side-toolbar/3.4/images/qr_wechat.png", desc: "专业的中文 IT 技术社区，与千万技术人共成长" },
@@ -112,11 +106,34 @@ export default {
       this.messages.push({ text: this.inputText, isUser: true });
       this.inputText = ''; // 清空输入框
 
-      // 这里模拟ChatGPT的响应
+      // 增加回复逻辑
+      let responseText = '';
+      let randomDelay = 1000 + Math.random() * 1000;  // 1000ms (1s) 到 2000ms (2s)
+      switch (this.queryCount) {
+        case 0:
+          responseText = 'aaa';
+          break;
+        case 1:
+           randomDelay =4000
+          responseText = '响应超时，请重试';
+          break;
+        case 2:
+          responseText = 'ccc';
+          break;
+        default:
+          responseText = 'No more predefined responses.';
+      }
+      this.queryCount++;  // 增加计数
+
+      // 生成1到2秒之间的随机延迟时间
+
+
       setTimeout(() => {
-        this.messages.push({ text: "这是一个模拟的响应！", isUser: false });
-      }, 1000);
-    },
+        this.messages.push({ text: responseText, isUser: false });
+      }, randomDelay);
+    }
+,
+
     goTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -142,46 +159,56 @@ export default {
   margin-bottom: 10px;
 }
 
-.el-button {
-  width: 60px;
-  height: 60px;
-  text-align: center;
+.message {
+  display: flex;
+  align-items: center;
+  margin: 5px;
+  word-wrap: break-word;
 }
 
-.csdn-side-toolbar {
-  position: fixed;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.bubble {
+  padding: 10px;
+  border-radius: 20px;
+  flex-grow: 1;
+}
+
+.message.is-user {
+  flex-direction: row-reverse;
+}
+
+.message.is-user .bubble {
+  background-color: #d3f261;
+}
+
+.message:not(.is-user) .bubble {
+  background-color: #f3f3f3;
 }
 
 .chat-container {
-  max-height: 300px;
-  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  overflow: hidden;
   border: 1px solid #ccc;
   padding: 5px;
   background-color: white;
 }
 
-.messages {
-  height: 250px;
-  overflow-y: scroll;
-}
 
-.message {
-  margin: 5px;
-  padding: 5px;
-  border-radius: 5px;
-  background-color: #f3f3f3;
-}
-
-.message.is-user {
-  text-align: right;
-  background-color: #d3f261;
+.messages-container {
+  overflow-y: auto;
+  flex-grow: 1; /* 让消息区域占据所有剩余的空间 */
 }
 
 .chat-input {
   display: flex;
   align-items: center;
+  padding: 10px; /* 根据需要调整 */
 }
 </style>

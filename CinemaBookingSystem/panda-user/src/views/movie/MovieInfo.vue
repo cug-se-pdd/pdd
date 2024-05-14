@@ -226,7 +226,7 @@ export default {
       colors: ['#99A9BF', '#F7BA2A', '#FF9900'],
       httpURL: this.global.base,
 // 将这里替换为你的视频文件路径
-      videoSource: require('../../assets/6184263-uhd_4096_2160_25fps.mp4'),
+      videoSource: require('../../assets/QQ2024514-01128-HD.mp4'),
       videoWidth: 640,  // 默认宽度
       videoHeight: 480, // 默认高度
       playing: false
@@ -463,8 +463,9 @@ ul li{
 }
 
 .movie-info-detail-container{
-  width:1200px;
+  width:800px;
   margin: 0 auto;
+
 }
 
 .movie-info-detail{
