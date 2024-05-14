@@ -26,12 +26,12 @@ export default {
         },
         {
           id: 2,
-          name: '南望山校区热度榜',
+          name: '中国地质大学热度榜',
           path: '/rankingList/domesticBoxOfficeList'
         },
         {
           id: 3,
-          name: '未来城校区热度榜',
+          name: '其他学校热度榜',
           path: '/rankingList/foreignBoxOfficeList'
         }
       ],
