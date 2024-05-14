@@ -34,6 +34,11 @@
             <a @click="toBillDetail(item.billId)" class="order-detail" >查看详情</a>
           </div>
         </div>
+        <div class="actions" v-if="item.item.payState">
+          <div>
+            <a @click="" class="order-detail" >活动反馈</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
