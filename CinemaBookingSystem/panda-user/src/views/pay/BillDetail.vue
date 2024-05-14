@@ -100,6 +100,16 @@
 
 
           </div>
+          <div class="form-container">
+            <el-form class="centered-form">
+              <el-form-item label="联系人">
+                <el-input placeholder="请输入联系人"></el-input>
+              </el-form-item>
+              <el-form-item label="手机号">
+                <el-input placeholder="请输入手机号"></el-input>
+              </el-form-item>
+            </el-form>
+          </div>
         </div>
 
         <!-- 统一位置的Upload和Image组件 -->
@@ -641,5 +651,15 @@ export default {
   margin-top: 8px;
   text-align: center;
 }
+.form-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+}
+
+.centered-form {
+  width: 300px; /* 设置表单宽度 */
+}
 </style>
