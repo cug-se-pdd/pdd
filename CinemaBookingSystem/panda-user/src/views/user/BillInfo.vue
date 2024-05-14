@@ -34,13 +34,28 @@
             <a @click="toBillDetail(item.billId)" class="order-detail" >查看详情</a>
           </div>
         </div>
-        <div class="actions" v-if="item.item.payState">
+        <div class="actions" v-if="item.payState">
           <div>
-            <a @click="" class="order-detail" >活动反馈</a>
+            <a @click="openFeedbackDialog" class="order-detail" >活动反馈</a>
           </div>
         </div>
       </div>
     </div>
+    <el-dialog :visible.sync="feedbackDialogVisible" title="活动反馈" width="30%">
+      <div>
+
+      </div>
+      <div>
+        综合评分：<el-rate v-model="feedbackForm.rating" />
+      </div>
+      <div style="margin-top: 20px;">
+        <el-input type="textarea" v-model="feedbackForm.comment" placeholder="请输入反馈内容" />
+      </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="feedbackDialogVisible = false">取消</el-button>
+        <el-button type="primary" >提交</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -53,6 +68,12 @@ export default {
     return {
       queryInfo: {
         userId: ''
+      },
+      feedbackDialogVisible: false,
+      feedbackForm: {
+        billId: '',
+        rating: 0,
+        comment: ''
       },
       billList: [
         {
@@ -90,6 +111,10 @@ export default {
     },
     toBillDetail(id) {
       this.$router.push('/billDetail/' + id)
+    },
+    openFeedbackDialog() {
+      this.feedbackForm.billId = 1;
+      this.feedbackDialogVisible = true;
     },
     async deleteBill(id) {
       const _this = this
