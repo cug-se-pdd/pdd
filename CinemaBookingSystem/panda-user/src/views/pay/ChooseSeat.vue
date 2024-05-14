@@ -8,7 +8,7 @@
     </el-steps>
     <div class="whole">
       <div class="left-non" v-if="this.session.sysMovie.movieLength===120">
-
+        <img src="../../assets/test.png" alt="Test Image">
       </div>
 
       <div class="left" v-else>
