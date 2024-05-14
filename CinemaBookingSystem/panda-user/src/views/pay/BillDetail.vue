@@ -4,7 +4,7 @@
       <el-step title="选择活动场次"></el-step>
       <el-step title="选择座位"></el-step>
       <el-step title="15分钟内提交"></el-step>
-      <el-step title="活动地点取票观影" status="wait"></el-step>
+      <el-step title="预约成功，请按时参与" status="wait"></el-step>
     </el-steps>
     <div class="bill-info-container">
       <!-- 预约状态 -->
