@@ -107,21 +107,62 @@ export default {
       this.inputText = ''; // 清空输入框
 
       // 增加回复逻辑
+      //
+      // //
+      // Q1 你好
+      // Q2 今天有哪些活动？（chat响应超时）
+      // Q2 今天有哪些活动？
+      // Q3 我准备今天参加计算机学院毕业盛典，你有什么建议吗？
+      // Q4 任意问题（chat响应超时）
+      //
+      //
+      //
       let responseText = '';
       let randomDelay = 1000 + Math.random() * 1000;  // 1000ms (1s) 到 2000ms (2s)
       switch (this.queryCount) {
         case 0:
-          responseText = 'aaa';
+          responseText = '你好！有什么我可以帮助你的吗？';
           break;
         case 1:
-           randomDelay =4000
-          responseText = '响应超时，请重试';
+           randomDelay =5000
+          responseText = 'Request failed with status code 400';
           break;
         case 2:
-          responseText = 'ccc';
+          randomDelay =2000
+          responseText = '\n' +
+              '以下是今天举办的的活动：\n' +
+              '\n' +
+              '["“青春留夏·计忆时光”计算机学院2024年毕业盛典",\n' +
+              '"第六届材料科学展演",\n' +
+              '"书香文化节主题朗诵大赛",\n' +
+              '"“翻书越岭，与诗相遇”拼贴诗创作活动"]';
+          break;
+        case 3:
+          randomDelay =5000
+          responseText = '建议一：提前安排好时间和交通\n' +
+              '时间：2024年5月1日，下午5点30分至7点30分\n' +
+              '地点：中国地质大学未来城校区弘雅堂\n' +
+              '交通：提前安排好交通工具，确保能够准时到达。如果需要，可以提前了解校区的交通路线和停车信息，以免耽误时间。\n' +
+              '\n' +
+              '建议二：确保朋友圈集赞任务完成\n' +
+              '时间：在活动开始前的一到两天\n' +
+              '具体要求：在朋友圈发布关于参加计算机学院毕业盛典的信息，并要求朋友们点赞。确保在活动开始前集赞达到十五个。\n' +
+              '\n' +
+              '建议三：携带必要的物品\n' +
+              '时间：在出门前\n' +
+              '具体要求：确保携带门票，以便进入活动现场。另外，如果需要，可以携带一些纸巾、水杯等必要的生活用品，以应对可能的需要。\n' +
+              '\n' +
+              '建议四：穿着得体\n' +
+              '时间：在活动开始前\n' +
+              '具体要求：毕业盛典是一个庄重的场合，建议穿着整洁、得体。可以选择适合场合的服装，展现出你的优雅和庄重。\n' +
+              '\n' +
+              '建议五：享受活动\n' +
+              '时间：整个活动期间\n' +
+              '具体要求：尽情享受毕业盛典带来的氛围和快乐！与同学、老师们交流，留下美好的回忆。';
           break;
         default:
-          responseText = 'No more predefined responses.';
+          randomDelay =5000
+          responseText = 'Request failed with status code 400';
       }
       this.queryCount++;  // 增加计数
 

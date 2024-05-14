@@ -46,6 +46,9 @@
         <el-col :span="4">
           <el-button type="danger" @click="isAbleMultipleDelete">批量删除</el-button>
         </el-col>
+        <el-col :span="4">
+          <el-button type="info" @click="">导出图表</el-button>
+        </el-col>
       </el-row>
 
 <!--    活动信息列表-->
